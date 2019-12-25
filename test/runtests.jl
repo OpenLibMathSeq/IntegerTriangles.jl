@@ -7,7 +7,8 @@ tstdir ∉ LOAD_PATH && push!(LOAD_PATH, tstdir)
 srcdir ∉ LOAD_PATH && push!(LOAD_PATH, srcdir)
 module runtests
 
-using Nemo, IntegerTriangles, Test
+using Nemo 
+using IntegerTriangles, IntegerTrianglesLib, IntegerTrianglesExamples
 
 profile(10, false)
 
