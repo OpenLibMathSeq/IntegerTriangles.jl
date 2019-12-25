@@ -2,4 +2,3 @@ Manifest.toml
 local/*
 docs/build/*
 .vsc/*
-src/JsonTriangles.jl
