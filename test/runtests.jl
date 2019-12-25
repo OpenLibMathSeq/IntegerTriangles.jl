@@ -1,5 +1,3 @@
-using IntegerTriangles, Test
+#using IntegerTriangles, Test
 
-@testset "IntegerTriangles" begin
-    @test 1 == 2
-end
+profile(10, false)

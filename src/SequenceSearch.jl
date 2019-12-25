@@ -192,16 +192,14 @@ end
 
 """
 
-Search for a sequence in the local OEIS database ('../data/stripped'). Input the sequence as a comma separated string. The search is redone 'restarts' times in the case that no match was found with the first remaining term removed from the search string. Prints the matches.
+Search for a sequence in the local OEIS database ('../data/stripped').
+    Input the sequence as a string. Prints the matches.
 """
-function _oeis_search(seq::String, restarts::Int, hits, verbose=false)
-
+function oeis_search(seq::String, verbose=false)
     oeis_notinstalled() && return []
-
-    found = false
+    matches = 0
     seq = replace(seq, ' ' => "")
-    verbose && println("Searching for:")
-    verbose && println(seq)
+    verbose && println("Searching for: ", seq)
 
     data = open(oeis_path())
     foundMAX = 3  # bound the search (sequences with many '0' make trouble).
@@ -210,9 +208,8 @@ function _oeis_search(seq::String, restarts::Int, hits, verbose=false)
         index === nothing && continue
         if index[1] < 17
             println(line[1:min(36,end)], " in range ", index)
-            found = true
             foundMAX -= 1
-            hits += 1
+            matches += 1
         end
         if foundMAX <= 0
             println("Stop! Too many sequences!")
@@ -220,41 +217,35 @@ function _oeis_search(seq::String, restarts::Int, hits, verbose=false)
         end
     end
     close(data)
-
-    if !found && restarts > 0
-        ind = findfirst(isequal(','), seq)
-        if !(ind === nothing) && (length(seq) > ind)
-            seq = seq[ind+1:end]
-            verbose && println("Restarting with fewer terms.")
-            _oeis_search(seq, restarts-1, hits, verbose)
-        end
-    end
-    hits
+    verbose && println("Matches: ", matches)
+    matches
 end
 
 """
 
-Search for a sequence in the local OEIS database starting from the second term.
+Search for a sequence in the local OEIS database ('../data/stripped').  The search is redone 'restarts' times in the case that no match was found with the first remaining term removed from the search string.
 """
 function oeis_search(seq, restarts::Int, verbose=false)
-    hits = _oeis_search("$seq"[2:end-1], restarts, 0, verbose)
-    #if hits == 0
-    #    seq = replace(seq, '-' => "")
-    #    hits = _oeis_search("$seq"[2:end-1], restarts, 0, verbose)
-    #end
+    seqstr = string(seq)
+    ind = findfirst(isequal(','), seqstr)
+    if !(ind === nothing) && (length(seqstr) > ind)
+        seqstr = seqstr[ind+1:end-1]
+        matches = oeis_search(seqstr, verbose)
+        while matches == 0 && restarts > 0
+            restarts -= 1
+            ind = findfirst(isequal(','), seqstr)
+            if !(ind === nothing) && (length(seqstr) > ind)
+                seqstr = seqstr[ind+1:end]
+                verbose && println("Restarting with fewer terms.")
+                if restarts == 0
+                    seqstr = replace(seqstr, '-' => "")
+                end
+                matches = oeis_search(seqstr, verbose)
+            end
+        end
+    end
+    matches
 end
-
-#function oeis_search(seq::Array{fmpz,1}, restarts::Int, verbose=false)
-#    _oeis_search("$seq"[2:end-1], restarts, verbose)
-#end
-
-#function oeis_search(seq::Array{Int,1}, restarts::Int, verbose=false)
-#    _oeis_search("$seq"[2:end-1], restarts, verbose)
-#end
-
-#function oeis_search(seq::Array{BigInt,1}, restarts::Int, verbose=false)
-#    _oeis_search("$seq"[2:end-1], restarts, true, verbose)
-#end
 
 #START-TEST-########################################################
 

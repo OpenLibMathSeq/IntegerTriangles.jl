@@ -136,7 +136,6 @@ end
 I225478(dim) = RecTriangle(dim, R225478)
 T225478(dim) = ZZTriangle(I225478(dim))
 
-# http://www.luschny.de/ect/Pascal-Triangle.html
 function R007318(n, k, prevrow::Function)
     (k == 0 && n == 0) && return fmpz(1)
     prevrow(k - 1) + prevrow(k)

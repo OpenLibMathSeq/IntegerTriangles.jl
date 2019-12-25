@@ -18,14 +18,11 @@ end
 
 SequenceHash(S::IntegerTriangle) = SequenceHash(Flatten(S)[1:15])
 
-function strip(seq)
-# strip(seq) = replace(seq, ' ' => "")
-    str = string(seq)
-    c = ""
-    for s in str[10:end]
-        s != ' ' && (c *= s)
-    end
-    c
+function profilepath()
+    srcdir = realpath(joinpath(dirname(@__FILE__)))
+    ROOTDIR = dirname(srcdir)
+    datadir = joinpath(ROOTDIR, "data")
+    profilepath = joinpath(datadir, "profile.txt")
 end
 
 function profileToFile(T::IntegerTriangle, name)
@@ -34,26 +31,31 @@ function profileToFile(T::IntegerTriangle, name)
     function prnt(io, name, seq)
         h = SequenceHash(seq)
         Println(io, seq, false)
-        println(io, "(", h[1:8], " ", name, " ", H[1:8], ")")
-        if (h[1:8] != "a38a0a11") && (h[1:8] != "29db0a91")
-            println("SEARCHED", strip(seq))
-            oeis_search(seq, 2)
-        end
+        println(io, h[1:8], " ")
+        println(io, "(", H[1:8], " ", name, " ", h[1:8], ")")
     end
 
-    open("profile.txt", "a") do io
+    function search(seq)
+        str = replace(string(seq)[10:end], ' ' => "")
+        println("SEARCHED", str)
+        matches = oeis_search(seq, 2, false)
+        matches == 0 && println("FAILED")
+    end
+
+    open(profilepath(), "a") do io
         Println(io, H * " " * name)
-        x = sum(T);     prnt(io, "Sum", x)
-        x = evensum(T); prnt(io, "EvenSum", x)
-        x = oddsum(T);  prnt(io, "OddSum", x)
-        x = altsum(T);  prnt(io, "AltSum", x)
-        x = diagsum(T); prnt(io, "DiagSum", x)
-        x = central(T); prnt(io, "Central", x)
-        x = leftside(T); prnt(io, "LeftSide", x)
-        x = rightside(T); prnt(io, "RightSide", x)
+        x = sum(T); prnt(io, "Sum", x); search(x)
+        x = evensum(T); prnt(io, "EvenSum", x); search(x)
+        x = oddsum(T); prnt(io, "OddSum", x); search(x)
+        x = altsum(T); prnt(io, "AltSum", x); search(x)
+        x = diagsum(T); prnt(io, "DiagSum", x); search(x)
+        x = middle(T); prnt(io, "Middle", x); search(x)
+        x = central(T); prnt(io, "Central", x); search(x)
+        x = leftside(T); prnt(io, "LeftSide", x); search(x)
+        x = rightside(T); prnt(io, "RightSide", x); search(x)
         P = Polynomial(T)
-        x = poshalf(P); prnt(io, "PosHalf", x)
-        x = neghalf(P); prnt(io, "NegHalf", x)
+        x = poshalf(P); prnt(io, "PosHalf", x); search(x)
+        x = neghalf(P); prnt(io, "NegHalf", x); search(x)
     end
 end
 

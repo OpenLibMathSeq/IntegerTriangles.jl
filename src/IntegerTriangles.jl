@@ -22,6 +22,7 @@ function profile(T::IntegerTriangle, name)
     print("OddSum:    "); oddsum(T) |> Println
     print("AltSum:    "); altsum(T) |> Println
     print("DiagSum:   "); diagsum(T) |> Println
+    print("Middle:    "); middle(T) |> Println
     print("Central:   "); central(T) |> Println
     print("LeftSide:  "); leftside(T) |> Println
     print("RightSide: "); rightside(T) |> Println
@@ -43,42 +44,45 @@ function profile(f::Function, dim=10, inverse=false, tofile=false)
     end
 end
 
-function profile(len)
-    profile(T225478, len)
+function profile(dim=10, tofile=false)
 
-    profile(T132393, len)
-    profile(T132393, len, true)
+    profile(T225478, dim, false, tofile)
 
-    profile(T048993, len)
-    profile(T048993, len, true)
+    profile(T132393, dim, false, tofile)
+    profile(T132393, dim, true, tofile)
 
-    profile(T271703, len)
-    profile(T271703, len, true)
+    profile(T048993, dim, false, tofile)
+    profile(T048993, dim, true, tofile)
 
-    profile(T094587, len)
-    profile(T094587, len, true)
+    profile(T271703, dim, false, tofile)
+    profile(T271703, dim, true, tofile)
 
-    profile(T008279, len)
+    profile(T094587, dim, false, tofile)
+    profile(T094587, dim, true, tofile)
 
-    profile(PascalTriangle, len)
-    profile(PascalTriangle, len, true)
+    profile(T008279, dim, false, tofile)
 
-    profile(LahTriangle, len)
-    profile(LahTriangle, len, true)
+    profile(PascalTriangle, dim, false, tofile)
+    profile(PascalTriangle, dim, true, tofile)
 
-    profile(CatalanTriangle, len)
-    profile(CatalanTriangle, len, true)
+    profile(LahTriangle, dim, false, tofile)
+    profile(LahTriangle, dim, true, tofile)
 
-    profile(MotzkinTriangle, len)
-    profile(MotzkinTriangle, len, true)
+    profile(CatalanTriangle, dim, false, tofile)
+    profile(CatalanTriangle, dim, true, tofile)
 
-    profile(SchröderB, len)
-    profile(SchröderB, len, true)
+    profile(MotzkinTriangle, dim, false, tofile)
+    profile(MotzkinTriangle, dim, true, tofile)
 
-    profile(SchröderL, len)
-    profile(SchröderL, len, true)
+    profile(SchröderB, dim, false, tofile)
+    profile(SchröderB, dim, true, tofile)
+
+    profile(SchröderL, dim, false, tofile)
+    profile(SchröderL, dim, true, tofile)
+
 end
 
-profile(10)
+#profile(10, false)
+#profile(10, true)
 
 end # module
