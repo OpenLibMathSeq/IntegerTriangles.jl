@@ -11,12 +11,13 @@ export SequenceHash, profileToFile
 function SequenceHash(seq)
     Shash = ZZ(length(seq))
     for s in seq
-        Shash = hash(s, hash(Shash, UInt64(abs(s))))
+        u(s) = UInt64(min(ZZ(18446744073709551615), abs(s)))
+        Shash = hash(s, hash(Shash, u(s)))
     end
     Nemo.hex(ZZ(Shash))
 end
 
-SequenceHash(S::IntegerTriangle) = SequenceHash(Flatten(S)[1:15])
+SequenceHash(S::IntegerTriangle) = SequenceHash(flat(S)[1:15])
 
 function profilepath()
     srcdir = realpath(joinpath(dirname(@__FILE__)))

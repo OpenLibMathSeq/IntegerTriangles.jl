@@ -11,26 +11,27 @@ using HashedRelations
 export profile
 
 function profile(T::IntegerTriangle, name)
-    println("\n================="); println(name)
-    Flatten(T)[1:15] |> Println
-    println()
-    for row in T Println(row) end
-    println()
+    println("\n=================")
+    println(name); println()
+    len = min(10, length(T))
+    hlen = min(10, div(length(T), 2))
 
-    print("Sum:       "); sum(T) |> Println
-    print("EvenSum:   "); evensum(T) |> Println
-    print("OddSum:    "); oddsum(T) |> Println
-    print("AltSum:    "); altsum(T) |> Println
-    print("DiagSum:   "); diagsum(T) |> Println
-    print("Middle:    "); middle(T) |> Println
-    print("Central:   "); central(T) |> Println
-    print("LeftSide:  "); leftside(T) |> Println
-    print("RightSide: "); rightside(T) |> Println
+    for row in T[1:len] Println(row) end
+    println()
+    print("Triangle:  "); flat(T)[1:len]      |> Println
+    print("Sum:       "); sum(T)[1:len]       |> Println
+    print("EvenSum:   "); evensum(T)[1:len]   |> Println
+    print("OddSum:    "); oddsum(T)[1:len]    |> Println
+    print("AltSum:    "); altsum(T)[1:len]    |> Println
+    print("DiagSum:   "); diagsum(T)[1:len]   |> Println
+    print("Middle:    "); middle(T)[1:len]    |> Println
+    print("Central:   "); central(T)[1:hlen]  |> Println
+    print("LeftSide:  "); leftside(T)[1:len]  |> Println
+    print("RightSide: "); rightside(T)[1:len] |> Println
     P = Polynomial(T)
-    print("PosHalf:   "); poshalf(P) |> Println
-    print("NegHalf:   "); neghalf(P) |> Println
+    print("PosHalf:   "); poshalf(P)[1:len]   |> Println
+    print("NegHalf:   "); neghalf(P)[1:len]   |> Println
     println()
-
 end
 
 function profile(f::Function, dim=10, inverse=false, tofile=false)
@@ -44,7 +45,7 @@ function profile(f::Function, dim=10, inverse=false, tofile=false)
     end
 end
 
-function profile(dim=10, tofile=false)
+function profile(dim=21, tofile=false)
 
     profile(T225478, dim, false, tofile)
 
@@ -82,7 +83,25 @@ function profile(dim=10, tofile=false)
 
 end
 
-#profile(10, false)
-#profile(10, true)
+function demo()
+    dim = 21
+    profile(10)
+
+    #profile(LahTriangle, dim, true, false)
+    #profile(MotzkinTriangle, dim, false, false)
+    #profile(CatalanTriangle, dim, false, false)
+    #profile(ExtCatalanTriangle, dim, true)
+    #profile(PascalTriangle, dim)
+    #profile(PascalTriangle, dim, true, tofile)
+    #profile(T094587, dim, true) # core!
+    #profile(T008279, dim)
+    #profile(T132393, dim, true)
+    #profile(T048993, dim)
+
+    # advanced
+    #profile(dim, true) # demonstrating local search
+end
+
+demo()
 
 end # module

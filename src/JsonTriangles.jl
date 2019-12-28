@@ -5,8 +5,10 @@
 
 module JsonTriangles
 
+#  UNDER CONSTRUCTION
+
 using JSON, OrderedCollections
-using IntegerTrianglesLib, HashedRelations, IntegerTrianglesExamples
+using IntegerTrianglesLib, HashedRelations, IntegerTrianglesExamples, HashToAnum
 
 pro = """
 {
@@ -25,15 +27,17 @@ pro = """
 				"data": "1,0,1,0,2,1,0,6",
 				"hash": "a34b3a",
 				"anum": "A271703",
-				"auth": "Lus",
-				"year": "2016"
+				"auth": "Lustig",
+				"year": "2016",
+                "ident": "true"
 			},
 			{   "type": "evensum",
-				"data": "1,0,1,0,2,1,0,6",
-				"hash": "a34b3a",
+				"data": "1,9,1,0,2,1,0,6",
+				"hash": "734b3a",
 				"anum": "A271703",
-				"auth": "Lus",
-				"year": "2016"
+				"auth": "Jonathan",
+				"year": "2016",
+                "ident": "false"
 			}
 		]
 	}
@@ -48,16 +52,18 @@ d_evensum = LittleDict{String,String}(
     "data" => "1,0,1,0,2,1,0,6",
     "hash" => "a34b3a",
     "anum" => "A271703",
-    "auth" => "Lus",
-    "year" => "2016"
+    "auth" => "Faber",
+    "year" => "2016",
+    "ident" => "true"
 )
 d_oddsum = LittleDict{String,String}(
     "type" => "oddsum",
     "data" => "1,0,1,0,2,1,0,6",
     "hash" => "a3cb3a",
     "anum" => "A271703",
-    "auth" => "Lus",
-    "year" => "2016"
+    "auth" => "Lustig",
+    "year" => "2016",
+    "ident" => "false"
 )
 
 characteristic = LittleDict{String,LittleDict}(
@@ -65,8 +71,8 @@ characteristic = LittleDict{String,LittleDict}(
     "oddsum" => d_oddsum
 )
 
-println()
-for c in characteristic println(c) end
+#println()
+#for c in characteristic println(c) end
 
 oeis = LittleDict{String,Array{String,1}}(
     "variants" => String["A271703", "A105278", "A111596"],
@@ -74,8 +80,8 @@ oeis = LittleDict{String,Array{String,1}}(
     "colrefs" => String["A000007", "A000142", "A001286", "A001754", "A001755", "A001777"]
 )
 
-println()
-for refs in oeis println(refs) end
+#println()
+#for refs in oeis println(refs) end
 
 rows = String[
 "1",
@@ -88,25 +94,87 @@ rows = String[
 "0, 5040, 15120, 12600, 4200, 630, 42, 1"
 ]
 
-println()
-for r in rows println(r) end
-println()
-println()
+#println()
+#for r in rows println(r) end
+#println()
+#println()
 
 TriangleProfile(name::String) = LittleDict{String,Any}(
     "name" => [name],
     "rows" => rows,
-    "oeis" => oeis,
     "characteristic" => characteristic
 )
 
-LahTP = TriangleProfile("Lah Numbers")
+#LahTP = TriangleProfile("Lah Numbers")
+#for item in LahTP
+#    I = item[2]
+#    for i in I
+#        println(i)
+#    end
+#end
 
-for item in LahTP
-    I = item[2]
-    for i in I
-        println(i)
+function MakeCharacter(T, fun)
+    seq = fun(T)[1:15]
+    h = SequenceHash(seq)
+
+    oeis = ["", "", "", ""]
+    try
+        oeis = DBASE[h]
+    catch y
+        if isa(y, KeyError)
+            oeis = ["missing", "missing", "missing", "missing"]
+        end
     end
+
+    LittleDict{String,String}(
+        "type" => string(fun),
+        "data" => string(seq)[10:end],
+        "hash" => h,
+        "anum" => oeis[1],
+        "auth" => oeis[2],
+        "year" => oeis[3],
+        "ident" => oeis[4]
+    )
 end
+
+#println(flat(T)[1:15])
+#for fun in [evensum, oddsum, altsum, diagsum, middle, central,
+#            leftside, rightside]
+
+maxel(A) = maximum(A)
+maxel(T::IntegerTriangle) = maxel.(T)
+
+function AllCharacters(T)
+
+    q = MakeCharacter(T, flat);      println(q)
+    q = MakeCharacter(T, sum);       println(q)
+    q = MakeCharacter(T, maxel);     println(q)
+    q = MakeCharacter(T, evensum);   println(q)
+    q = MakeCharacter(T, oddsum);    println(q)
+    q = MakeCharacter(T, altsum);    println(q)
+    q = MakeCharacter(T, diagsum);   println(q)
+    q = MakeCharacter(T, middle);    println(q)
+    q = MakeCharacter(T, central);   println(q)
+    q = MakeCharacter(T, leftside);  println(q)
+    q = MakeCharacter(T, rightside); println(q)
+end
+
+function demo()
+    # !Important! Don't change dim = 31.
+    dim = 31
+
+    #T = LahTriangle(dim)
+    #T = InverseTriangle(T)
+
+    T = MotzkinTriangle(dim)
+    #T = InverseTriangle(T)
+
+    #T = CatalanTriangle(dim)
+    #T = InverseTriangle(T)
+
+    AllCharacters(T)
+end
+
+demo()
 
 end # module

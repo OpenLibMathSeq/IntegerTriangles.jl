@@ -25,7 +25,11 @@ function PolyPlot(F, title)
     display(P)
 end
 
-P = PolynomialFunction(LahTriangle(6))
-PolyPlot(P, "Lah polynomials")
+function demo()
+    P = PolynomialFunction(LahTriangle(6))
+    PolyPlot(P, "Lah polynomials")
+end
+
+demo()
 
 end # module

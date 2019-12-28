@@ -144,4 +144,8 @@ I007318(dim) = RecTriangle(dim, R007318)
 PascalTriangle(dim) = ZZTriangle(I007318(dim))
 #isa(PascalTriangle(6), IntegerTriangle) |> println
 
+# A063967 Fibonacci Triangle
+# RiordanSquare(1/(1 - x - x^2), 11)
+# A037027, A036355, A073370, A058071
+
 end # module

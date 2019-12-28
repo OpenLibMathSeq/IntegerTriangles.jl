@@ -14,7 +14,7 @@ export IntegerSequence, IntegerTriangle, RationalSequence, RationalTriangle
 export ZZSequence, ZZTriangle, ZZPolySeq, QQPolySeq, Polynomial
 export QQSequence, QQTriangle, ZZPolynomials, QQPolynomials
 export diag, OrthoPoly, DeléhamΔ, EgfExpansion, EgfPolyExpansion
-export AbstractTriangle, RecTriangle, InverseTriangle, Flatten, Println
+export AbstractTriangle, RecTriangle, InverseTriangle, flat, Println
 export Binomial, MakeFunction, FunctionList, PolynomialFunction
 
 const IntegerSequence = Array{fmpz,1}
@@ -105,7 +105,7 @@ poshalf(P::ZZPolySeq) = poshalf.(P)
 neghalf(P::ZZPolySeq) = neghalf.(P)
 
 """
-Return the number of permutations of n letters, ``n! = ∏(1, n)``, the factorial of ``n``. (Nota: The notation is a shortcut. It breaks Julia naming conventions, so better use only internally.)
+Return the number of permutations of n letters, ``n! = ∏(1, n)``, the factorial of ``n``. (Nota: The notation is a shortcut. The use of '!' breaks Julia naming conventions, so better use only internally.)
 """
 F!(n) = Nemo.factorial(ZZ(n))
 
@@ -191,7 +191,7 @@ function InverseTriangle(T)
     [[ZZ(IM[n, k]) for k in 1:n] for n in 1:dim]
 end
 
-Flatten(T) = [T[n][k] for n in 1:length(T) for k in 1:n]
+flat(T) = [T[n][k] for n in 1:length(T) for k in 1:n]
 
 # Print the array without typeinfo.
 function Println(io, v::AbstractVector, newline=true)
