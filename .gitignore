@@ -2,5 +2,4 @@ Manifest.toml
 local/*
 docs/build/*
 .vscode/*
-data/*
 demos/.ipynb_checkpoints
