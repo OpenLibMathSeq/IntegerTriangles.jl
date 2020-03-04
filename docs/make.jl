@@ -1,5 +1,5 @@
 using Documenter
-using PACKAGE_NAME
+using IntegerTriangles
 
 makedocs(
     sitename = "IntegerTriangles",
