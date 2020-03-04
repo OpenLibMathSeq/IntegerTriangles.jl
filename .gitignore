@@ -1,3 +1,6 @@
 Manifest.toml
 local/*
-.vsc/*
+docs/build/*
+.vscode/*
+data/*
+demos/.ipynb_checkpoints
