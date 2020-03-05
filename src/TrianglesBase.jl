@@ -44,6 +44,7 @@ function ℤTri(dim::Int; reg=false)
     reg ? ℤSeq.(1:dim) : ℤTri(undef, dim)
 end
 
+ℤSeq(len, f::Function) = f.(0:len-1)
 ℤTri(dim, f::Function) = f.(0:dim-1)
 
 # ---------------
@@ -149,7 +150,8 @@ LinMap(F::Function, V::ℤSeq) = LinMap(F, V, length(V))
 LinMap(M::ℤTri, V::ℤSeq, n) = sum(M[n][k] * V[k] for k = 1:n)
 LinMap(M::ℤTri, V::ℤSeq) = (n -> LinMap(M, V, n)).(1:length(V))
 
-Telescope(A) = (A[1:k] for k = 1:size(A, 1))
+Telescope(A::ℤSeq) = (A[1:k] for k = 1:size(A, 1))
+Telescope(len::Int, f::Function) = Telescope([ℤ(f(k)) for k = 0:len-1])
 
 F!(n) = Nemo.factorial(ZZ(n))
 Binomial(n, k) = Nemo.binomial(ℤ(n), ℤ(k))
