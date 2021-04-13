@@ -9,7 +9,7 @@ julia:
   - 1.6
   - nightly
 
-matrix:
+jobs:
   allow_failures:
     - julia: nightly
 
@@ -21,17 +21,4 @@ env:
     - DOCUMENTER_DEBUG=true
 
 script:
-  - julia --color=yes -e 'using Pkg; Pkg.build()'
-  - julia --check-bounds=yes --color=yes -e 'using Pkg; Pkg.test(coverage=true)'
-
-jobs:
-  include:
-    - stage: "Documentation"
-      julia: 1.6
-      os: linux
-      script:
-        - julia --project=docs/ -e 'import Pkg; Pkg.add("Documenter")'
-        - julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
-        - julia --project=docs/ docs/make.jl
-      after_success:
-        - julia -e 'cd(Pkg.dir("IntegerTriangles.jl")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+  - julia --project --check-bounds=yes -e 'import Pkg; Pkg.build(); Pkg.test("IntegerTriangles"; coverage=true)'
