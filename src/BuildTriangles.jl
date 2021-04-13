@@ -50,10 +50,10 @@ const exclude = [
     "tempCodeRunnerFile.jl"
 ]
 
+#     Plots  fails
 const references = 
     "Nemo, 
     HTTP, 
-    Plots, 
     DocStringExtensions, 
     OrderedCollections,
     PrettyTables"

@@ -21,7 +21,7 @@ To see what you can expect start by executing
     using IntegerTriangles
     dim = 8
     TraitCard(BinomialTriangle, BinomialTransform, dim)
-.
+
 Overview tables can be automatically generated for a variety of triangles and traits.
 
 | A-Number | Triangle   | Form | Function  | Sequence                                    | 
@@ -35,6 +35,8 @@ Overview tables can be automatically generated for a variety of triangles and tr
 | nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 
 .
+Note that we assume all sequences to start at offset = 0. Also note that all A-numbers
+are approximativ only, i.e. the first few terms may differ.
 
 You can also look at the demo [notebook](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/demos/IntegerTriangles.ipynb).
 
