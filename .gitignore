@@ -2,5 +2,6 @@ Manifest.toml
 local/*
 docs/build/*
 .vscode/*
+.github/*
 demos/.ipynb_checkpoints
 IntegerTriangles.code-workspace

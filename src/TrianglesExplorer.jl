@@ -8,7 +8,7 @@ module TrianglesExplorer
 using Nemo, OrderedCollections
 using TrianglesBase, TrianglesExamples, TrianglesUtils
 
-export TriangleInfo, AllTraits
+export Explore
 
 const WARNING_ON_NOTFOUND = false
 
@@ -52,8 +52,7 @@ const Traits = LittleDict{String, Function}(
     "TransNat1"  => TransNat1
 )
 
-function _Show(io, name, kind, trait, seq, savetofile=false)
-    # anum = GetSeqnum(seq)
+function Show(io, name, kind, trait, seq, savetofile=false)
     anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
     if savetofile
         print(".")
@@ -63,12 +62,6 @@ function _Show(io, name, kind, trait, seq, savetofile=false)
         print(anum, " ", name, " ", kind, " ", trait, " ")
         Println(seq[1:min(8, end)])
     end
-end
-
-function Show(triangle, kind, trait, dim)
-    T = TriangleVariant(Triangles[triangle], dim, kind) 
-    seq = Traits[trait](T)
-    _Show(stdout, triangle, kind, trait, seq)
 end
 
 function TriangleVariant(Tri, dim, kind="Std") 
@@ -87,7 +80,15 @@ function TriangleVariant(Tri, dim, kind="Std")
     return reverse.(invM) 
 end
 
-function TriangleInfo(triangle, kind, trait)
+function Explore(triangle, kind, trait, dim)
+    T = TriangleVariant(Triangles[triangle], dim, kind) 
+    seq = Traits[trait](T)
+    Show(stdout, triangle, kind, trait, seq)
+end
+
+const LEN = 32
+
+function Explore(triangle, kind, trait)
     dim = 32
     T = TriangleVariant(Triangles[triangle], dim, kind) 
     seq = Traits[trait](T)
@@ -97,29 +98,29 @@ function TriangleInfo(triangle, kind, trait)
     String[anum, triangle, kind, trait, seqstr]
 end
 
-const LEN = 32
-
-function AllTraits(trait, dim)
+function Explore(trait, dim)
     for (name, triangle) in Triangles
         for kind in Kind
             T = TriangleVariant(triangle, dim, kind)
             if T != [] 
                 seq = Traits[trait](T)
-                _Show(stdout, name, kind, trait, seq)
+                Show(stdout, name, kind, trait, seq)
             end    
         end
     end
 end
 
 # The BIG LIST goes to data/profile.txt.
-function AllTraits(savetofile=false)
+function Explore(savetofile=false)
+    @warn "This will take several minutes and produce the file 'profile.txt' in the data directory."
+
     open(profilepath(), "a") do io
         for (name, triangle) in Triangles
             for kind in Kind
                 T = TriangleVariant(triangle, LEN, kind) 
                 if T != []
                     for (trait, f) in Traits
-                        _Show(io, name, kind, trait, f(T), savetofile) 
+                        Show(io, name, kind, trait, f(T), savetofile) 
                     end
                 end
             end
@@ -131,25 +132,25 @@ end
 # START-TEST-##############################################
 
 function test()
-    Show("SchroederB", "Inv", "AltSum",    32)
-    AllTraits("PosHalf", 32)
+    Explore("SchroederB", "Inv", "AltSum",    32)
+    Explore("PosHalf", 32)
 end
 
 function demo()
-    Show("Binomial",   "Std", "PolyVal3",  32)
-    Show("SchroederB", "Inv", "AltSum",    32)
-    Show("SchroederL", "Inv", "AltSum",    32)
-    Show("Motzkin",    "Rev", "Central",   32)
-    Show("Laguerre",   "Std", "PosHalf",   32)
-    Show("Laguerre",   "Std", "TransNat0", 32)
-    Show("Laguerre",   "Std", "TransNat1", 32)
-    Show("Lah",        "Std", "TransSqrs", 32)
-    Show("Lah",        "Std", "TransAlts", 32)
+    Explore("Binomial",   "Std", "PolyVal3",  32)
+    Explore("SchroederB", "Inv", "AltSum",    32)
+    Explore("SchroederL", "Inv", "AltSum",    32)
+    Explore("Motzkin",    "Rev", "Central",   32)
+    Explore("Laguerre",   "Std", "PosHalf",   32)
+    Explore("Laguerre",   "Std", "TransNat0", 32)
+    Explore("Laguerre",   "Std", "TransNat1", 32)
+    Explore("Lah",        "Std", "TransSqrs", 32)
+    Explore("Lah",        "Std", "TransAlts", 32)
     println()
 end
 
 function perf()
-    AllTraits(true) 
+    Explore(true) 
 end
 
 function main()

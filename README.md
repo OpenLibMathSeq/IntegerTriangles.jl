@@ -34,7 +34,6 @@ Overview tables can be automatically generated for a variety of triangles and tr
 | A111884  | Lah        | Std  | TransAlts | 1, -1, -1, -1, 1, 19, 151, 1091             |
 | nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 
-.
 
 Note that we assume all sequences to start at offset = 0. Also note that all A-numbers
 are approximativ only, i.e. the first few terms may differ.

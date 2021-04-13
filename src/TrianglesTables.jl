@@ -47,11 +47,11 @@ function test()
     L = String["A111884", "Lah", "Std", "TransAlts", "1, -1, -1, -1, 1, 19, 151, 1091"] 
     mat = [mat; reshape(L, 1, 5)]
 
-    L = TriangleInfo("Laguerre", "Rev", "TransNat1")
+    L = Explore("Laguerre", "Rev", "TransNat1")
     mat = [mat; reshape(L, 1, 5)]
 
-    # println(mat)
     pretty_table(mat, header, alignment=[:l,:l,:l,:l,:l])
+    # ... as Html:
     # pretty_table(data, header, backend = :html, alignment=[:l,:l,:l,:l,:l])
 
     open(profilepath(), "a") do io

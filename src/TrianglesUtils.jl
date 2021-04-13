@@ -272,7 +272,8 @@ function demo()
     Println.(PolyArray(T))
     println()
 
-    oeis_search(ℤInt[1,2,3,4,5,6,7])
+    # 
+    # oeis_search(ℤInt[1,2,3,4,5,6,7])
 end
 
 

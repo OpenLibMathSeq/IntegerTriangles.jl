@@ -7,9 +7,6 @@ AbstractSequence
 AbstractTriangle
 ```
 ```@docs
-AllTraits
-```
-```@docs
 AltSum
 ```
 ```@docs
@@ -68,6 +65,9 @@ Evaluate
 ```
 ```@docs
 EvenSum
+```
+```@docs
+Explore
 ```
 ```@docs
 ExtCatalanTriangle
@@ -257,9 +257,6 @@ TransSqrs
 ```
 ```@docs
 TransUnos
-```
-```@docs
-TriangleInfo
 ```
 ```@docs
 ZInt
