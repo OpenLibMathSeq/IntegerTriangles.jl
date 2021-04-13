@@ -12,6 +12,7 @@ julia:
 jobs:
   allow_failures:
     - julia: nightly
+  after_success: skip
 
 notifications:
   email: true
@@ -19,6 +20,3 @@ notifications:
 env:
   global:
     - DOCUMENTER_DEBUG=true
-
-script:
-  - julia --project --check-bounds=yes -e 'import Pkg; Pkg.build(); Pkg.test("IntegerTriangles"; coverage=true)'
