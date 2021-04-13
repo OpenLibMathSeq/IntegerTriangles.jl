@@ -22,32 +22,32 @@ function PolyPlot(F, title)
     ylabel!("p(x)")
 
     # axis limit
-    P = plot!(xlims=(-2.0,1.0), ylims=(-5.0, 5.0))
+    P = plot!(xlims=(-2.0, 1.0), ylims=(-5.0, 5.0))
     display(P)
 end
 
-#START-TEST-########################################################
+# START-TEST-########################################################
 
 function test()
 end
 
 function demo()
-    #P = PolynomialFunction(LahTriangle(7))
-    #PolyPlot(P, "Lah polynomials")
-    #P = PolynomialFunction(EulerianTriangle(7))
-    #PolyPlot(P, "Eulerian polynomials")
-    #P = PolynomialFunction(LaguerreTriangle(7))
-    #PolyPlot(P, "Laguerre polynomials")
-    #P = PolynomialFunction(CatalanTriangle(7))
-    #PolyPlot(P, "Catalan polynomials")
-    #P = PolynomialFunction(MotzkinTriangle(7))
-    #PolyPlot(P, "Motzkin polynomials")
-    #P = PolynomialFunction(NarayanaTriangle(7))
-    #PolyPlot(P, "Narayana polynomials")
-    P = PolynomialFunction(JacobsthalTriangle(7))
-    PolyPlot(P, "Jacobsthal polynomials")
-    #P = PolynomialFunction(FibonacciTriangle(7))
-    #PolyPlot(P, "Fibonacci polynomials")
+    # P = PolynomialFunction(LahTriangle(7))
+    # PolyPlot(P, "Lah polynomials")
+    # P = PolynomialFunction(EulerianTriangle(7))
+    # PolyPlot(P, "Eulerian polynomials")
+    # P = PolynomialFunction(LaguerreTriangle(7))
+    # PolyPlot(P, "Laguerre polynomials")
+    # P = PolynomialFunction(CatalanTriangle(7))
+    # PolyPlot(P, "Catalan polynomials")
+    # P = PolynomialFunction(MotzkinTriangle(7))
+    # PolyPlot(P, "Motzkin polynomials")
+    P = PolynomialFunction(NarayanaTriangle(7))
+    PolyPlot(P, "Narayana polynomials")
+    # P = PolynomialFunction(JacobsthalTriangle(7))
+    # PolyPlot(P, "Jacobsthal polynomials")
+    # P = PolynomialFunction(FibonacciTriangle(7))
+    # PolyPlot(P, "Fibonacci polynomials")
 end
 
 function perf()
@@ -56,7 +56,7 @@ end
 function main()
     test()
     # this might take a while
-    #demo()
+    demo()
     perf()
 end
 

@@ -3,14 +3,18 @@
 [![Build status](https://travis-ci.org/OpenLibMathSeq/IntegerTriangles.jl.svg?branch=master)](https://travis-ci.org/OpenLibMathSeq/IntegerTriangles.jl)
 --
 
-The package is tested against Julia 1.3.1 and above on Linux, macOS, and Windows64.
+The package is tested against Julia 1.6.0 on Linux, macOS, and Windows64.
 
-Very early in the development cycle, version 0.1.0.
+Very early in the development cycle, version 0.2.0.
 
 ## Julia implementations of integer triangles.
 
 We give a framework for computing mathematical integer triangles and use
-it to create "Integer Triangle Trait Cards"™. A trait card is a compilation of the essential characteristics of an integer triangle, whereby we understand the characteristics of a triangle to be integer sequences that can be obtained from the triangle by elementary transformations.
+it to create "Integer Triangle Trait Cards"™. 
+
+A trait card is a compilation of the essential characteristics of an integer triangle, 
+whereby we understand the characteristics of a triangle to be integer sequences that 
+can be obtained from the triangle by elementary transformations.
 
 To see what you can expect start by executing
 

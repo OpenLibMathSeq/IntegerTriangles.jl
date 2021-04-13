@@ -3,3 +3,4 @@ local/*
 docs/build/*
 .vscode/*
 demos/.ipynb_checkpoints
+IntegerTriangles.code-workspace
