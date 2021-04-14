@@ -38,6 +38,8 @@ Overview tables can be automatically generated for a variety of triangles and tr
 Note that we assume all sequences to start at offset = 0. Also note that all A-numbers
 are approximativ only, i.e. the first few terms may differ.
 
+To use this feature you have to download the file [stripped.gz]( http://oeis.org/stripped.gz) from oeis.org, expand it and put it in the directory ../data.
+
 You can also look at the demo [notebook](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/demos/IntegerTriangles.ipynb).
 
 An introduction to the project can be found in:

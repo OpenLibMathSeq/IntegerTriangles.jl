@@ -48,6 +48,9 @@ const ℚTri = Seq{ℚSeq}  # (alias for Array{Array{fmpq, 1}, 1})
 ZSeq(len::Int) = ℤSeq(undef, len) # (constructor for Array{fmpz, 1})
 QSeq(len::Int) = ℚSeq(undef, len) # (constructor for Array{fmpq, 1})
 
+ZSeq(len::Int, f::Function) = [ZZ(f(n)) for n in 0:len-1] # (constructor for Array{fmpz, 1})
+QSeq(len::Int, f::Function) = [QQ(f(n)) for n in 0:len-1] # (constructor for Array{fmpq, 1})
+
 function ZTri(dim::Int; reg=false) # (constructor for Array{Array{fmpz, 1}, 1})
     reg ? ZSeq.(1:dim) : ℤTri(undef, dim)
 end

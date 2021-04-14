@@ -37,10 +37,13 @@ function TraitCard(T::ℤTri, name, N)
     S = NegHalf(P);  print("NegHalf:   "); S[1:len] |> Println
     S = PolyValue(PA, 2); print("PolyVal2:  "); S[1:len] |> Println
     S = PolyValue(PA, 3); print("PolyVal3:  "); S[1:len] |> Println
-    S = Trans(T, [ZZ(n) for n = 0:32]); print("N0TS:      "); S[1:len] |> Println
-    S = Trans(T, [ZZ(n) for n = 1:32]); print("NATS:      "); S[1:len] |> Println
+    S = Trans(T, [ZZ(1) for n = 0:32]);      print("TransUnos: "); S[1:len] |> Println
+    S = Trans(T, [ZZ((-1)^n) for n = 0:32]); print("TransAlts: "); S[1:len] |> Println
+    S = Trans(T, [ZZ(n) for n = 0:32]); print("TransNat0: "); S[1:len] |> Println
+    S = Trans(T, [ZZ(n) for n = 1:32]); print("TransNat1: "); S[1:len] |> Println
     println()
 end
+
 
 function AssociatedTriangles(T::ℤTri, N)
 
