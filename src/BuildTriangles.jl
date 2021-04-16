@@ -458,9 +458,10 @@ function addsig(srcfile, docfile)
             end
 
             nn = nextline(srcfile)
-            if !startswith(nn, "const Module")
-                println(docfile, "\$(SIGNATURES)")
-            end
+            # Do you want signatures? 
+            #if !startswith(nn, "const Module")
+            #    println(docfile, "\$(SIGNATURES)")
+            #end
             println(docfile, n)
             n = nn
         end

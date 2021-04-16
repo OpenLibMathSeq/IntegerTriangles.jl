@@ -19,14 +19,19 @@ export EgfExpansionCoeff, EgfExpansionPoly
 export RecTriangle, InverseTriangle
 export PolynomialFunction, ReversedPolynomial, PolyValue, PolyVal2, PolyVal3
 export RiordanSquare, Println, Print, Telescope, LinMap, Trans
-export Sum, EvenSum, OddSum, AltSum, DiagSum, Central, Middle
+export EvenSum, OddSum, AltSum, DiagSum, Central, Middle
 export LeftSide, RightSide, PosHalf, NegHalf, Flat
 export Binomial, BinomialTransform, BinomialTriangle, Coefficients
 export TransUnos, TransAlts, TransSqrs, TransNat0, TransNat1
 
-# include("TrianglesTypes.jl")
 
+"""
+Supertype for sequences (or sequence-like types). 
+"""
 abstract type AbstractSequence end
+"""
+Supertype for triangles (or triangles-like types). 
+"""
 abstract type AbstractTriangle end
 
 const Seq{T} = Array{T,1}
@@ -78,9 +83,6 @@ const ℚPolyTri = Seq{ℚPolySeq} # (alias for Array{Array{fmpq_poly, 1}, 1})
 ZPolyRing(x) = PolynomialRing(ZZ, x)
 QPolyRing(x) = PolynomialRing(QQ, x)
 
-Base.sum(T::ℤTri) = [sum(row) for row ∈ T]
-Base.sum(T::ℚTri) = [sum(row) for row ∈ T]
-
 const WARNING_ON_NOTINVERTIBLE = false
 
 function DiagonalTriangle(T::ℤTri)
@@ -96,73 +98,313 @@ function DiagonalTriangle(T::ℤTri)
     U
 end
 
+"""
+The sum of a ℤTri is the sequence of the sum of the rows.
+"""
+Base.sum(T::ℤTri) = [sum(row) for row ∈ T]
+Base.sum(T::ℚTri) = [sum(row) for row ∈ T]
+
+"""
+The EvenSum of a ℤSeq is the sum of the even indexed terms, indexing starts with 0.
+```
+julia> EvenSum([0, 1, 2, 3, 4, 5])  
+0 + 2 + 4 = 6
+```
+"""
 EvenSum(A) = sum(A[1:2:end])
+
+"""
+The OddSum of a ℤSeq is the sum of the odd indexed terms, indexing starts with 0.
+```
+julia> OddSum([0, 1, 2, 3, 4, 5])  
+1 + 3 + 5 = 9
+```
+"""
 OddSum(A) = sum(A[2:2:end])
+
+"""
+The AltSum of a ℤSeq is the alternating sum.
+```
+julia> AltSum([0, 1, 2, 3, 4, 5])  
++ 0 - 1 + 2 - 3 + 4 - 5 = 6 - 9 = - 3
+```
+"""
 AltSum(A) = EvenSum(A) - OddSum(A)
-Middle(A) = A[div(end + 1, 2)]
-LeftSide(A) = A[1]
+
+"""
+The Middle of a ℤSeq A is the middle term, A[div(begin + end, 2)].
+```
+julia> Middle([0, 1, 2, 3, 4, 5]) 
+3 
+```
+"""
+Middle(A) = A[div(begin + end, 2)]
+
+"""
+The LeftSide of a ℤSeq is the first term.
+```
+julia> LeftSide([0, 1, 2, 3, 4, 5]) 
+0 
+```
+"""
+LeftSide(A) = A[begin]
+
+"""
+The RightSide of a ℤSeq is the last term.
+```
+julia> RightSide([0, 1, 2, 3, 4, 5]) 
+5 
+```
+"""
 RightSide(A) = A[end]
 
+"""
+The EvenSum of a ℤTri is the sequence of the even sums of the rows.
+```
 EvenSum(T::ℤTri) = EvenSum.(T)
+```
+"""
+EvenSum(T::ℤTri) = EvenSum.(T)
+
+"""
+The OddSum of a ℤTri is the sequence of the odd sums of the rows.
+```
 OddSum(T::ℤTri) = OddSum.(T)
+```
+"""
+OddSum(T::ℤTri) = OddSum.(T)
+
+"""
+The AltSum of a ℤTri is the sequence of the alternating sums of the rows.
+```
 AltSum(T::ℤTri) = EvenSum(T) - OddSum(T)
+```
+"""
+AltSum(T::ℤTri) = EvenSum(T) - OddSum(T)
+
+"""
+The DiagSum of a ℤTri is the sum of the diagonal triangle.
+```
 DiagSum(T::ℤTri) = sum(DiagonalTriangle(T))
+```
+"""
+DiagSum(T::ℤTri) = sum(DiagonalTriangle(T))
+
+"""
+The Middle of a ℤTri is the sequence of the middle term in the rows.
+```
 Middle(T::ℤTri) = Middle.(T)
-Central(T::ℤTri) = Middle.(T[1:2:end])
+```
+"""
+Middle(T::ℤTri) = Middle.(T)
+
+"""
+The Central of a ℤTri is the sequence of the middle term 
+of the even indexed rows, indexing starts with 0.
+```
+Central(T::ℤTri) = Middle.(T[begin:2:end])
+```
+"""
+Central(T::ℤTri) = Middle.(T[begin:2:end])
+
+"""
+The LeftSide of a ℤTri is the sequence of the first term in the rows.
+```
 LeftSide(T::ℤTri) = LeftSide.(T)
+```
+"""
+LeftSide(T::ℤTri) = LeftSide.(T)
+
+"""
+The RightSide of a ℤTri is the sequence of the last term in the rows.
+```
+RightSide(T::ℤTri) = RightSide.(T)
+```
+"""
 RightSide(T::ℤTri) = RightSide.(T)
 
-# Triangles -> Polynomials
+"""
+Return the ℤ-polynomial whose coefficients are the terms of the sequence.
+```
+[1, 2, 3] -> 1 + 2*x + 3*x^2
+```
+"""
 function Polynomial(S::ℤSeq)
     R, x = ZPolyRing("x")
     sum(c * x^(k - 1) for (k, c) ∈ enumerate(S))
 end
+
+"""
+Return the sequence of ℤ-polynomials whose coefficients are the terms of the triangle.
+```
+Polynomial(T::ℤTri) = Polynomial.(T)
+```
+"""
 Polynomial(T::ℤTri) = Polynomial.(T)
 
+"""
+Return the ℤ-polynomial whose coefficients are the terms of the reversed sequence.
+```
+[1, 2, 3] -> x^2 + 2*x + 3
+```
+"""
 ReversedPolynomial(S::ℤSeq) = Polynomial(reverse(S))
+
+"""
+Return the sequence of ℤ-polynomials whose coefficients are the terms of the reversed triangle.
+```
+ReversedPolynomial(T::ℤTri) = ReversedPolynomial.(T)
+```
+"""
 ReversedPolynomial(T::ℤTri) = ReversedPolynomial.(T)
 
-# Triangles ->  PolynomialFunctions
-function PolynomialFunction(s)
+"""
+Return the polynomial function associated with the polynomial with coefficients
+given by the sequence S. A polynomial function evaluates to Float64 values.
+```
+p = PolynomialFunction([1, 2, 3])
+julia> [p(r) for r in 0:3]
+4-element Vector{Float64}:
+  1.0
+  6.0
+ 17.0
+ 34.0
+```
+"""
+function PolynomialFunction(S)
     y -> sum(Float64(c) * y^(k - 1)
-            for (k, c) ∈ enumerate(s))
+            for (k, c) ∈ enumerate(S))
 end
+
+"""
+Return the sequence of polynomial functions associated to the polynomials with coefficients
+given by the triangle T. 
+```
 PolynomialFunction(T::ℤTri) = PolynomialFunction.(T)
+```
+"""
+PolynomialFunction(T::ℤTri) = PolynomialFunction.(T)
+
+"""
+Return the value of the ℤ-polynomial p evaluated at x.
+```
+julia> R, x = ZPolyRing("x")
+p = 1 + 2*x + 3*x^2
+Evaluate(p, 2)
+17
+```
+"""
+Evaluate(p::ℤPoly, x) = subst(p, x)
+Evaluate(p::ℚPoly, x) = subst(p, x)
+
+"""
+Return the sequence of values to which the sequence of ℤ-polynomials P evaluate at x.
+```
+julia> R, x = ZPolyRing("x")
+P = [sum(k * x^k for k in 0:n) for n in 0:9]
+Evaluate(P, 2)  # A036799
+Evaluate(P, 3)  # A289399	
+```
+"""
+Evaluate(P::ℤPolySeq, x) = Evaluate.(P, x)
+Evaluate(P::ℚPolySeq, x) = Evaluate.(P, x)
+
+"""
+Return the list of coefficients of the polynomial p (ordered by ascending powers).
+```
+julia> R, x = ZPolyRing("x")
+p = 1 + 2*x + 3*x^2
+Coefficients(p)
+```
+"""
+Coefficients(p) = coeff.(p, 0:degree(p))
+
+"""
+Return the sequence of list of coefficients of the polynomials P.
+"""
+Coefficients(P::AbstractArray) = Coefficients.(P)
 
 import Nemo.numerator
 numerator(T::ℚTri) = [numerator.(t) for t ∈ T]
 
-# Polynomials -> Triangles
-Coefficients(p) = coeff.(p, 0:degree(p))
-Coefficients(P::AbstractArray) = Coefficients.(P)
-
-Evaluate(p::ℤPoly, x) = subst(p, x)
-Evaluate(p::ℚPoly, x) = subst(p, x)
-Evaluate(P::ℤPolySeq, x) = Evaluate.(P, x)
-Evaluate(P::ℚPolySeq, x) = Evaluate.(P, x)
-
-function Transpose!(T::ℤTri)
-    for n in 1:length(T), k in 1:n
-        @inbounds T[n][k], T[k][n] = T[k][n], T[n][k]
-    end
-    T
-end
-
+"""
+Return numerator(2^degree(p) * Evaluate(p, QQ(1, 2))).
+```
+julia> R, x = ZPolyRing("x")
+p = 1 + 2*x + 3*x^2
+PosHalf(p)
+11
+```
+"""
 PosHalf(p) = numerator(2^degree(p) * Evaluate(p, QQ(1, 2)))
+
+"""
+Return Numerator((-2)^degree(p) * Evaluate(p, QQ(-1, 2)))
+```
+julia> R, x = ZPolyRing("x")
+p = 1 + 2*x + 3*x^2
+NegHalf(p)
+3
+```
+"""
 NegHalf(p) = numerator((-2)^degree(p) * Evaluate(p, QQ(-1, 2)))
 
+"""
+Return the sequence generated by broadcasting PosHalf over the 
+rows of the triangle interpreted as a polynomials.
+```
+julia> T = [[ZZ(k) for k in 0:n] for n in 1:5]
+PosHalf(Polynomial(T))  # A000295
+5-element ℤSeq
+ 1
+ 4
+ 11
+ 26
+ 57
+```
+"""
 PosHalf(T::ℤTri) = PosHalf.(Polynomial(T))
+
+"""
+Return the sequence generated by broadcasting NegHalf over the 
+rows of the triangle interpreted as a polynomials.
+```
+NegHalf(T::ℤTri) = NegHalf.(Polynomial(T))
+```
+"""
 NegHalf(T::ℤTri) = NegHalf.(Polynomial(T))
 
+"""
+Return the sequence generated by broadcasting PosHalf over the 
+sequence of polynomials.
+"""
 PosHalf(P::ℤPolySeq) = PosHalf.(P)
+
+"""
+Return the sequence generated by broadcasting NegHalf over the 
+sequence of polynomials.
+"""
 NegHalf(P::ℤPolySeq) = NegHalf.(P)
 
-
-LinMap(F::Function, V::ℤSeq, n) = sum(F(n - 1)[k] * V[k] for k = 1:n)
-LinMap(F::Function, V::ℤSeq) = LinMap(F, V, length(V))
 LinMap(M::ℤTri, V::ℤSeq, n) = sum(M[n][k] * V[k] for k = 1:n)
+
+"""
+LinMap(M::ℤTri, V::ℤSeq) returns the 'matrix times vector' product
+of M and V.
+"""
 LinMap(M::ℤTri, V::ℤSeq) = (n -> LinMap(M, V, n)).(1:length(V))
 
+LinMap(F::Function, V::ℤSeq, n) = sum(F(n - 1)[k] * V[k] for k = 1:n)
+
+"""
+LinMap(F::Function, V::ℤSeq) returns the 'matrix times vector' product
+of F (a function returning ℤSeqs) and V.
+"""
+LinMap(F::Function, V::ℤSeq) = LinMap(F, V, length(V))
+
+"""
+Transform a ℤSeq V by the triangle M by applying LinMap to (M, V).
+"""
 Trans(M::ℤTri, V::ℤSeq) = (n -> LinMap(M, V, n)).(1:min(length(M), length(V)))
 
 TransUnos(T) = Trans(T, [ZZ(1) for n = 0:length(T)]) 
@@ -180,6 +422,7 @@ the factorial of ``n``. (Nota: The notation is a shortcut. The use of '!' breaks
 Julia naming conventions, therefore use it only internally.)
 """
 F!(n) = Nemo.factorial(ZZ(n))
+
 Binomial(n, k) = Nemo.binomial(ZZ(n), ZZ(k))
 Binomial(n) = [Binomial(n, k) for k = 0:n]
 Binomial(A::ℤSeq) = LinMap(Binomial, A)
@@ -323,7 +566,7 @@ Print(T::ℤSeq) = Println(IOContext(stdout), T, false)
 """
 A recursive triangle `RecTriangle` is a subtype of `AbstractTriangle`. The rows
 of the triangle are generated by a function `gen(n, k, prevrow)` defined for
-``n ≥ 0`` and ``0 ≤ k ≤ n``. The function returns value of type fmpz.
+``n ≥ 0`` and ``0 ≤ k ≤ n``. The function returns value of type ℤInt.
 
 The parameter prevrow is a function which returns the values of `row(n-1)` of
 the triangle and 0 if ``k < 0`` or ``k > n``. The function prevrow is provided
@@ -338,7 +581,7 @@ struct RecTriangle <: AbstractTriangle
         new(
             dim,
             fill(ZZ(0), dim),
-            (n::Int, k::Int, f::Function) -> gen(n, k, f)::fmpz,
+            (n::Int, k::Int, f::Function) -> gen(n, k, f)::ℤInt,
         )
     end
 end
@@ -364,7 +607,7 @@ function Base.iterate(T::RecTriangle, n)
 end
 
 Base.length(R::RecTriangle) = R.dim
-Base.eltype(R::RecTriangle) = fmpz
+Base.eltype(R::RecTriangle) = ℤInt
 
 function PolyArray(T::ℤTri)
     P = Polynomial(T)
@@ -471,7 +714,6 @@ function demo()
     s |> println
 
     T = Telescope(6, n -> ZZ(n)) 
-    println(T)
     println(isa(collect(T), ℤTri))
 end
 

@@ -232,9 +232,6 @@ StirlingSetTransform
 StirlingSetTriangle
 ```
 ```@docs
-Sum
-```
-```@docs
 Telescope
 ```
 ```@docs

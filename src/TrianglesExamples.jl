@@ -143,7 +143,7 @@ function R008279(n::Int, k::Int, prevrow::Function)
 end
 
 """
-Iterates over the first n rows of `A132393`.
+xIterates over the first n rows of `A132393`.
 Triangle of unsigned Stirling numbers of the first kind.
 """
 I132393(n) = RecTriangle(n, R132393)
@@ -414,7 +414,7 @@ end
 
 function main()
     test()
-    #demo()
+    demo()
     perf()
 end
 

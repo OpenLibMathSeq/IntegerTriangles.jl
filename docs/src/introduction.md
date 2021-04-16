@@ -1,30 +1,18 @@
-<img src="https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/docs/src/TrianglesLogo.png">
+![IntegerTriangles](TrianglesLogo.png)
 
-[![Build status](https://travis-ci.org/OpenLibMathSeq/IntegerTriangles.jl.svg?branch=master)](https://travis-ci.org/OpenLibMathSeq/IntegerTriangles.jl)
---
-
-The package is tested against Julia 1.6.0 on Linux, macOS, and Windows64.
-
-Very early in the development cycle, version 0.2.0.
-
-## Julia implementations of integer triangles.
+# Julia implementations of integer triangles.
 
 We give a framework for computing mathematical integer triangles and use
-it to create so called "Integer Triangle Trait Cards". 
+it to create so called "Trait Cards". 
 
 A trait card is a compilation of the essential characteristics of an integer triangle, 
 whereby we understand the characteristics of a triangle to be integer sequences that 
 can be obtained from the triangle by elementary transformations.
 
-To see what you can expect start by executing
-
-    using IntegerTriangles
-    TraitCard(BinomialTriangle, 8)
-
 Overview tables can be automatically generated for a variety of triangles and traits.
 
 | A-Number | Triangle   | Form | Function  | Sequence                                    | 
-| -------- | ---------- | ---- | --------- | ------------------------------------------- |
+|:--------:|:---------- |:----:|:--------- |:------------------------------------------- |
 | A000302  | Binomial   | Std  | PolyVal3  | 1, 4, 16, 64, 256, 1024, 4096, 16384        |
 | A001333  | SchroederB | Inv  | AltSum    | 1, -1, 3, -7, 17, -41, 99, -239             |
 | A006012  | SchroederL | Inv  | AltSum    | 1, -2, 6, -20, 68, -232, 792, -2704         |
@@ -35,10 +23,16 @@ Overview tables can be automatically generated for a variety of triangles and tr
 
 
 Important: Note that we assume all sequences to start at offset = 0. Also note that all 
-references to A-numbers are approximativ only, i.e. the first few terms of the sequence 
+references to A-numbers are approximativ only, i.e. the first few terms of the sequence
 may differ and the OEIS-'offset' is always disregarded. 
 
-To use this feature you have to download the file [stripped.gz](http://oeis.org/stripped.gz) from oeis.org, expand it and put it in the directory ../data.
+To use this feature you have to download the file [stripped.gz](http://oeis.org/stripped.gz) 
+from oeis.org, expand it and put it in the 'data' directory.
+
+To see what you can expect start by executing
+
+    using IntegerTriangles
+    TraitCard(BinomialTriangle, 8)
 
 You can also look at the demo [notebook](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/demos/IntegerTriangles.ipynb).
 
