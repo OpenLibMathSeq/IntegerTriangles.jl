@@ -131,9 +131,9 @@ end
 
 # The BIG LIST goes to data/profile.txt.
 function Explore(savetofile::Bool)
-    @warn "This will take several minutes and produce the file 'profile.txt' in the data directory."
+    @warn "This will take several minutes and produce the file 'BIGLIST.md' in the data directory."
 
-    open(profilepath(), "a") do io
+    open(profilepath("BIGLIST"), "a") do io
         for (name, triangle) in Triangles
             for kind in Kind
                 T = TriangleVariant(triangle, LEN, kind)

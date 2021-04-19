@@ -85,7 +85,7 @@ function demo()
 end
 
 function perf()
-    AllPrettyTraits()
+    # AllPrettyTraits()
 end
 
 function main()
