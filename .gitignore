@@ -1,6 +1,5 @@
 Manifest.toml
 local/*
-profiles/*
 docs/build/*
 .vscode/*
 .github/*
