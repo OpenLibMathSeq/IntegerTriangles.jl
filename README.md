@@ -10,7 +10,7 @@ Very early in the development cycle, version 0.2.0.
 ## Julia implementations of integer triangles.
 
 We give a framework for computing mathematical integer triangles and use
-it to create "Integer Triangle Trait Cards"™. 
+it to create so called "Integer Triangle Trait Cards". 
 
 A trait card is a compilation of the essential characteristics of an integer triangle, 
 whereby we understand the characteristics of a triangle to be integer sequences that 
@@ -19,8 +19,7 @@ can be obtained from the triangle by elementary transformations.
 To see what you can expect start by executing
 
     using IntegerTriangles
-    dim = 8
-    TraitCard(BinomialTriangle, BinomialTransform, dim)
+    TraitCard(BinomialTriangle, 8)
 
 Overview tables can be automatically generated for a variety of triangles and traits.
 
@@ -35,10 +34,11 @@ Overview tables can be automatically generated for a variety of triangles and tr
 | nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 
 
-Note that we assume all sequences to start at offset = 0. Also note that all A-numbers
-are approximativ only, i.e. the first few terms may differ.
+Important: Note that we assume all sequences to start at offset = 0. Also note that all 
+references to A-numbers are approximativ only, i.e. the first few terms of the sequence 
+may differ and the OEIS-'offset' is always disregarded. 
 
-To use this feature you have to download the file [stripped.gz]( http://oeis.org/stripped.gz) from oeis.org, expand it and put it in the directory ../data.
+To use this feature you have to download the file [stripped.gz](http://oeis.org/stripped.gz) from oeis.org, expand it and put it in the directory ../data.
 
 You can also look at the demo [notebook](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/demos/IntegerTriangles.ipynb).
 

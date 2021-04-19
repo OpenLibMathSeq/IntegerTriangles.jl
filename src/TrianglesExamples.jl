@@ -10,13 +10,14 @@ using Nemo, TrianglesBase
 export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTriangle, MotzkinTriangle
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
 export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle
-export EulerianTriangle, NarayanaTriangle, NarayanaTransform
+export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
 export EulerianTransform, MotzkinTransform, SchroederBigTransform
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle
 export StirlingSetTransform, StirlingCycleTransform
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703
+export TRIANGLES
 
 function PrimeDivisors(n)
     n < 2 && return ZInt[]
@@ -36,7 +37,7 @@ function LahNumbers(n::Int64)
     CacheLah[n] = row
 end
 
-LahNumbers(n, k) = LahNumbers(n + 1)[k + 1]
+LahNumbers(n, k) = LahNumbers(n)[k + 1]
 
 function LahTriangle(size)
     length(CacheLah) < size && LahNumbers(size)
@@ -133,6 +134,7 @@ function R094587(n::Int, k::Int, prevrow::Function)
     (k == 0 && n == 0) && return ZZ(1)
     (n - k) * prevrow(k) + prevrow(k - 1)
 end
+
 """
 Recurrence for A008279. Number of permutations of n things k at a time.
 (Falling factorials)
@@ -143,7 +145,7 @@ function R008279(n::Int, k::Int, prevrow::Function)
 end
 
 """
-Iterates over the first n rows of `A132393`.
+xIterates over the first n rows of `A132393`.
 Triangle of unsigned Stirling numbers of the first kind.
 """
 I132393(n) = RecTriangle(n, R132393)
@@ -179,11 +181,17 @@ Iterates over the first n rows of `A094587`.
 """
 I094587(n) = RecTriangle(n, R094587)
 T094587(dim) = ZTri(I094587(dim))
+# T094587(dim) = Reverse(ZTri(I008279(dim)))
+
+
 """
 Iterates over the first n rows of `A008279`.
 """
 I008279(n) = RecTriangle(n, R008279)
 T008279(dim) = ZTri(I008279(dim))
+
+FallFactTriangle(dim) = ZTri(I008279(dim))
+PermCoeffsTriangle(dim) = ZTri(I008279(dim))
 
 function R225478(n, k, prevrow::Function)
     (k == 0 && n == 0) && return ZZ(1)
@@ -254,6 +262,25 @@ EulerianTransform(A::ℤSeq) = Eulerian.(Telescope(A))
 # for n in (0..7): [A130850(n, k) for k in (0..n)]
 # (PARI) t(n, k) = (n-k)!*stirling(n+1, n-k+1, 2);
 #########################################################
+
+const CacheEulerian2 = Dict{Tuple{Int,Int},fmpz}()
+function EulerianNumbers2(n, k)
+    haskey(CacheEulerian2, (n, k)) && return CacheEulerian2[(n, k)]
+    CacheEulerian2[(n, k)] = if (k == n) 
+        ZZ(1)
+    elseif (k <= 0) || (k > n)
+        ZZ(0)
+    else
+        (n - k + 1) * EulerianNumbers2(n - 1, k - 1) +
+        (k) * EulerianNumbers2(n - 1, k)
+    end
+end
+
+EulerianTriangle2(dim) = [[EulerianNumbers2(n, k) for k = 0:n] for n = 0:dim - 1]
+Eulerian2(n) = EulerianTriangle2(n + 1)[n + 1]
+Eulerian2(n, k) = Eulerian2(n)[k + 1]
+Eulerian2(A::ℤSeq) = LinMap(Eulerian2, A, length(A))
+EulerianTransform2(A::ℤSeq) = Eulerian2.(Telescope(A))
 
 const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
 function NarayanaNumbers(n::Int, k::Int)
@@ -341,6 +368,23 @@ function transforms(trans)
     trans(Nut) |> Println
 end
 
+const TRIANGLES = Function[
+    BinomialTriangle,
+    CatalanTriangle,
+    EulerianTriangle,
+    FibonacciTriangle,
+    LaguerreTriangle,
+    LahTriangle,
+    MotzkinTriangle,
+    NarayanaTriangle,
+    SchröderBTriangle,
+    SchröderLTriangle,
+    StirlingCycleTriangle,
+    StirlingSetTriangle,
+    T008279
+    ]
+
+
 # START-TEST-########################################################
 using Test
 
@@ -397,7 +441,10 @@ function demo()
     transforms(LaguerreTransform)
 
     Println.(EulerianTriangle(8))
+    Println.(EulerianTriangle2(8))
     transforms(EulerianTransform)
+
+    Println.(Inverse(EulerianTriangle2(8)))
 
     Println.(NarayanaTriangle(8))
     transforms(NarayanaTransform)
@@ -414,12 +461,13 @@ end
 
 function main()
     test()
-    #demo()
+    demo()
     perf()
 end
 
-main()
-
+#main()
+Println.(Reverse(DiagonalTriangle(FallFactTriangle(12))))
+Println.(Reverse(FallFactTriangle(12)))
 
 end # module
 

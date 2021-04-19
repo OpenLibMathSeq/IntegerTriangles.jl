@@ -1,4 +1,9 @@
-using Documenter, IntegerTriangles
+prodir = realpath(joinpath(dirname(dirname(@__FILE__))))
+srcdir = joinpath(prodir, "src")
+srcdir ∉ LOAD_PATH && push!(LOAD_PATH, srcdir)
+
+using Documenter
+#using IntegerTriangles
 
 makedocs(
     modules = [IntegerTriangles],
@@ -6,6 +11,7 @@ makedocs(
     clean = true,
     doctest = false,
     pages = [
+        "Introduction" => "introduction.md",
         "Library" => "index.md",
         "Modules" => "modules.md",
     ]
