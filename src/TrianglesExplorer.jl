@@ -15,34 +15,38 @@ const WARNING_ON_NOTFOUND = false
 const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
 
 const Triangles = LittleDict{String, Function}(
-    "Binomial"      => BinomialTriangle, 
-    "Catalan"       => CatalanTriangle, 
-    "Eulerian"      => EulerianTriangle, 
-    "Fibonacci"     => FibonacciTriangle, 
-    "Laguerre"      => LaguerreTriangle, 
-    "Lah"           => LahTriangle, 
-    "Motzkin"       => MotzkinTriangle, 
-    "Narayana"      => NarayanaTriangle, 
-    "SchroederB"    => SchröderBTriangle, 
+    "Binomial"      => BinomialTriangle,
+    "Catalan"       => CatalanTriangle,
+    "Eulerian"      => EulerianTriangle,
+    "Fibonacci"     => FibonacciTriangle,
+    "Laguerre"      => LaguerreTriangle,
+    "Lah"           => LahTriangle,
+    "Motzkin"       => MotzkinTriangle,
+    "Narayana"      => NarayanaTriangle,
+    "SchroederB"    => SchröderBTriangle,
     "SchroederL"    => SchröderLTriangle,
-    "StirlingCycle" => StirlingCycleTriangle, 
-    "StirlingSet"   => StirlingSetTriangle, 
-    "PermCoeffs"    => T008279 
+    "StirlingCycle" => StirlingCycleTriangle,
+    "StirlingSet"   => StirlingSetTriangle,
+    "PermCoeffs"    => T008279
 )
 
 const Traits = LittleDict{String, Function}(
-    "Triangle"   => Flat, 
-    "Sum"        => sum, 
-    "EvenSum"    => EvenSum, 
-    "OddSum"     => OddSum, 
+    "Triangle"   => Flat,
+    "Reverse"    => Reverse,
+    "Inverse"    => Inverse,
+    "RevInv"     => RevInv,
+    "InvRev"     => InvRev,
+    "Sum"        => sum,
+    "EvenSum"    => EvenSum,
+    "OddSum"     => OddSum,
     "AltSum"     => AltSum,
-    "DiagSum"    => DiagSum, 
-    "Middle"     => Middle, 
-    "Central"    => Central, 
-    "LeftSide"   => LeftSide, 
-    "RightSide"  => RightSide, 
-    "PosHalf"    => PosHalf, 
-    "NegHalf"    => NegHalf, 
+    "DiagSum"    => DiagSum,
+    "Middle"     => Middle,
+    "Central"    => Central,
+    "LeftSide"   => LeftSide,
+    "RightSide"  => RightSide,
+    "PosHalf"    => PosHalf,
+    "NegHalf"    => NegHalf,
     "PolyVal2"   => PolyVal2,
     "PolyVal3"   => PolyVal3,
     "TransUnos"  => TransUnos,
@@ -64,24 +68,24 @@ function Show(io, name, kind, trait, seq, savetofile=false)
     end
 end
 
-function TriangleVariant(Tri, dim, kind="Std") 
+function TriangleVariant(Tri, dim, kind="Std")
     if ! (kind in Kind)
         @warn("No valid kind!")
         return []
     end
-   
+
     M = Tri(dim)
     kind == "Std" && return M
-    kind == "Rev" && return reverse.(M) 
+    kind == "Rev" && return reverse.(M)
     kind == "InvRev" && (M = reverse.(M))
     invM = InverseTriangle(M)
-    (kind == "Inv" || kind == "InvRev" 
+    (kind == "Inv" || kind == "InvRev"
         || invM == []) && return invM
-    return reverse.(invM) 
+    return reverse.(invM)
 end
 
 function Explore(triangle, kind, trait, dim)
-    T = TriangleVariant(Triangles[triangle], dim, kind) 
+    T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = Traits[trait](T)
     Show(stdout, triangle, kind, trait, seq)
 end
@@ -90,7 +94,7 @@ const LEN = 32
 
 function Explore(triangle, kind, trait)
     dim = 32
-    T = TriangleVariant(Triangles[triangle], dim, kind) 
+    T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = Traits[trait](T)
     anum = GetSeqnum(seq)
     anum === nothing && (anum = "nothing")
@@ -102,25 +106,25 @@ function Explore(trait, dim)
     for (name, triangle) in Triangles
         for kind in Kind
             T = TriangleVariant(triangle, dim, kind)
-            if T != [] 
+            if T != []
                 seq = Traits[trait](T)
                 Show(stdout, name, kind, trait, seq)
-            end    
+            end
         end
     end
 end
 
 # The BIG LIST goes to data/profile.txt.
-function Explore(savetofile=false)
+function Explore(savetofile::Bool)
     @warn "This will take several minutes and produce the file 'profile.txt' in the data directory."
 
     open(profilepath(), "a") do io
         for (name, triangle) in Triangles
             for kind in Kind
-                T = TriangleVariant(triangle, LEN, kind) 
+                T = TriangleVariant(triangle, LEN, kind)
                 if T != []
                     for (trait, f) in Traits
-                        Show(io, name, kind, trait, f(T), savetofile) 
+                        Show(io, name, kind, trait, f(T), savetofile)
                     end
                 end
             end
@@ -150,11 +154,11 @@ function demo()
 end
 
 function perf()
-    Explore(true) 
+    Explore(true)
 end
 
 function main()
-    test()
+    #test()
     demo()
     #perf()
 end

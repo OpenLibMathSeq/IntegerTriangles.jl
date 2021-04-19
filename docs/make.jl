@@ -3,7 +3,7 @@ srcdir = joinpath(prodir, "src")
 srcdir ∉ LOAD_PATH && push!(LOAD_PATH, srcdir)
 
 using Documenter
-using IntegerTriangles
+#using IntegerTriangles
 
 makedocs(
     modules = [IntegerTriangles],

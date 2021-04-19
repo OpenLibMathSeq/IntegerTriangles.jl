@@ -6,7 +6,7 @@
 module TrianglesUtils
 
 using Nemo, TrianglesBase, HTTP
-export Show, GetSeqnum, SeqToString, oeis_search, search_failed
+export Show, GetSeqnum, SeqToString, oeis_search, oeis_notinstalled, search_failed
 export profilepath
 
 const srcdir = realpath(joinpath(dirname(@__FILE__)))
@@ -90,13 +90,13 @@ function SeqToString(seq::ℤSeq)
 end
 
 # increases accuracy and prevents premature matches
-const minlen = 30  # fragil! 
+const minlen = 30  # fragil! do not reduce!
 
 function GetSeqnum(seq::ℤSeq)
     str = SeqToString(seq)
     soff = 1; loff = 10 
-    println(seq)
-    println(str)
+    #println(seq)
+    #println(str)
     for ln ∈ eachline(oeis_file())
         ln[1] == '#' && continue
         l = replace(ln, "-" => "")

@@ -1,0 +1,88 @@
+{
+	"greeting": "Greetings from The On-Line Encyclopedia of Integer Sequences! http://oeis.org/",
+	"query": "1,1,1,1,2,0,1,3,1,1,1,4,",
+	"count": 3,
+	"start": 0,
+	"results": [
+		{
+			"number": 78805,
+			"data": "1,1,1,1,2,0,1,3,1,1,1,4,3,2,0,1,5,6,4,2,1,1,6,10,8,6,2,0,1,7,15,15,13,6,3,1,1,8,21,26,25,16,9,2,0,1,9,28,42,45,36,22,9,4,1,1,10,36,64,77,72,50,28,12,2,0,1,11,45,93,126,133,106,70,34,13,5,1,1,12,55,130,198,232",
+			"name": "Triangular array T given by T(n,k)= number of 01-words of length n having exactly k 1's, every runlength of 1's odd and initial letter 0.",
+			"comment": [
+				"Row sums: A028495."
+			],
+			"reference": [
+				"Clark Kimberling, Binary words with restricted repetitions and associated compositions of integers, in Applications of Fibonacci Numbers, vol.10, Proceedings of the Eleventh International Conference on Fibonacci Numbers and Their Applications, William Webb, editor, Congressus Numerantium, Winnipeg, Manitoba 194 (2009) 141-151."
+			],
+			"formula": [
+				"T(n, k)=T(n-2, k)+T(n-2, k-1)+T(n-2, k-2)+T(n-3, k-1)-T(n-4, k-2) for 0\u003c=k\u003c=n, n\u003e=1. (All numbers T(i, j) not in the array are 0, by definition of T.)"
+			],
+			"example": [
+				"T(5,2) counts the words 01010, 01001, 00101. Top of triangle T:",
+				"1 = T(1,0)",
+				"1 1 = T(2,0) T(2,1)",
+				"1 2 0 = T(3,0) T(3,1) T(3,2)",
+				"1 3 1 1",
+				"1 4 3 2 0"
+			],
+			"xref": [
+				"Cf. A078804, A078806."
+			],
+			"keyword": "nonn,tabl",
+			"offset": "1,5",
+			"author": "_Clark Kimberling_, Dec 07 2002",
+			"references": 2,
+			"revision": 6,
+			"time": "2012-03-30T18:57:05-04:00",
+			"created": "2003-05-16T03:00:00-04:00"
+		},
+		{
+			"number": 65432,
+			"data": "1,1,-1,1,-2,0,1,-3,1,1,1,-4,3,2,0,1,-5,6,2,-2,-2,1,-6,10,0,-6,-4,0,1,-7,15,-5,-11,-3,5,5,1,-8,21,-14,-15,4,15,10,0,1,-9,28,-28,-15,19,26,6,-14,-14,1,-10,36,-48,-7,42,30,-16,-42,-28,0,1,-11,45,-75,14,70,16,-60,-70,-14,42,42,1,-12,55,-110,54,96,-28,-120",
+			"name": "Triangle related to Catalan triangle: recurrence related to A033877 (Schroeder numbers).",
+			"comment": [
+				"Sums of odd rows are 0, of even rows are the Catalan numbers (A000108) with alternating signs. Row sums of unsigned version give A065441."
+			],
+			"formula": [
+				"a[0, 0] := 1; a[n_, k_] := 0/;(k \u003e n||n \u003c 0||k \u003c 0); a[n_, k_] := a[n, k] = a[n, k-1]-2a[n-1, k-1]+a[n-1, k]; Table[a[n, k], {n, 0, 16}, {k, 0, n}]"
+			],
+			"example": [
+				"{1},{1,-1},{1,-2,0},{1,-3,1,1},{1,-4,3,2,0}"
+			],
+			"keyword": "sign,tabl",
+			"offset": "0,5",
+			"author": "_Wouter Meeussen_, Nov 16 2001",
+			"references": 2,
+			"revision": 6,
+			"time": "2016-04-25T13:17:22-04:00",
+			"created": "2003-05-16T03:00:00-04:00"
+		},
+		{
+			"number": 94184,
+			"data": "1,1,1,1,2,0,1,3,1,-1,1,4,3,-2,0,1,5,6,-2,-2,2,1,6,10,0,-6,4,0,1,7,15,5,-11,3,5,-5,1,8,21,14,-15,-4,15,-10,0,1,9,28,28,-15,-19,26,-6,-14,14,1,10,36,48,-7,-42,30,16,-42,28,0,1,11,45,75,14,-70,16,60,-70,14,42,-42,1,12,55,110,54,-96,-28,120,-70,-56,126,-84,0,1",
+			"name": "Triangle read by rows in which each term equals the entry above minus the entry left plus twice the entry left-above.",
+			"comment": [
+				"Row sums are A086990 or A090412. (Superseeker finds that the j-th coefficient of OGF(A090412)(z)*(1-z)^j equals A049122). Same absolute values as A065432. Even rows end in 0, odd rows end in Catalan numbers (A000118) with alternating sign."
+			],
+			"formula": [
+				"T(i, j)=T(i-1, j)-T(i, j-1)+2*T(i-1, j-1), with T(i, 0)=1 and T(i, j)=0 if j\u003ei."
+			],
+			"example": [
+				"Table starts {1},{1,1},{1,2,0},{1,3,1,-1},{1,4,3,-2,0},{1,5,6,-2,-2,2}"
+			],
+			"mathematica": [
+				"T[_, 0]:=1;T[0, 0]:=1;T[i_, j_]/;j\u003ei:=0;T[i_, j_]:=T[i, j]=T[i-1, j]-T[i, j-1]+2 T[i-1, j-1]"
+			],
+			"xref": [
+				"Cf. A086990, A090412, A049122, A009766, A065432, A065441."
+			],
+			"keyword": "sign,tabl",
+			"offset": "0,5",
+			"author": "_Wouter Meeussen_, May 06 2004",
+			"references": 0,
+			"revision": 4,
+			"time": "2012-03-30T18:37:44-04:00",
+			"created": "2004-06-12T03:00:00-04:00"
+		}
+	]
+}
