@@ -82,6 +82,9 @@ ExtCatalanTriangle
 Factorial
 ```
 ```@docs
+FallingFactTriangle
+```
+```@docs
 FibonacciTransform
 ```
 ```@docs
@@ -284,6 +287,9 @@ TransTraits
 ```
 ```@docs
 TransUnos
+```
+```@docs
+Triangles
 ```
 ```@docs
 ZInt

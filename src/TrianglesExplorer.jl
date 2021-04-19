@@ -8,7 +8,7 @@ module TrianglesExplorer
 using Nemo, OrderedCollections
 using TrianglesBase, TrianglesExamples, TrianglesUtils
 
-export Explore
+export Explore, Triangles
 
 const WARNING_ON_NOTFOUND = false
 
@@ -27,7 +27,7 @@ const Triangles = LittleDict{String, Function}(
     "SchroederL"    => SchröderLTriangle,
     "StirlingCycle" => StirlingCycleTriangle,
     "StirlingSet"   => StirlingSetTriangle,
-    "PermCoeffs"    => T008279
+    "FallingFact"   => FallingFactTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -84,14 +84,29 @@ function TriangleVariant(Tri, dim, kind="Std")
     return reverse.(invM)
 end
 
+const LEN = 32
+
 function Explore(triangle, kind, trait, dim)
     T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = Traits[trait](T)
     Show(stdout, triangle, kind, trait, seq)
 end
 
-const LEN = 32
+function Explore(T::ℤTri, trait::Function)
+    seq = trait(T)
+    if seq == [] || seq === nothing
+        return []
+    end
+    typeof(seq) === ℤTri && (seq = Flat(seq))
+    anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
+    anum === nothing && (anum = "nothing")
+    seqstr = string(seq[1:min(9, end)])[max(0,11):max(0,end-1)]
+    String["$trait ", anum, seqstr]
+end
 
+"""
+
+"""
 function Explore(triangle, kind, trait)
     dim = 32
     T = TriangleVariant(Triangles[triangle], dim, kind)
@@ -102,7 +117,7 @@ function Explore(triangle, kind, trait)
     String[anum, triangle, kind, trait, seqstr]
 end
 
-function Explore(trait, dim)
+function Explore(trait::String, dim::Int)
     for (name, triangle) in Triangles
         for kind in Kind
             T = TriangleVariant(triangle, dim, kind)

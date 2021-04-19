@@ -15,11 +15,11 @@ const datadir = joinpath(ROOTDIR, "data")
 oeis_file() = joinpath(datadir, "stripped")
 is_oeis_installed() = isfile(oeis_file())
 
-function profilepath()
+function profilepath(name)
     srcdir = realpath(joinpath(dirname(@__FILE__)))
     ROOTDIR = dirname(srcdir)
-    datadir = joinpath(ROOTDIR, "data")
-    profilepath = joinpath(datadir, "profile.txt")
+    datadir = joinpath(ROOTDIR, "profiles")
+    profilepath = joinpath(datadir, name * ".md")
 end
 
 function oeis_notinstalled()
@@ -132,6 +132,9 @@ end
 GetSeqnum(seq::ℤTri) = GetSeqnum(Flat(seq))
 
 function GetSeqnum(seq, search=false)
+    if seq === nothing || seq == []
+        return nothing
+    end
     anum = GetSeqnum(seq)
     if search
         if anum === nothing

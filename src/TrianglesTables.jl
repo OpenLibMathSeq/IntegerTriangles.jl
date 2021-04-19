@@ -6,7 +6,7 @@
 module TrianglesTables
 
 using PrettyTables, TrianglesExplorer
-using TrianglesBase, TrianglesExamples, TrianglesUtils
+using TrianglesBase, TrianglesExamples, TrianglesTraitCard, TrianglesUtils
 
 #=
 ┌──────────┬────────────┬──────┬───────────┬─────────────────────────────────────────────┐
@@ -21,6 +21,28 @@ using TrianglesBase, TrianglesExamples, TrianglesUtils
 │ nothing  │ Laguerre   │ Rev  │ TransNat1 │ 1, 3, 15, 97, 753, 6771, 68983, 783945      │
 └──────────┴────────────┴──────┴───────────┴─────────────────────────────────────────────┘
 =#
+
+function PrettyTraits(T, name)
+
+    header = [ "Trait", "Anumber", "Sequence" ]
+    mat = String[name "" ""]
+
+    for tra in TRAITS
+        s = Explore(T, tra) 
+        s == [] && continue
+        mat = [mat; reshape(s, 1, 3)]
+    end
+
+    open(profilepath(name), "a") do io
+        pretty_table(io, mat, header, alignment=[:l,:l,:l])
+    end
+end
+
+function AllPrettyTraits()
+    for T in Triangles
+        PrettyTraits(Triangles[T[1]](32), T[1])
+    end
+end
 
 
 # START-TEST-########################################################
@@ -54,7 +76,7 @@ function test()
     # ... as Html:
     # pretty_table(data, header, backend = :html, alignment=[:l,:l,:l,:l,:l])
 
-    open(profilepath(), "a") do io
+    open(profilepath("test"), "a") do io
         pretty_table(io, mat, header, alignment=[:l,:l,:l,:l,:l])
     end
 end
@@ -63,6 +85,7 @@ function demo()
 end
 
 function perf()
+    AllPrettyTraits()
 end
 
 function main()

@@ -699,6 +699,7 @@ InvRev(T::ℤTri) = Inverse(Reverse(T))
 
 
 function Flat(T::ℤTri)
+    T === [] && return []
     Empty(s) = isempty(s) ? [ZZ(0)] : s
     [z for t ∈ T for z ∈ Empty(t)]
 end
