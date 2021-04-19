@@ -6,8 +6,8 @@
 module TrianglesUtils
 
 using Nemo, TrianglesBase, HTTP
-export Show, GetSeqnum, SeqToString, oeis_search, oeis_notinstalled, search_failed
-export profilepath
+export Show, GetSeqnum, GetSeqnumUri, SeqToString 
+export profilepath, oeis_search, oeis_notinstalled, search_failed
 
 const srcdir = realpath(joinpath(dirname(@__FILE__)))
 const ROOTDIR = dirname(srcdir)
@@ -19,7 +19,7 @@ function profilepath(name)
     srcdir = realpath(joinpath(dirname(@__FILE__)))
     ROOTDIR = dirname(srcdir)
     datadir = joinpath(ROOTDIR, "profiles")
-    profilepath = joinpath(datadir, name * ".md")
+    profilepath = joinpath(datadir, name * ".html")
 end
 
 function oeis_notinstalled()
@@ -80,11 +80,15 @@ function oeis_search(seq)
     filename
 end
 
-function SeqToString(seq::ℤSeq)
+
+function SeqToString(seq::ℤSeq, max=100)
     separator = ","
     str = ""
+    c = 1
     for term in seq
         str *= string(abs(term)) * separator
+        c += 1
+        c > max && break
     end
     str
 end
@@ -111,7 +115,7 @@ function GetSeqnum(seq::ℤSeq)
         l = replace(ln, "-" => "")
         len = min(length(str)-toff, length(l)-loff) - 1
         len < minlen && continue
-        cmp(str[toff:toff+len], l[loff:loff+len]) == 0 && return "B" * ln[2:7]
+        cmp(str[toff:toff+len], l[loff:loff+len]) == 0 && return "A" * ln[2:7]
     end
     for ln ∈ eachline(oeis_file())
         ln[1] == '#' && continue
@@ -121,10 +125,10 @@ function GetSeqnum(seq::ℤSeq)
         loff = ff[1] + 1; soff = 1
         len = min(length(str)-soff, length(l)-loff) - 1
         len < minlen && continue
-        cmp(str[soff:soff+len], l[loff:loff+len]) == 0 && return "C" * ln[2:7]
+        cmp(str[soff:soff+len], l[loff:loff+len]) == 0 && return "A" * ln[2:7]
         len = min(length(str)-toff, length(l)-loff) - 1
         len < minlen && continue
-        cmp(str[toff:toff+len], l[loff:loff+len]) == 0 && return "D" * ln[2:7]
+        cmp(str[toff:toff+len], l[loff:loff+len]) == 0 && return "A" * ln[2:7]
     end
     nothing
 end
@@ -148,6 +152,15 @@ function GetSeqnum(seq, search=false)
         end
     end
     anum 
+end
+
+function GetSeqnumUri(seq::ℤSeq)
+    anum = GetSeqnum(seq)
+    if anum === nothing 
+        return "<a href='" * "https://oeis.org/?q=" * SeqToString(seq, 10) * "'>" * "nomatch</a>"
+    end
+    uri = joinpath("https://oeis.org/", anum)
+    return "<a href='" * uri * "'>" * anum * "</a>"
 end
 
 
@@ -275,7 +288,6 @@ function demo()
     Println.(PolyArray(T))
     println()
 
-    # 
     # oeis_search(ℤInt[1,2,3,4,5,6,7])
 end
 
@@ -299,6 +311,9 @@ function perf()
     GetSeqnum(ℤInt[0, 70, 3783, 338475, 40565585, 6061961733, 
     1083852977811, 225615988054171, 53595807366038234, 14308700593468127485, 
     4241390625289880226714]) |> println
+    GetSeqnumUri(ℤInt[1, 1, 7, 37, 241, 2101, 18271, 201097, 2270017, 
+    29668681, 410815351, 6238931821, 101560835377, 1765092183037, 
+    32838929702671, 644215775792401]) |> println
 end
 
 function main()
@@ -308,5 +323,6 @@ function main()
 end
 
 main()
+
 
 end # module

@@ -8,6 +8,8 @@ module TrianglesTables
 using PrettyTables, TrianglesExplorer
 using TrianglesBase, TrianglesExamples, TrianglesTraitCard, TrianglesUtils
 
+export PrettyTraits, AllPrettyTraits
+
 #=
 ┌──────────┬────────────┬──────┬───────────┬─────────────────────────────────────────────┐
 │ A-number │ Triangle   │ Form │ Function  │ Sequence                                    │
@@ -24,7 +26,7 @@ using TrianglesBase, TrianglesExamples, TrianglesTraitCard, TrianglesUtils
 
 function PrettyTraits(T, name)
 
-    header = [ "Trait", "Anumber", "Sequence" ]
+    header = [ "Trait", "ANumber", "Sequence" ]
     mat = String[name "" ""]
 
     for tra in TRAITS
@@ -34,7 +36,7 @@ function PrettyTraits(T, name)
     end
 
     open(profilepath(name), "a") do io
-        pretty_table(io, mat, header, alignment=[:l,:l,:l])
+        pretty_table(io, mat, header, backend = :html, alignment=[:l,:l,:l])
     end
 end
 
@@ -79,13 +81,15 @@ function test()
     open(profilepath("test"), "a") do io
         pretty_table(io, mat, header, alignment=[:l,:l,:l,:l,:l])
     end
+
+    PrettyTraits(LahTriangle(32), "Lah")
 end
 
 function demo()
 end
 
 function perf()
-    # AllPrettyTraits()
+   # AllPrettyTraits()
 end
 
 function main()

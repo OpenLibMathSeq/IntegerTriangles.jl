@@ -7,6 +7,9 @@ AbstractSequence
 AbstractTriangle
 ```
 ```@docs
+AllPrettyTraits
+```
+```@docs
 AltSum
 ```
 ```@docs
@@ -97,6 +100,9 @@ Flat
 GetSeqnum
 ```
 ```@docs
+GetSeqnumUri
+```
+```@docs
 InvRev
 ```
 ```@docs
@@ -185,6 +191,9 @@ PolynomialFunction
 ```
 ```@docs
 PosHalf
+```
+```@docs
+PrettyTraits
 ```
 ```@docs
 Print

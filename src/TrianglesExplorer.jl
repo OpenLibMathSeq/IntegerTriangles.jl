@@ -98,9 +98,9 @@ function Explore(T::ℤTri, trait::Function)
         return []
     end
     typeof(seq) === ℤTri && (seq = Flat(seq))
-    anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
+    anum = GetSeqnumUri(seq)
     anum === nothing && (anum = "nothing")
-    seqstr = string(seq[1:min(9, end)])[max(0,11):max(0,end-1)]
+    seqstr = string(seq[1:min(10, end)])[max(0,11):max(0,end-1)]
     String["$trait ", anum, seqstr]
 end
 
