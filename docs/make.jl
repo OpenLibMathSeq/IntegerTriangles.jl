@@ -7,8 +7,9 @@ using IntegerTriangles
 
 makedocs(
     modules = [IntegerTriangles],
-    sitename = "IntegerTriangles",
+    sitename = "IntegerTriangles.jl",
     clean = true,
+    checkdocs = :none,
     doctest = false,
     pages = [
         "Introduction" => "introduction.md",
@@ -20,21 +21,19 @@ makedocs(
         "FallingFact" => "FallingFact.md",
         "Fibonacci" => "Fibonacci.md",
         "Laguerre" => "Laguerre.md",
+        "Lah" => "Lah.md",
         "Motzkin" => "Motzkin.md",
         "Narayana" => "Narayana.md",
+        "RisingFact" => "RisingFact.md",
         "SchroederBig" => "SchroederB.md",
         "SchroederLittle" => "SchroederL.md",
         "StirlingCycle" => "StirlingCycle.md",
-        "StirlingSet" => "StirlingSet.md",
+        "StirlingSet" => "StirlingSet.md"
     ]
 )
 
-# Documenter can also automatically deploy documentation to gh-pages.
-# See "Hosting Documentation" and deploydocs() in the Documenter 
-# manual for more information.
-
-#deploydocs(
-#    repo = "github.com/OpenLibMathSeq/IntegerTriangles.jl.git",
-#    push_preview = true
-#    )
+deploydocs(            
+    repo = "openlibmathseq.github.io/IntegerTriangles.jl",
+    target = "build"
+)
 
