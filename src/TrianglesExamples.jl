@@ -13,7 +13,7 @@ export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
 export EulerianTransform, MotzkinTransform, SchroederBigTransform
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
-export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle
+export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
 export StirlingSetTransform, StirlingCycleTransform
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703
@@ -25,6 +25,9 @@ function PrimeDivisors(n)
 end
 
 const CacheLah = Dict{Int,Array{fmpz,1}}([0 => [ZZ(1)]])
+"""
+(SIGNATURES)
+"""
 function LahNumbers(n::Int64)
     haskey(CacheLah, n) && return CacheLah[n]
     prevrow = LahNumbers(n - 1)
@@ -39,6 +42,9 @@ end
 
 LahNumbers(n, k) = LahNumbers(n)[k + 1]
 
+"""
+(SIGNATURES)
+"""
 function LahTriangle(size)
     length(CacheLah) < size && LahNumbers(size)
     [CacheLah[n] for n = 0:size - 1]
@@ -56,6 +62,7 @@ BernoulliPolynomial(n) = EgfExpansionPoly(n, egfBernoulli)
 G278075(x, t) = divexact(1, 1 - x * (1 - exp(-t)))
 FubiniPolynomial(n) = EgfExpansionPoly(n, G278075)
 
+
 function MotzkinTriangle2(dim::Int)
     T = ZTri(dim)
     for n = 1:dim
@@ -71,12 +78,23 @@ function MotzkinTriangle2(dim::Int)
 end
 
 ################################# ???
+"""
+(SIGNATURES)
+"""
 MotzkinTriangle(dim) = OrthoPoly(dim, n -> 1, n -> 1)
+
+"""
+(SIGNATURES)
+"""
 Motzkin(n) = MotzkinTriangle(n + 1)[n + 1] # TODO!!
+
 Motzkin(n, k) = Motzkin(n)[k + 1]
 Motzkin(A::ℤSeq) = LinMap(Motzkin, A, length(A))
 MotzkinTransform(A::ℤSeq) = Motzkin.(Telescope(A))
 
+"""
+(SIGNATURES)
+"""
 CatalanTriangle(dim) = OrthoPoly(dim, n -> 0, n -> 1)
 Catalan(n) = CatalanTriangle(n + 1)[n + 1] # TODO!!
 Catalan(n::Int, k::Int) = Catalan(n)[k + 1]
@@ -151,6 +169,9 @@ Triangle of unsigned Stirling numbers of the first kind.
 I132393(n) = RecTriangle(n, R132393)
 T132393(dim) = ZTri(I132393(dim))
 
+"""
+(SIGNATURES)
+"""
 StirlingCycleTriangle(dim) = T132393(dim)
 StirlingCycle(n) = StirlingCycleTriangle(n + 1)[n + 1]
 StirlingCycle(n, k) = StirlingCycle(n)[k + 1]
@@ -164,6 +185,9 @@ Triangle of Stirling numbers of 2nd kind.
 I048993(n) = RecTriangle(n, R048993)
 T048993(dim) = ZTri(I048993(dim))
 
+"""
+(SIGNATURES)
+"""
 StirlingSetTriangle(dim) = T048993(dim)
 StirlingSet(n) = StirlingSetTriangle(n + 1)[n + 1]
 StirlingSet(n, k) = StirlingSet(n)[k + 1]
@@ -224,12 +248,18 @@ SchroederBigTransform(A::ℤSeq) = SchroederBig.(Telescope(A))
 
 FJ(n, k) = n <= 2 ? 1 : FJ(n - 1, k) + k * FJ(n - 2, k)
 
+"""
+(SIGNATURES)
+"""
 JacobsthalTriangle(dim) = RiordanSquare(dim, n -> FJ(n, 2))
 Jacobsthal(n) = JacobsthalTriangle(n + 1)[n + 1]
 Jacobsthal(n, k) = Jacobsthal(n)[k + 1]
 Jacobsthal(A::ℤSeq) = LinMap(Jacobsthal, A, length(A))
 JacobsthalTransform(A::ℤSeq) = Jacobsthal.(Telescope(A))
 
+"""
+(SIGNATURES)
+"""
 FibonacciTriangle(dim) = RiordanSquare(dim, n -> FJ(n, 1))
 Fibonacci(n) = FibonacciTriangle(n + 1)[n + 1]
 Fibonacci(n, k) = Fibonacci(n)[k + 1]
@@ -249,6 +279,9 @@ function EulerianNumbers(n, k)
     end
 end
 
+"""
+(SIGNATURES)
+"""
 EulerianTriangle(dim) = [[EulerianNumbers(n, k) for k = 0:n] for n = 0:dim - 1]
 Eulerian(n) = EulerianTriangle(n + 1)[n + 1]
 Eulerian(n, k) = Eulerian(n)[k + 1]
@@ -296,11 +329,23 @@ div(
     end
 end
 
+"""
+(SIGNATURES)
+"""
 NarayanaTriangle(dim) = [[NarayanaNumbers(n, k) for k = 0:n] for n = 0:dim]
 Narayana(n) = NarayanaTriangle(n + 1)[n + 1]
 Narayana(n, k) = Narayana(n)[k + 1]
 Narayana(A::ℤSeq) = LinMap(Narayana, A, length(A))
 NarayanaTransform(A::ℤSeq) = Narayana.(Telescope(A))
+
+"""
+(SIGNATURES)
+"""
+RisingFactTriangle(dim) = [[rising_factorial(ZZ(n), ZZ(k)) for k = 0:n] for n = 0:dim]
+RisingFact(n) = RisingFactTriangle(n + 1)[n + 1]
+RisingFact(n, k) = RisingFact(n)[k + 1]
+RisingFact(A::ℤSeq) = LinMap(RisingFact, A, length(A))
+RisingFactTransform(A::ℤSeq) = RisingFact.(Telescope(A))
 
 export Laguerre, LaguerreTriangle, LaguerreTransform
 
@@ -323,6 +368,9 @@ end
 Laguerre(n::Int, k::Int) = Laguerre(n)[k + 1]
 Laguerre(A::ℤSeq) = LinMap(Laguerre, A, length(A))
 
+"""
+(SIGNATURES)
+"""
 function LaguerreTriangle(size::Int)
     length(CacheLaguerre) < size && Laguerre(size)
     [CacheLaguerre[n] for n in 0:size - 1]
@@ -380,7 +428,8 @@ const TRIANGLES = Function[
     SchröderLTriangle,
     StirlingCycleTriangle,
     StirlingSetTriangle,
-    FallingFactTriangle
+    FallingFactTriangle,
+    RisingFactTriangle
     ]
 
 
@@ -452,6 +501,11 @@ function demo()
 
     Println.(Reverse(DiagonalTriangle(FallingFactTriangle(10))))
     Println.(Reverse(FallingFactTriangle(10)))
+
+    Println.(RisingFactTriangle(10))
+    Println.(Inverse(RisingFactTriangle(10)))
+    Println.(Reverse(RisingFactTriangle(10)))
+    Println.(Inverse(Reverse(RisingFactTriangle(10))))
 end
 
 function perf()
@@ -468,6 +522,8 @@ function main()
 end
 
 main()
+
+
 
 end # module
 

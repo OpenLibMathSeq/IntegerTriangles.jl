@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
+```@raw html
 <style>
   table, td, th {
       border-collapse: collapse;
       font-family: sans-serif;
+      color: blue;
   }
 
   td, th {
@@ -21,7 +20,7 @@
   }
 
   tr.header {
-      background: navy !important;
+      background: orange !important;
       color: white;
       font-weight: bold;
   }
@@ -38,7 +37,6 @@
   th.rowNumber, td.rowNumber {
       text-align: right;
   }
-
 </style>
 <body>
 <table>
@@ -163,5 +161,4 @@
     <td style = "text-align: left;">1, 3, 13, 73, 501, 4051, 37633, 394353, 4596553, 58941091</td>
   </tr>
 </table>
-</body>
-</html>
+```

@@ -235,6 +235,9 @@ RightSide
 RiordanSquare
 ```
 ```@docs
+RisingFactTriangle
+```
+```@docs
 SchroederBigTransform
 ```
 ```@docs

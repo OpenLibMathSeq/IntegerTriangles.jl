@@ -18,6 +18,9 @@ function TraitCard(T::ℚTri, name)
     println()
 end
 
+"""
+(SIGNATURES)
+"""
 function TraitCard(T::ℤTri, name, N, an=false)
     an = an && ! oeis_notinstalled()
 
@@ -146,7 +149,9 @@ function TransTraits(triangle::Function)
     println()
 end
 
-
+"""
+(SIGNATURES)
+"""
 function AssociatedTriangles(T::ℤTri, N)
 
     len = max(N, min(N - 1, length(T)))
@@ -257,6 +262,8 @@ function demo()
     xTraitCard(FibonacciTriangle)
     xTraitCard(EulerianTriangle)
     xTraitCard(EulerianTriangle2)
+    xTraitCard(FallingFactTriangle)
+    xTraitCard(RisingFactTriangle)
 end
 
 function perf()
@@ -266,13 +273,9 @@ function perf()
 end
 
 function main()
-    #test()
+    test()
     #demo()
     #perf()
-    #xTraitCard(EulerianTriangle)
-    #xTraitCard(EulerianTriangle2)
-    # xTraitCard(MotzkinTriangle)
-    xTraitCard(T094587)
 end
 
 main()

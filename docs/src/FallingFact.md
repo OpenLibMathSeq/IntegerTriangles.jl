@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
+```@raw html
 <style>
   table, td, th {
       border-collapse: collapse;
       font-family: sans-serif;
+      color: blue;
   }
 
   td, th {
@@ -21,7 +20,7 @@
   }
 
   tr.header {
-      background: navy !important;
+      background: orange !important;
       color: white;
       font-weight: bold;
   }
@@ -38,7 +37,6 @@
   th.rowNumber, td.rowNumber {
       text-align: right;
   }
-
 </style>
 <body>
 <table>
@@ -144,7 +142,7 @@
   </tr>
   <tr>
     <td style = "text-align: left;">TransSqrs </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=0,1,10,81,652,5545,50886,506905,5480056,64116657,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343276'>A343276</a></td>
     <td style = "text-align: left;">0, 1, 10, 81, 652, 5545, 50886, 506905, 5480056, 64116657</td>
   </tr>
   <tr>
@@ -158,5 +156,4 @@
     <td style = "text-align: left;">1, 3, 11, 49, 261, 1631, 11743, 95901, 876809, 8877691</td>
   </tr>
 </table>
-</body>
-</html>
+```

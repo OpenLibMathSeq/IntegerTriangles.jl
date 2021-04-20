@@ -86,6 +86,9 @@ end
 
 const LEN = 32
 
+"""
+(SIGNATURES)
+"""
 function Explore(triangle, kind, trait, dim)
     T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = Traits[trait](T)

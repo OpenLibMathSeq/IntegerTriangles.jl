@@ -140,7 +140,14 @@ const ℚPolyTri = Seq{ℚPolySeq}
 
 # ---------------
 
+"""
+(SIGNATURES)
+"""
 ZPolyRing(x) = PolynomialRing(ZZ, x)
+
+"""
+(SIGNATURES)
+"""
 QPolyRing(x) = PolynomialRing(QQ, x)
 
 const WARNING_ON_NOTINVERTIBLE = false
@@ -551,14 +558,25 @@ Return the factorial ``n! = ∏(1, n)``.
 """
 Factorial(n) = Nemo.factorial(ZZ(n))
 
-
+"""
+(SIGNATURES)
+"""
 Binomial(n, k) = Nemo.binomial(ZZ(n), ZZ(k))
 Binomial(n) = [Binomial(n, k) for k = 0:n]
 Binomial(A::ℤSeq) = LinMap(Binomial, A)
 
+"""
+(SIGNATURES)
+"""
 BinomialTriangle(dim) = [Binomial(n) for n = 0:dim - 1]
+"""
+(SIGNATURES)
+"""
 BinomialTransform(A::ℤSeq) = Binomial.(Telescope(A))
 
+"""
+(SIGNATURES)
+"""
 Laplace(s, k) = factorial(k) * coeff(s, k)
 
 """
@@ -598,6 +616,9 @@ function OrthoPoly(dim::Int, s::Function, t::Function)
     T
 end
 
+"""
+(SIGNATURES)
+"""
 function DelehamΔ(dim::Int, s::Function, t::Function)
     T = ZTri(dim)
     R, x = ZPolyRing("x")
@@ -615,6 +636,9 @@ function DelehamΔ(dim::Int, s::Function, t::Function)
     T
 end
 
+"""
+(SIGNATURES)
+"""
 function RiordanSquare(dim::Int, s::Function)
     T = ZTri(dim, reg=true)
     for n ∈ 0:dim - 1
@@ -626,6 +650,9 @@ function RiordanSquare(dim::Int, s::Function)
     T
 end
 
+"""
+(SIGNATURES)
+"""
 function ExpRiordanSquare(dim::Int, s::Function)
     R = RiordanSquare(dim, s)
     u = ZZ(1)
@@ -639,6 +666,9 @@ function ExpRiordanSquare(dim::Int, s::Function)
     R
 end
 
+"""
+(SIGNATURES)
+"""
 function check(invM, dim)
     for n = 1:dim
         for k = 1:n
@@ -650,6 +680,9 @@ function check(invM, dim)
     return true
 end
 
+"""
+(SIGNATURES)
+"""
 function InverseTriangle(T)
     dim = length(T)
     M = zeros(QQ, dim, dim)
@@ -690,21 +723,31 @@ Return the row reversed triangle.
 """
 Reverse(T::ℤTri) = reverse.(T)
 
+"""
+(SIGNATURES)
+"""
 function RevInv(T::ℤTri)
     I = Inverse(T)
     return I != [] ? Reverse(I) : []
 end
 
+"""
+(SIGNATURES)
+"""
 InvRev(T::ℤTri) = Inverse(Reverse(T))
 
-
+"""
+(SIGNATURES)
+"""
 function Flat(T::ℤTri)
     T === [] && return []
     Empty(s) = isempty(s) ? [ZZ(0)] : s
     [z for t ∈ T for z ∈ Empty(t)]
 end
 
-# Print the array without typeinfo.
+"""
+Print the array without typeinfo.
+"""
 function Println(io, v::AbstractVector, newline=true)
     print(io, "[")
     for (i, el) ∈ enumerate(v)
@@ -785,6 +828,9 @@ function PolyArray(T::ℤTri)
     U
 end
 
+"""
+(SIGNATURES)
+"""
 function PolyTriangle(T::ℤTri)
     A = PolyArray(T)
     U = ZTri(length(T))
@@ -794,14 +840,27 @@ function PolyTriangle(T::ℤTri)
     U
 end
 
+"""
+(SIGNATURES)
+"""
 function PolyValue(T::ℤTri, k::Int)
     P = PolyArray(T)
     [P[n][k + 1] for n = 1:length(P)]
 end
 
+"""
+(SIGNATURES)
+"""
 PolyVal2(T::ℤTri) = PolyValue(T, 2)
+
+"""
+(SIGNATURES)
+"""
 PolyVal3(T::ℤTri) = PolyValue(T, 3)
 
+"""
+(SIGNATURES)
+"""
 const TRAITS = Function[
     Flat,
     Reverse,
