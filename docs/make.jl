@@ -33,7 +33,7 @@ makedocs(
 )
 
 deploydocs(            
-    repo = "OpenLibMathSeq/IntegerTriangles.jl",
+    repo = "github.com/OpenLibMathSeq/IntegerTriangles.jl.git",
     target = "build"
 )
 
