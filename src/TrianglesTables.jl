@@ -24,6 +24,14 @@ export PrettyTraits, AllPrettyTraits
 └──────────┴────────────┴──────┴───────────┴─────────────────────────────────────────────┘
 =#
 
+const CSS = ["<style> table, td, th {border-collapse: collapse; font-family: sans-serif; color: blue;}",
+ "td, th {border-bottom: 0; padding: 4px}", 
+ "tr:nth-child(odd) {background: #eee;}", "tr:nth-child(even) {background: #fff;}",
+ "tr.header {background: orange !important; color: white; font-weight: bold;}",
+ "tr.subheader {background: lightgray !important; color: black;}",
+ "tr.headerLastRow {border-bottom: 2px solid black;}",
+ "th.rowNumber, td.rowNumber {text-align: right;} </style><body>"]
+
 function PrettyTraits(T, name)
 
     header = [ "Trait", "ANumber", "Sequence" ]
@@ -36,7 +44,12 @@ function PrettyTraits(T, name)
     end
 
     open(profilepath(name), "a") do io
-        pretty_table(io, mat, header, backend = :html, alignment=[:l,:l,:l])
+        println(io, "```@raw html")
+        for ln in CSS
+            println(io, ln)
+        end
+        pretty_table(io, mat, header, backend = :html, standalone= false, alignment=[:l,:l,:l])
+        println(io, "```")
     end
 end
 
@@ -89,12 +102,12 @@ function demo()
 end
 
 function perf()
-   # AllPrettyTraits()
+   AllPrettyTraits()
 end
 
 function main()
-    test()
-    demo()
+   # test()
+   # demo()
     perf()
 end
 

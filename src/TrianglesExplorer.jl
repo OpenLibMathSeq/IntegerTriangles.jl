@@ -27,7 +27,9 @@ const Triangles = LittleDict{String, Function}(
     "SchroederL"    => SchröderLTriangle,
     "StirlingCycle" => StirlingCycleTriangle,
     "StirlingSet"   => StirlingSetTriangle,
-    "FallingFact"   => FallingFactTriangle
+    "FallingFact"   => FallingFactTriangle,
+    "RisingFact"    => RisingFactTriangle,
+    "Fubini"        => FubiniTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -36,6 +38,8 @@ const Traits = LittleDict{String, Function}(
     "Inverse"    => Inverse,
     "RevInv"     => RevInv,
     "InvRev"     => InvRev,
+    "PolyTri"    => PolyTri,
+    "DiagTri"    => DiagTri,
     "Sum"        => sum,
     "EvenSum"    => EvenSum,
     "OddSum"     => OddSum,
@@ -94,6 +98,7 @@ function Explore(triangle, kind, trait, dim)
     seq = Traits[trait](T)
     Show(stdout, triangle, kind, trait, seq)
 end
+
 
 function Explore(T::ℤTri, trait::Function)
     seq = trait(T)

@@ -20,6 +20,7 @@ makedocs(
         "Eulerian" => "Eulerian.md",
         "FallingFact" => "FallingFact.md",
         "Fibonacci" => "Fibonacci.md",
+        "Fubini" => "Fubini.md",
         "Laguerre" => "Laguerre.md",
         "Lah" => "Lah.md",
         "Motzkin" => "Motzkin.md",

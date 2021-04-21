@@ -1,44 +1,12 @@
 ```@raw html
-<style>
-  table, td, th {
-      border-collapse: collapse;
-      font-family: sans-serif;
-      color: blue;
-  }
-
-  td, th {
-      border-bottom: 0;
-      padding: 4px
-  }
-
-  tr:nth-child(odd) {
-      background: #eee;
-  }
-
-  tr:nth-child(even) {
-      background: #fff;
-  }
-
-  tr.header {
-      background: orange !important;
-      color: white;
-      font-weight: bold;
-  }
-
-  tr.subheader {
-      background: lightgray !important;
-      color: black;
-  }
-
-  tr.headerLastRow {
-      border-bottom: 2px solid black;
-  }
-
-  th.rowNumber, td.rowNumber {
-      text-align: right;
-  }
-</style>
-<body>
+<style> table, td, th {border-collapse: collapse; font-family: sans-serif; color: blue;}
+td, th {border-bottom: 0; padding: 4px}
+tr:nth-child(odd) {background: #eee;}
+tr:nth-child(even) {background: #fff;}
+tr.header {background: orange !important; color: white; font-weight: bold;}
+tr.subheader {background: lightgray !important; color: black;}
+tr.headerLastRow {border-bottom: 2px solid black;}
+th.rowNumber, td.rowNumber {text-align: right;} </style><body>
 <table>
   <tr class = "header headerLastRow">
     <th style = "text-align: left;">Trait</th>
@@ -64,6 +32,16 @@
     <td style = "text-align: left;">InvRev </td>
     <td style = "text-align: left;"><a href='https://oeis.org/A128229'>A128229</a></td>
     <td style = "text-align: left;">1, -1, 1, 0, -2, 1, 0, 0, -3, 1</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">DiagTri </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,1,1,2,1,3,2,1,'>nomatch</a></td>
+    <td style = "text-align: left;">1, 1, 1, 1, 1, 2, 1, 3, 2, 1</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyTri </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,1,2,1,1,5,3,1,'>nomatch</a></td>
+    <td style = "text-align: left;">1, 1, 1, 1, 2, 1, 1, 5, 3, 1</td>
   </tr>
   <tr>
     <td style = "text-align: left;">sum </td>
@@ -142,7 +120,7 @@
   </tr>
   <tr>
     <td style = "text-align: left;">TransSqrs </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/A343276'>A343276</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=0,1,10,81,652,5545,50886,506905,5480056,64116657,'>nomatch</a></td>
     <td style = "text-align: left;">0, 1, 10, 81, 652, 5545, 50886, 506905, 5480056, 64116657</td>
   </tr>
   <tr>

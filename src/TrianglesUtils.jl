@@ -19,7 +19,7 @@ function profilepath(name)
     srcdir = realpath(joinpath(dirname(@__FILE__)))
     ROOTDIR = dirname(srcdir)
     datadir = joinpath(ROOTDIR, "profiles")
-    profilepath = joinpath(datadir, name * ".html")
+    profilepath = joinpath(datadir, name * ".md")
 end
 
 function oeis_notinstalled()

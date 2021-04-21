@@ -1,44 +1,12 @@
 ```@raw html
-<style>
-  table, td, th {
-      border-collapse: collapse;
-      font-family: sans-serif;
-      color: blue;
-  }
-
-  td, th {
-      border-bottom: 0;
-      padding: 4px
-  }
-
-  tr:nth-child(odd) {
-      background: #eee;
-  }
-
-  tr:nth-child(even) {
-      background: #fff;
-  }
-
-  tr.header {
-      background: orange !important;
-      color: white;
-      font-weight: bold;
-  }
-
-  tr.subheader {
-      background: lightgray !important;
-      color: black;
-  }
-
-  tr.headerLastRow {
-      border-bottom: 2px solid black;
-  }
-
-  th.rowNumber, td.rowNumber {
-      text-align: right;
-  }
-</style>
-<body>
+<style> table, td, th {border-collapse: collapse; font-family: sans-serif; color: blue;}
+td, th {border-bottom: 0; padding: 4px}
+tr:nth-child(odd) {background: #eee;}
+tr:nth-child(even) {background: #fff;}
+tr.header {background: orange !important; color: white; font-weight: bold;}
+tr.subheader {background: lightgray !important; color: black;}
+tr.headerLastRow {border-bottom: 2px solid black;}
+th.rowNumber, td.rowNumber {text-align: right;} </style><body>
 <table>
   <tr class = "header headerLastRow">
     <th style = "text-align: left;">Trait</th>
@@ -74,6 +42,16 @@
     <td style = "text-align: left;">InvRev </td>
     <td style = "text-align: left;"><a href='https://oeis.org/A007318'>A007318</a></td>
     <td style = "text-align: left;">1, -1, 1, 1, -2, 1, -1, 3, -3, 1</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">DiagTri </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A011973'>A011973</a></td>
+    <td style = "text-align: left;">1, 1, 1, 1, 1, 2, 1, 3, 1, 1</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyTri </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A009998'>A009998</a></td>
+    <td style = "text-align: left;">1, 1, 1, 1, 2, 1, 1, 4, 3, 1</td>
   </tr>
   <tr>
     <td style = "text-align: left;">sum </td>

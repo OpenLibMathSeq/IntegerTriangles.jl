@@ -13,9 +13,10 @@ export ℤInt, ℤSeq, ℤTri, ℚInt, ℚSeq, ℚTri
 export ℤPolySeq, ℚPolySeq, ℤPolyRing, ℚPolyRing
 export ZInt, ZSeq, ZTri, QInt, QSeq, QTri
 export ZPolySeq, QPolySeq, ZPolyRing, QPolyRing
-export Polynomial, Evaluate, PolyArray, PolyTriangle
-export DiagonalTriangle, OrthoPoly, DelehamΔ
-export EgfExpansionCoeff, EgfExpansionPoly, RecTriangle
+export Polynomial, Evaluate, PolyArray 
+export PolyTriangle, PolyTri, DiagTri, DiagonalTriangle
+export OrthoPoly, DelehamΔ, RecTriangle
+export EgfExpansionCoeff, EgfExpansionPoly
 export InverseTriangle, Inverse, Reverse, InvRev, RevInv
 export PolynomialFunction, ReversePolynomial, PolyValue
 export PolyVal2, PolyVal3, Coefficients
@@ -178,6 +179,8 @@ function DiagonalTriangle(T::ℤTri)
     end
     U
 end
+
+DiagTri(T::ℤTri) = DiagonalTriangle(T)
 
 """
 The sum of a ℤTri is the sequence of the sum of the rows.
@@ -757,6 +760,10 @@ function Println(io, v::AbstractVector, newline=true)
     newline ? println(io, "]") : print(io, "]")
 end
 
+
+# TransformTriangle(Trans::Function, dim::Int, f::Function) =  ℤTri(dim, n -> Trans(n+1, x -> f(x, n)))
+
+
 # Print the array without typeinfo.
 Println(io, str::String) = println(io, str)
 Println(T::ℤTri) = Println.(IOContext(stdout), T)
@@ -840,6 +847,9 @@ function PolyTriangle(T::ℤTri)
     U
 end
 
+PolyTri(T::ℤTri) = PolyTriangle(T)
+
+
 """
 (SIGNATURES)
 """
@@ -867,6 +877,8 @@ const TRAITS = Function[
     Inverse,
     RevInv,
     InvRev,
+    DiagTri,
+    PolyTri,
     sum,
     EvenSum,
     OddSum,

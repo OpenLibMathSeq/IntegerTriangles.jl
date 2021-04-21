@@ -52,6 +52,9 @@ DelehamΔ
 DiagSum
 ```
 ```@docs
+DiagTri
+```
+```@docs
 DiagonalTriangle
 ```
 ```@docs
@@ -95,6 +98,12 @@ FibonacciTriangle
 ```
 ```@docs
 Flat
+```
+```@docs
+FubiniTriangle
+```
+```@docs
+FubiniTriangle
 ```
 ```@docs
 GetSeqnum
@@ -170,6 +179,9 @@ PascalTriangle
 ```
 ```@docs
 PolyArray
+```
+```@docs
+PolyTri
 ```
 ```@docs
 PolyTriangle

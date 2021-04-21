@@ -11,10 +11,10 @@ export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTria
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
 export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
-export EulerianTransform, MotzkinTransform, SchroederBigTransform
+export EulerianTransform, MotzkinTransform, SchroederBigTransform, FubiniTriangle
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
-export StirlingSetTransform, StirlingCycleTransform
+export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703
 export TRIANGLES
@@ -52,6 +52,39 @@ end
 
 LahNumbers(A::ℤSeq) = LinMap(LahNumbers, A, length(A))
 LahTransform(A::ℤSeq) = LahNumbers.(Telescope(A))
+
+
+const CacheFubini = Dict{Int,Array{fmpz,1}}([0 => [ZZ(1)]])
+"""
+(SIGNATURES)
+"""
+function FubiniNumbers(n::Int64)
+    haskey(CacheFubini, n) && return CacheFubini[n]
+    prevrow = FubiniNumbers(n - 1)
+    row = ZSeq(n + 1)
+    row[1] = 0
+    row[2] = 1
+    row[n + 1] = n * prevrow[n]
+    for k = 3:n
+        row[k] = (k - 1)*(prevrow[k - 1] + prevrow[k])
+    end
+    CacheFubini[n] = row
+end
+
+FubiniNumbers(n, k) = FubiniNumbers(n)[k + 1]
+
+"""
+(SIGNATURES)
+"""
+function FubiniTriangle(size)
+    length(CacheFubini) < size && FubiniNumbers(size)
+    [CacheFubini[n] for n = 0:size - 1]
+end
+
+FubiniNumbers(A::ℤSeq) = LinMap(FubiniNumbers, A, length(A))
+FubiniTransform(A::ℤSeq) = FubiniNumbers.(Telescope(A))
+
+
 
 G271703(x, t) = exp(t * divexact(x, 1 - t))
 T271703(dim) = EgfExpansionCoeff(dim, G271703)
@@ -429,7 +462,8 @@ const TRIANGLES = Function[
     StirlingCycleTriangle,
     StirlingSetTriangle,
     FallingFactTriangle,
-    RisingFactTriangle
+    RisingFactTriangle,
+    FubiniTriangle
     ]
 
 
@@ -513,6 +547,10 @@ function perf()
     # display(@benchmark PolyArray(LaguerreTriangle(100)))
     # @time LaguerreTriangle(1000)
     # @time PolyArray(LaguerreTriangle(100))
+    T = LaguerreTriangle(8)
+    Println.(PolyTriangle(T))
+    Println.(PolyArray(T))
+    Println.(Inverse(PolyTriangle(T)))
 end
 
 function main()
@@ -521,8 +559,8 @@ function main()
     perf()
 end
 
-main()
-
+#main()
+Println.(FubiniTriangle(8)) 
 
 
 end # module
