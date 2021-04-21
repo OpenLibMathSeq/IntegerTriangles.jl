@@ -1,7 +1,7 @@
 name = "IntegerTriangles"
 uuid = "715aea54-2823-4197-8122-618b5e027a3f"
 authors = ["Peter Luschny"]
-version = "0.2.0"
+version = "0.2.1"
 
 [deps]
 AbstractAlgebra = "c3fe647b-3220-5bb0-a1ea-a7954cac585d"
