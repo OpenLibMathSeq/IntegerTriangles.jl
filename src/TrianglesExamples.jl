@@ -5,26 +5,29 @@
 
 module TrianglesExamples
 
-using Nemo, TrianglesBase
+using Nemo, TrianglesBase, xFromIntegerSequences
 
 export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTriangle, MotzkinTriangle
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
-export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle
+export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle, AitkenTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
 export EulerianTransform, MotzkinTransform, SchroederBigTransform, FubiniTriangle
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
-export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle
+export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle, RencontresTriangle
+export DArcaisTriangle, WorpitzkyTriangle, EulerianS2Triangle
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703
 export TRIANGLES
 
 function PrimeDivisors(n)
-    n < 2 && return ZInt[]
+    n < 2 && return ℤInt[]
     sort!([p for (p, e) ∈ factor(ZZ(n))])
 end
 
-const CacheLah = Dict{Int,Array{fmpz,1}}([0 => [ZZ(1)]])
+# ------------------------------------------------
+
+const CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
 """
 (SIGNATURES)
 """
@@ -53,8 +56,9 @@ end
 LahNumbers(A::ℤSeq) = LinMap(LahNumbers, A, length(A))
 LahTransform(A::ℤSeq) = LahNumbers.(Telescope(A))
 
+# ------------------------------------------------
 
-const CacheFubini = Dict{Int,Array{fmpz,1}}([0 => [ZZ(1)]])
+const CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
 """
 (SIGNATURES)
 """
@@ -84,6 +88,43 @@ end
 FubiniNumbers(A::ℤSeq) = LinMap(FubiniNumbers, A, length(A))
 FubiniTransform(A::ℤSeq) = FubiniNumbers.(Telescope(A))
 
+# ------------------------------------------------
+
+const CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+"""
+(SIGNATURES)
+"""
+function AitkenNumbers(n::Int64)
+    haskey(CacheAitken, n) && return CacheAitken[n]
+    prevrow = AitkenNumbers(n - 1)
+    row = ZSeq(n + 1)
+    row[1] = prevrow[n]
+    for k = 2:n + 1
+        row[k] = row[k-1] + prevrow[k - 1]
+    end
+    CacheAitken[n] = row
+end
+
+AitkenNumbers(n, k) = AitkenNumbers(n)[k + 1]
+
+"""
+(SIGNATURES)
+"""
+function AitkenTriangle(size)
+    length(CacheAitken) < size && AitkenNumbers(size)
+    [CacheAitken[n] for n = 0:size - 1]
+end
+
+AitkenNumbers(A::ℤSeq) = LinMap(AitkenNumbers, A, length(A))
+AitkenTransform(A::ℤSeq) = AitkenNumbers.(Telescope(A))	
+
+# ------------------------------------------------
+#row[k] = ( get(prevrow, k - 1, 0)
+#+ get(prevrow, k, 0) * (2 * k - 1)
+#+ get(prevrow, k + 1, 0) * k^2 )
+
+#A011971 := proc(n, k) option remember; if n=0 and k=0 then 1 elif k=0 
+#then A011971(n-1, n-1) else A011971(n, k-1) + A011971(n-1, k-1); fi: end;
 
 
 G271703(x, t) = exp(t * divexact(x, 1 - t))
@@ -110,7 +151,8 @@ function MotzkinTriangle2(dim::Int)
     T
 end
 
-################################# ???
+# ------------------------------------------------
+
 """
 (SIGNATURES)
 """
@@ -125,6 +167,8 @@ Motzkin(n, k) = Motzkin(n)[k + 1]
 Motzkin(A::ℤSeq) = LinMap(Motzkin, A, length(A))
 MotzkinTransform(A::ℤSeq) = Motzkin.(Telescope(A))
 
+# ------------------------------------------------
+
 """
 (SIGNATURES)
 """
@@ -134,7 +178,7 @@ Catalan(n::Int, k::Int) = Catalan(n)[k + 1]
 Catalan(A::ℤSeq) = LinMap(Catalan, A, length(A))
 CatalanTransform(A::ℤSeq) = Catalan.(Telescope(A))
 
-const CacheBallot = Dict{Tuple{Int,Int},fmpz}()
+const CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
 
 function CatalanBallot(n::Int, k::Int)
     haskey(CacheBallot, (n, k)) && return CacheBallot[(n, k)]
@@ -148,8 +192,64 @@ function CatalanBallot(n::Int, k::Int)
 end
 
 CatalanBallot(n) = [CatalanBallot(n, k) for k ∈ 0:n]
-
 ExtCatalanTriangle(dim) = [[CatalanBallot(n, k) for k = 0:n] for n = 0:dim - 1]
+
+# ------------------------------------------------
+
+Rencontres(n, k) = A000166(n - k)*Binomial(n, k) 
+RencontresTriangle(dim) = [[Rencontres(n, k) for k = 0:n] for n = 0:dim - 1]
+
+#A008290(n) = A008290Triangle(n + 1)[n + 1]
+#A008290(n, k) = A008290(n)[k + 1]
+Rencontres(A::ℤSeq) = LinMap(Rencontres, A, length(A))
+RencontresTransform(A::ℤSeq) = Rencontres.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
+
+function DArcais(n, k)  
+    haskey(CacheDArcais, (n, k)) && return CacheDArcais[(n, k)]
+    k == 0 && return ZZ(0^n)
+    S = sum(Binomial(n-1, j-1)*A038048(j)*DArcais(n-j, k-1) for j in 0:n-k+1)
+    CacheDArcais[(n, k)] = S
+end
+
+DArcaisTriangle(dim) = [[DArcais(n, k) for k = 0:n] for n = 0:dim - 1]
+DArcais(A::ℤSeq) = LinMap(DArcais, A, length(A))
+DArcaisTransform(A::ℤSeq) = DArcais.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
+
+function Worpitzky(n, k)  
+    haskey(CacheWorpitzky, (n, k)) && return CacheWorpitzky[(n, k)]
+    S = sum(Eulerian(n, j)*Binomial(n-j, n-k) for j in 0:n)
+    CacheWorpitzky[(n, k)] = S
+end
+
+WorpitzkyTriangle(dim) = [[Worpitzky(n, k) for k = 0:n] for n = 0:dim - 1]
+Worpitzky(A::ℤSeq) = LinMap(Worpitzky, A, length(A))
+WorpitzkyTransform(A::ℤSeq) = Worpitzky.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheEulerianS2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+
+function EulerianS2(n, k) 
+    n < 0 && return ZZ(0) 
+    haskey(CacheEulerianS2, (n, k)) && return CacheEulerianS2[(n, k)]
+    S = EulerianS2(n-1, k)*k + EulerianS2(n-1, k-1)*(2*n - k) 
+    CacheEulerianS2[(n, k)] = S
+end
+
+EulerianS2Triangle(dim) = [[EulerianS2(n, k) for k = 0:n] for n = 0:dim - 1]
+EulerianS2(A::ℤSeq) = LinMap(EulerianS2, A, length(A))
+EulerianS2Transform(A::ℤSeq) = EulerianS2.(Telescope(A))
+
+# ------------------------------------------------
+
 
 bs(n) = iszero(n) ? 0 : isodd(n) ? 2 : 1
 SchröderBTriangle(dim) = DelehamΔ(dim, bs, n -> 0^n)
@@ -299,7 +399,7 @@ Fibonacci(n, k) = Fibonacci(n)[k + 1]
 Fibonacci(A::ℤSeq) = LinMap(Fibonacci, A, length(A))
 FibonacciTransform(A::ℤSeq) = Fibonacci.(Telescope(A))
 
-const CacheEulerian = Dict{Tuple{Int,Int},fmpz}()
+const CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
 function EulerianNumbers(n, k)
     haskey(CacheEulerian, (n, k)) && return CacheEulerian[(n, k)]
     CacheEulerian[(n, k)] = if (k == 0) && (n >= 0)
@@ -391,9 +491,8 @@ function Laguerre(n::Int)
     row[n + 1] = ZZ(1)
     for k ∈ 1:n
         row[k] = ( get(prevrow, k - 1, 0)
-    + get(prevrow, k,   0) * (2 * k - 1)
-                 + get(prevrow, k + 1, 0) * k^2
-                 )
+                  + get(prevrow, k, 0) * (2 * k - 1)
+                  + get(prevrow, k + 1, 0) * k^2 )
     end
     CacheLaguerre[n] = row
 end
@@ -452,6 +551,7 @@ const TRIANGLES = Function[
     BinomialTriangle,
     CatalanTriangle,
     EulerianTriangle,
+    EulerianS2Triangle,
     FibonacciTriangle,
     LaguerreTriangle,
     LahTriangle,
@@ -463,8 +563,11 @@ const TRIANGLES = Function[
     StirlingSetTriangle,
     FallingFactTriangle,
     RisingFactTriangle,
-    FubiniTriangle
-    ]
+    FubiniTriangle,
+    RencontresTriangle,
+    DArcaisTriangle, 
+    WorpitzkyTriangle
+]
 
 
 # START-TEST-########################################################
@@ -551,6 +654,8 @@ function perf()
     Println.(PolyTriangle(T))
     Println.(PolyArray(T))
     Println.(Inverse(PolyTriangle(T)))
+    Println.(FubiniTriangle(8)) 
+    Println.(DArcaisTriangle(8)) 
 end
 
 function main()
@@ -560,7 +665,7 @@ function main()
 end
 
 #main()
-Println.(FubiniTriangle(8)) 
+Println.(ConvTri(EulerianS2Triangle(8))) 
 
 
 end # module

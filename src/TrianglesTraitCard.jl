@@ -65,6 +65,12 @@ function TraitCard(T::ℤTri, name, N, an=false)
     an && print(GetSeqnum(S, SEARCH), " ")
     S[1:len] |> Println
 
+    S = ConvolutionTriangle(T)
+    S = Flat(S);
+    print("Convolut:  ")
+    an && print(GetSeqnum(S, SEARCH), " ")
+    S[1:len] |> Println
+
     S = PolyTriangle(T)
     S = Flat(S);
     print("Poly:      ")

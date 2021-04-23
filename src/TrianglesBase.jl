@@ -25,7 +25,7 @@ export EvenSum, OddSum, AltSum, DiagSum, Central, Middle
 export LeftSide, RightSide, PosHalf, NegHalf, Flat
 export Factorial, Binomial, BinomialTransform, BinomialTriangle
 export TransUnos, TransAlts, TransSqrs, TransNat0, TransNat1
-export TRAITS
+export ConvolutionTriangle, ConvTri, TRAITS
 
 """
 Supertype for sequences (or sequence-like types).
@@ -181,6 +181,28 @@ function DiagonalTriangle(T::ℤTri)
 end
 
 DiagTri(T::ℤTri) = DiagonalTriangle(T)
+
+"""
+Return the convolution triangle of T.
+```
+julia> T = [ℤInt[1], ℤInt[2, 3], ℤInt[4, 5, 6], ℤInt[7, 8, 9, 10]]
+Println.(ConvolutionTriangle(T))
+[1]
+[3, 4]
+[6, 10, 16]
+[10, 18, 32, 49]
+```
+"""
+function ConvolutionTriangle(T::ℤTri)
+    dim = length(T)
+    U = ZTri(dim)
+    for n = 1:dim
+        U[n] = [T[k][1]*T[n][n-k+1] for k in 1:n]
+    end
+    U
+end
+
+ConvTri(T::ℤTri) = ConvolutionTriangle(T)
 
 """
 The sum of a ℤTri is the sequence of the sum of the rows.
@@ -501,12 +523,13 @@ Expands up to min(length(M), length(V)).
 """
 Trans(M::ℤTri, V::ℤSeq) = (n -> LinMap(M, V, n)).(1:min(length(M), length(V)))
 
-"""
-TransUnos(T) = Trans(T, [ZZ(1) for n = 0:length(T)])
 
-Standard trait of T.
-"""
-TransUnos(T) = Trans(T, [ZZ(1) for n = 0:length(T)])
+#"""  --- same as sum
+#TransUnos(T) = Trans(T, [ZZ(1) for n = 0:length(T)])
+#
+#Standard trait of T.
+#"""
+#TransUnos(T) = Trans(T, [ZZ(1) for n = 0:length(T)])
 
 """
 TransAlts(T) = Trans(T, [(-1)^n * ZZ(1) for n = 0:length(T)])
@@ -878,6 +901,7 @@ const TRAITS = Function[
     RevInv,
     InvRev,
     DiagTri,
+    ConvTri,
     PolyTri,
     sum,
     EvenSum,
@@ -892,7 +916,6 @@ const TRAITS = Function[
     NegHalf,
     PolyVal2,
     PolyVal3,
-    TransUnos,
     TransAlts,
     TransSqrs,
     TransNat0,
@@ -984,6 +1007,9 @@ function main()
     perf()
 end
 
-main()
+#main()
+T = [ℤInt[1], ℤInt[2, 3], ℤInt[4, 5, 6], ℤInt[7, 8, 9, 10]]
+Println.(ConvolutionTriangle(T))
+
 
 end # module

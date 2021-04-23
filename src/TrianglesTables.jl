@@ -56,6 +56,7 @@ end
 function AllPrettyTraits()
     for T in Triangles
         PrettyTraits(Triangles[T[1]](32), T[1])
+        println(".")
     end
 end
 

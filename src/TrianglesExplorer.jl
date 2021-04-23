@@ -12,12 +12,13 @@ export Explore, Triangles
 
 const WARNING_ON_NOTFOUND = false
 
-const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
+const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev", "Conv"]
 
 const Triangles = LittleDict{String, Function}(
     "Binomial"      => BinomialTriangle,
     "Catalan"       => CatalanTriangle,
     "Eulerian"      => EulerianTriangle,
+    "EulerianS2"    => EulerianS2Triangle,
     "Fibonacci"     => FibonacciTriangle,
     "Laguerre"      => LaguerreTriangle,
     "Lah"           => LahTriangle,
@@ -29,7 +30,11 @@ const Triangles = LittleDict{String, Function}(
     "StirlingSet"   => StirlingSetTriangle,
     "FallingFact"   => FallingFactTriangle,
     "RisingFact"    => RisingFactTriangle,
-    "Fubini"        => FubiniTriangle
+    "Fubini"        => FubiniTriangle,
+    "Aitken"        => AitkenTriangle,
+    "Rencontres"    => RencontresTriangle,
+    "DArcais"       => DArcaisTriangle,
+    "Worpitzky"     => WorpitzkyTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -38,8 +43,9 @@ const Traits = LittleDict{String, Function}(
     "Inverse"    => Inverse,
     "RevInv"     => RevInv,
     "InvRev"     => InvRev,
-    "PolyTri"    => PolyTri,
     "DiagTri"    => DiagTri,
+    "ConvTri"    => ConvTri,
+    "PolyTri"    => PolyTri,
     "Sum"        => sum,
     "EvenSum"    => EvenSum,
     "OddSum"     => OddSum,
@@ -53,7 +59,6 @@ const Traits = LittleDict{String, Function}(
     "NegHalf"    => NegHalf,
     "PolyVal2"   => PolyVal2,
     "PolyVal3"   => PolyVal3,
-    "TransUnos"  => TransUnos,
     "TransAlts"  => TransAlts,
     "TransSqrs"  => TransSqrs,
     "TransNat0"  => TransNat0,
@@ -106,6 +111,7 @@ function Explore(T::ℤTri, trait::Function)
         return []
     end
     typeof(seq) === ℤTri && (seq = Flat(seq))
+    println("$trait ")
     anum = GetSeqnumUri(seq)
     anum === nothing && (anum = "nothing")
     seqstr = string(seq[1:min(10, end)])[max(0,11):max(0,end-1)]
