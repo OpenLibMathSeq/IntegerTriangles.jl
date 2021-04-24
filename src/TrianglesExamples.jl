@@ -17,13 +17,19 @@ export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFa
 export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle, RencontresTriangle
 export DArcaisTriangle, WorpitzkyTriangle, EulerianS2Triangle
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
-export T094587, T008279, T225478, T271703
+export T094587, T008279, T225478, T271703, FineTriangle, TTreeTriangle
 export TRIANGLES
 
 function PrimeDivisors(n)
     n < 2 && return ℤInt[]
     sort!([p for (p, e) ∈ factor(ZZ(n))])
 end
+
+# ------------------------------------------------
+
+FineTriangle(dim::Int) = RiordanSquare(dim, Fine)
+TernaryTree(n::Int) = div(Binomial(ZZ(3*n), n), ZZ(2*n + 1))
+TTreeTriangle(dim::Int) =  RiordanSquare(dim, TernaryTree)
 
 # ------------------------------------------------
 
@@ -566,7 +572,9 @@ const TRIANGLES = Function[
     FubiniTriangle,
     RencontresTriangle,
     DArcaisTriangle, 
-    WorpitzkyTriangle
+    WorpitzkyTriangle, 
+    FineTriangle,
+    TTreeTriangle
 ]
 
 
@@ -665,23 +673,7 @@ function main()
 end
 
 #main()
-Println.(ConvTri(EulerianS2Triangle(8))) 
-
+#Println.(ConvTri(EulerianS2Triangle(8))) 
+Println.(TTreeTriangle(8))
 
 end # module
-
-#=
-A008284    T := proc(n, k) option remember; if k < 0 or n < 0 then 0 elif k = 0 
-           then if n = 0 then 1 else 0 fi else T(n - 1, k - 1) + T(n - k, k) fi end: 
-A008298		Triangle of D'Arcais numbers.
-A008290		Triangle T(n,k) of rencontres numbers
-A008291		Triangle of rencontres numbers.
-A010048		Triangle of Fibonomial coefficients.
-A008279		Triangle T(n,k) = n!/(n-k)! (0 <= k <= n) 
-            read by rows, giving number of permutations of n things k at a time.
-A019538		Triangle of numbers T(n,k) = k!*Stirling2(n,k) 
-A011971		Aitken's array: 
-A009766		Catalan's triangle T(n,k) 
-A008288     := proc(n, k) option remember; if k = 0 then 1 elif n=k then 1 
-            else A008288(n-1, k-1) + A008288(n-2, k-1) + A008288(n-1, k) fi; end: 
-=#             

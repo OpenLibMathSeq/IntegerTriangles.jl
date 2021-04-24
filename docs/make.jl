@@ -34,7 +34,9 @@ makedocs(
         "SchroederLittle" => "SchroederL.md",
         "StirlingCycle" => "StirlingCycle.md",
         "StirlingSet" => "StirlingSet.md",
-        "Worpitzky" => "Worpitzky.md"
+        "Worpitzky" => "Worpitzky.md",
+        "Fine"      => "Fine.md",
+        "TTree"     => "TTree.md"
     ]
 )
 

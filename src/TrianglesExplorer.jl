@@ -12,7 +12,7 @@ export Explore, Triangles
 
 const WARNING_ON_NOTFOUND = false
 
-const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev", "Conv"]
+const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
 
 const Triangles = LittleDict{String, Function}(
     "Binomial"      => BinomialTriangle,
@@ -34,7 +34,9 @@ const Triangles = LittleDict{String, Function}(
     "Aitken"        => AitkenTriangle,
     "Rencontres"    => RencontresTriangle,
     "DArcais"       => DArcaisTriangle,
-    "Worpitzky"     => WorpitzkyTriangle
+    "Worpitzky"     => WorpitzkyTriangle,
+    "Fine"          => FineTriangle,
+    "TTree"         => TTreeTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -44,7 +46,6 @@ const Traits = LittleDict{String, Function}(
     "RevInv"     => RevInv,
     "InvRev"     => InvRev,
     "DiagTri"    => DiagTri,
-    "ConvTri"    => ConvTri,
     "PolyTri"    => PolyTri,
     "Sum"        => sum,
     "EvenSum"    => EvenSum,
@@ -59,7 +60,8 @@ const Traits = LittleDict{String, Function}(
     "NegHalf"    => NegHalf,
     "PolyVal2"   => PolyVal2,
     "PolyVal3"   => PolyVal3,
-    "TransAlts"  => TransAlts,
+    "BinTrans"   => BinTrans,
+    "IBinTrans"  => IBinTrans,
     "TransSqrs"  => TransSqrs,
     "TransNat0"  => TransNat0,
     "TransNat1"  => TransNat1
@@ -178,7 +180,6 @@ function demo()
     Explore("Laguerre",   "Std", "TransNat0", 32)
     Explore("Laguerre",   "Std", "TransNat1", 32)
     Explore("Lah",        "Std", "TransSqrs", 32)
-    Explore("Lah",        "Std", "TransAlts", 32)
     println()
 end
 

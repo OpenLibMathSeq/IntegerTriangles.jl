@@ -43,7 +43,9 @@ function PrettyTraits(T, name)
         mat = [mat; reshape(s, 1, 3)]
     end
 
-    open(profilepath(name), "a") do io
+    path = profilepath(name)
+    rm(path; force=true)
+    open(path, "w") do io
         println(io, "```@raw html")
         for ln in CSS
             println(io, ln)
@@ -92,7 +94,9 @@ function test()
     # ... as Html:
     # pretty_table(data, header, backend = :html, alignment=[:l,:l,:l,:l,:l])
 
-    open(profilepath("test"), "a") do io
+    path = profilepath("test")
+    rm(path; force=true)
+    open(path, "w") do io
         pretty_table(io, mat, header, alignment=[:l,:l,:l,:l,:l])
     end
 

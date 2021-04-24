@@ -6,7 +6,7 @@
 module xFromIntegerSequences
 
 using Nemo, TrianglesBase 
-export A000166, A038048
+export A000166, A038048, Fine
 
 const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
 """
@@ -27,6 +27,12 @@ function A038048(n::Int)
     return CacheA038048[n] = s
 end
 
-println([A038048(n) for n in 0:9])
+const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
+function Fine(n::Int)
+    haskey(CacheFine, n) && return CacheFine[n]
+    s = div((7*n - 12)*Fine(n-1) + (4*n - 6)*Fine(n-2), 2*n)
+    CacheFine[n] = s
+end
+# println([Fine(n) for n in 0:19])
 
 end # module

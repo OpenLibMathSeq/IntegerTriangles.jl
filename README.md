@@ -4,7 +4,7 @@
 [![Docs dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://openlibmathseq.github.io/IntegerTriangles.jl/dev/introduction/)
 --
 
-The package is tested against Julia 1.6.0 on Linux, macOS, and Windows64.
+The package is tested against Julia >= 1.6.0 on Linux, macOS, and Windows64.
 
 Very early in the development cycle, version 0.2.0.
 
@@ -31,7 +31,6 @@ Overview tables can be automatically generated for a variety of triangles and tr
 | A006012  | SchroederL | Inv  | AltSum    | 1, -2, 6, -20, 68, -232, 792, -2704         |
 | A026302  | Motzkin    | Rev  | Central   | 1, 2, 9, 44, 230, 1242, 6853, 38376         |
 | A103194  | Laguerre   | Std  | TransNat0 | 0, 1, 6, 39, 292, 2505, 24306, 263431       |
-| A111884  | Lah        | Std  | TransAlts | 1, -1, -1, -1, 1, 19, 151, 1091             |
 | nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 
 

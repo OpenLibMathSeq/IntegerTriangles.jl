@@ -34,11 +34,6 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
     <td style = "text-align: left;">1, 1, 2, 2, 5, 3, 15, 7, 5, 52</td>
   </tr>
   <tr>
-    <td style = "text-align: left;">ConvTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,2,1,5,3,4,15,10,14,25,'>nomatch</a></td>
-    <td style = "text-align: left;">1, 2, 1, 5, 3, 4, 15, 10, 14, 25</td>
-  </tr>
-  <tr>
     <td style = "text-align: left;">PolyTri </td>
     <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,2,3,1,5,10,5,1,'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 1, 2, 3, 1, 5, 10, 5, 1</td>
@@ -109,9 +104,14 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
     <td style = "text-align: left;">1, 7, 56, 521, 5529, 65674, 860387, 12290251, 189680754, 3139572183</td>
   </tr>
   <tr>
-    <td style = "text-align: left;">TransAlts </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,4,7,37,94,587,1925,13606,54217,'>nomatch</a></td>
-    <td style = "text-align: left;">1, -1, 4, -7, 37, -94, 587, -1925, 13606, -54217</td>
+    <td style = "text-align: left;">BinTrans </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A126390'>A126390</a></td>
+    <td style = "text-align: left;">1, 3, 13, 71, 457, 3355, 27509, 248127, 2434129, 25741939</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">IBinTrans </td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
+    <td style = "text-align: left;">1, 1, 1, 1, 1, 1, 1, 1, 1, 1</td>
   </tr>
   <tr>
     <td style = "text-align: left;">TransSqrs </td>
