@@ -19,10 +19,15 @@ makedocs(
         "Binomial" => "Binomial.md",
         "Catalan" => "Catalan.md",
         "DArcais" => "DArcais.md",
+        "Delannoy" => "Delannoy.md",
+        "Euler" => "Euler.md",
+        "EulerSec" => "EulerS.md",
+        "EulerTan" => "EulerT.md",
         "Eulerian" => "Eulerian.md",
         "EulerianS2" => "EulerianS2.md",
         "FallingFact" => "FallingFact.md",
         "Fibonacci" => "Fibonacci.md",
+        "Fine" => "Fine.md",
         "Fubini" => "Fubini.md",
         "Laguerre" => "Laguerre.md",
         "Lah" => "Lah.md",
@@ -34,9 +39,8 @@ makedocs(
         "SchroederLittle" => "SchroederL.md",
         "StirlingCycle" => "StirlingCycle.md",
         "StirlingSet" => "StirlingSet.md",
-        "Worpitzky" => "Worpitzky.md",
-        "Fine"      => "Fine.md",
-        "TTree"     => "TTree.md"
+        "TTree" => "TTree.md",
+        "Worpitzky" => "Worpitzky.md"
     ]
 )
 

@@ -5,6 +5,12 @@
 
 module TrianglesPlot
 
+"""
+Plotting triangles.
+"""
+const ModuleTrianglesPlot = ""
+
+
 using TrianglesBase, TrianglesExamples
 using Plots; gr()
 

@@ -10,6 +10,11 @@ using TrianglesBase, TrianglesExamples, TrianglesUtils
 
 export Explore, Triangles
 
+"""
+Explore integer triangles via their traits.
+"""
+const ModuleTrianglesExplorer = ""
+
 const WARNING_ON_NOTFOUND = false
 
 const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
@@ -17,6 +22,9 @@ const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
 const Triangles = LittleDict{String, Function}(
     "Binomial"      => BinomialTriangle,
     "Catalan"       => CatalanTriangle,
+    "Euler"         => EulerTriangle,
+    "EulerS"        => EulerSecTriangle,
+    "EulerT"        => EulerTanTriangle,
     "Eulerian"      => EulerianTriangle,
     "EulerianS2"    => EulerianS2Triangle,
     "Fibonacci"     => FibonacciTriangle,
@@ -36,7 +44,8 @@ const Triangles = LittleDict{String, Function}(
     "DArcais"       => DArcaisTriangle,
     "Worpitzky"     => WorpitzkyTriangle,
     "Fine"          => FineTriangle,
-    "TTree"         => TTreeTriangle
+    "TTree"         => TTreeTriangle,
+    "Delannoy"      => DelannoyTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -188,17 +197,11 @@ function perf()
 end
 
 function main()
-    #test()
+    test()
     demo()
     #perf()
 end
 
 main()
-
-# "1,5,7,1,23,43,17,95,241,197,329,1249,",
-# 1,3,12,60,360,2520,20160,181440,1814400,19958400,
-# "1,2,2,0,0,0,0,0,0,0,0,0,",
-# 1,1,3,6,15,36,91,232,603,1585,4213,11298,",
-# "0,1,2,2,2,3,4,4,4,5,6,6,",
 
 end # module

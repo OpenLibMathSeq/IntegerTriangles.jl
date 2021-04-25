@@ -9,6 +9,12 @@ using Nemo, TrianglesBase, HTTP
 export Show, GetSeqnum, GetSeqnumUri, SeqToString 
 export profilepath, oeis_search, oeis_notinstalled, search_failed
 
+"""
+Search the OEIS for a sequence. Saved a file in the 'data' directory in json format. Ect.
+"""
+const ModuleTrianglesUtils = ""
+
+
 const srcdir = realpath(joinpath(dirname(@__FILE__)))
 const ROOTDIR = dirname(srcdir)
 const datadir = joinpath(ROOTDIR, "data")

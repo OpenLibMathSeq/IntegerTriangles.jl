@@ -11,19 +11,79 @@ export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTria
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
 export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle, AitkenTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
+export EulerTriangle, EulerTanTriangle, EulerSecTriangle
 export EulerianTransform, MotzkinTransform, SchroederBigTransform, FubiniTriangle
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
 export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle, RencontresTriangle
-export DArcaisTriangle, WorpitzkyTriangle, EulerianS2Triangle
+export DArcaisTriangle, WorpitzkyTriangle, EulerianS2Triangle, SwingTriangle, DelannoyTriangle
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703, FineTriangle, TTreeTriangle
 export TRIANGLES
+
+"""
+Recurrences and iterations for many triangles.
+"""
+const ModuleTrianglesExamples = ""
 
 function PrimeDivisors(n)
     n < 2 && return ℤInt[]
     sort!([p for (p, e) ∈ factor(ZZ(n))])
 end
+
+# ------------------------------------------------
+
+Euler(n, k) = Binomial(n, k) * V000111(n - k)
+EulerTriangle(dim) = [[Euler(n, k) for k = 0:n] for n = 0:dim - 1]
+Euler(A::ℤSeq) = LinMap(Euler, A, length(A))
+EulerTransform(A::ℤSeq) = Euler.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheBeta = Dict{Tuple{Int,Int},fmpz}()
+
+"""
+https://oeis.org/wiki/User:Peter_Luschny/SwissKnifePolynomials
+"""
+function BetaPoly(n) 
+
+    function v(n, k)
+        if haskey(CacheBeta, (n, k)) 
+            CacheBeta[(n, k)]
+        else
+            CacheBeta[(n, k)] = binomial(n, k)*subst(BetaPoly(k), 0)
+        end
+    end
+
+    R, z = ZPolyRing("z")
+    n == 0 && return R(1)
+    R(sum(isodd(k) ? 0 : v(n, k)*(z - 1)^(n - k - 1) for k in 0:n-1))
+end
+
+SECH(n) = isodd(n)  ? 0 : subst(BetaPoly(n), 0) 
+TANH(n) = iseven(n) ? 0 : subst(BetaPoly(n), 0) 
+
+function SecPoly(n) 
+    R, z = ZPolyRing("z")
+    R(sum(Binomial(n, k)*SECH(k)*z^(n-k) for k in 0:n)) 
+end
+
+function TanPoly(n) 
+    R, z = ZPolyRing("z")
+    n == 0 && return R(0)
+    R(sum(Binomial(n, k)*TANH(n - k)*z^k for k in 0:n-1)) 
+end
+
+function SwissKnifePoly(n, p, q)
+    R, z = ZPolyRing("z")
+    P = p == 0 ? 0 : SecPoly(n)
+    Q = q == 0 ? 0 : TanPoly(n)
+    p*P + q*Q
+end
+
+EulerTanTriangle(dim) = [Coefficients(TanPoly(n), n) for n in 0:dim-1]
+EulerSecTriangle(dim) = Coefficients([SecPoly(n) for n in 0:dim-1])
+
 
 # ------------------------------------------------
 
@@ -93,6 +153,25 @@ end
 
 FubiniNumbers(A::ℤSeq) = LinMap(FubiniNumbers, A, length(A))
 FubiniTransform(A::ℤSeq) = FubiniNumbers.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
+"""
+(SIGNATURES)
+"""
+function Delannoy(n::Int64, k::Int64)
+    haskey(CacheDelannoy, (n, k)) && return CacheDelannoy[(n, k)]
+    if n < 0 || k < 0 || k > n 
+        return CacheDelannoy[(n,k)] = 0
+    end    
+    CacheDelannoy[(n,k)] = Delannoy(n-1, k-1) + Delannoy(n-2, k-1) + Delannoy(n-1, k)
+end
+
+Delannoy(n) = [Delannoy(n, k) for k ∈ 0:n]
+DelannoyTriangle(dim) = [Delannoy(n) for n = 0:dim - 1]
+Delannoy(A::ℤSeq) = LinMap(Delannoy, A, length(A))
+DelannoyTransform(A::ℤSeq) = Delannoy.(Telescope(A))
 
 # ------------------------------------------------
 
@@ -256,6 +335,22 @@ EulerianS2Transform(A::ℤSeq) = EulerianS2.(Telescope(A))
 
 # ------------------------------------------------
 
+const CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+
+function Swing(n, k) 
+    haskey(CacheSwing, (n, k)) && return CacheSwing[(n, k)]
+    p = ZZ(2)^n
+    k == 0 && return p
+    S = numerator(p*prod(QQ(2,j)^((-1)^(j )) for j in 1:k))
+    CacheSwing[(n, k)] = S
+end
+
+SwingTriangle(dim) = [[Swing(n, k) for k = 0:n] for n = 0:dim - 1]
+Swing(A::ℤSeq) = LinMap(Swing, A, length(A))
+SwingTransform(A::ℤSeq) = Swing.(Telescope(A))
+
+# ------------------------------------------------
+
 
 bs(n) = iszero(n) ? 0 : isodd(n) ? 2 : 1
 SchröderBTriangle(dim) = DelehamΔ(dim, bs, n -> 0^n)
@@ -373,7 +468,7 @@ function SchroederBig(n, k)
     div(
         (k + 1) * sum(Binomial(n + 1, k + j + 1) *
             Binomial(n + j, j) for j = 0:(n - k)),
-        n + 1,
+        n + 1
     )
 end
 
@@ -460,11 +555,10 @@ function NarayanaNumbers(n::Int, k::Int)
         ZZ(1)
     elseif k > n || k <= 0
         ZZ(0)
-    else
-div(
+    else div(
             Binomial(ZZ(n), n - k) * Binomial(ZZ(n - 1), n - k),
-            ZZ(n - k + 1),
-        )
+            ZZ(n - k + 1)
+         )
     end
 end
 
@@ -556,6 +650,10 @@ end
 const TRIANGLES = Function[
     BinomialTriangle,
     CatalanTriangle,
+    DelannoyTriangle,
+    EulerTriangle,
+    EulerTanTriangle,
+    EulerSecTriangle,
     EulerianTriangle,
     EulerianS2Triangle,
     FibonacciTriangle,
@@ -574,7 +672,7 @@ const TRIANGLES = Function[
     DArcaisTriangle, 
     WorpitzkyTriangle, 
     FineTriangle,
-    TTreeTriangle
+    TTreeTriangle,
 ]
 
 
@@ -651,6 +749,11 @@ function demo()
     Println.(Inverse(RisingFactTriangle(10)))
     Println.(Reverse(RisingFactTriangle(10)))
     Println.(Inverse(Reverse(RisingFactTriangle(10))))
+
+    for n in 0:7 BetaPoly(n) |> println end
+    for n in 0:7 SecPoly(n) |> println end
+    for n in 0:7 TanPoly(n) |> println end
+
 end
 
 function perf()
@@ -672,8 +775,7 @@ function main()
     perf()
 end
 
-#main()
-#Println.(ConvTri(EulerianS2Triangle(8))) 
-Println.(TTreeTriangle(8))
+main()
+
 
 end # module

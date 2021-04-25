@@ -61,6 +61,9 @@ ConvolutionTriangle
 DArcaisTriangle
 ```
 ```@docs
+DelannoyTriangle
+```
+```@docs
 DelehamΔ
 ```
 ```@docs
@@ -77,6 +80,15 @@ EgfExpansionCoeff
 ```
 ```@docs
 EgfExpansionPoly
+```
+```@docs
+EulerSecTriangle
+```
+```@docs
+EulerTanTriangle
+```
+```@docs
+EulerTriangle
 ```
 ```@docs
 EulerianS2Triangle
@@ -319,6 +331,9 @@ StirlingSetTransform
 StirlingSetTriangle
 ```
 ```@docs
+SwingTriangle
+```
+```@docs
 TRAITS
 ```
 ```@docs
@@ -419,6 +434,9 @@ xTraitCard
 ```
 ```@docs
 ℤTri
+```
+```@docs
+V000111
 ```
 ```@docs
 A000166

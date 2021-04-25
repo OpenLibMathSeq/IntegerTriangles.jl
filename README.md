@@ -6,7 +6,7 @@
 
 The package is tested against Julia >= 1.6.0 on Linux, macOS, and Windows64.
 
-Very early in the development cycle, version 0.2.0.
+Very early in the development cycle.
 
 ## Julia implementations of integer triangles.
 

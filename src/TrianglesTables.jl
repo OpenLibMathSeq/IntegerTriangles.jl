@@ -10,6 +10,12 @@ using TrianglesBase, TrianglesExamples, TrianglesTraitCard, TrianglesUtils
 
 export PrettyTraits, AllPrettyTraits
 
+"""
+Pretty printing triangles trait cards.
+"""
+const ModuleTrianglesTables = ""
+
+
 #=
 ┌──────────┬────────────┬──────┬───────────┬─────────────────────────────────────────────┐
 │ A-number │ Triangle   │ Form │ Function  │ Sequence                                    │
@@ -57,6 +63,7 @@ end
 
 function AllPrettyTraits()
     for T in Triangles
+        println("-- ", T[1])
         PrettyTraits(Triangles[T[1]](32), T[1])
         println(".")
     end
@@ -113,7 +120,8 @@ end
 function main()
    # test()
    # demo()
-    perf()
+   perf()
+   
 end
 
 main()

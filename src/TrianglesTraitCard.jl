@@ -9,6 +9,12 @@ using Nemo, TrianglesBase, TrianglesExamples, TrianglesUtils
 
 export TraitCard, xTraitCard, TransTraits, AssociatedTriangles
 
+"""
+Build the trait card of one or many triangles.
+"""
+const ModuleTrianglesTraitCard = ""
+
+
 const SEARCH = true
 
 function TraitCard(T::ℚTri, name)
