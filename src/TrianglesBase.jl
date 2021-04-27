@@ -26,7 +26,9 @@ export LeftSide, RightSide, PosHalf, NegHalf, Flat, Factorial
 export Binomial, BinomialTransform, BinTrans, BinomialTriangle
 export IBinomial, IBinomialTransform, IBinTrans, IBinomialTriangle
 export TransUnos, TransAlts, TransSqrs, TransNat0, TransNat1
-export ConvolutionTriangle, ConvTri, TRAITS
+export Convolution, ConvolutionTriangle, ConvolutionTransformation 
+export ConvSum, ConvTri, ConvTrans
+export TRAITS
 
 """
 Basic definitions used in the library IntegerTriangles.jl.
@@ -188,27 +190,40 @@ end
 
 DiagTri(T::ℤTri) = DiagonalTriangle(T)
 
+# --------------------------------------------------
+
+function Convolution(S::ℤSeq, T::ℤSeq) 
+    L = length(S); L != length(T) && return []
+    [sum(S[k + 1] * T[n - k + 1] for k in 0:n) for n in 0:L-1]
+end
+
+Convolution(S::ℤSeq) = Convolution(S, S) 
+ConvSum(S::ℤSeq) = sum(Convolution(S))
+
 """
 Return the convolution triangle of T.
 ```
 julia> T = [ℤInt[1], ℤInt[2, 3], ℤInt[4, 5, 6], ℤInt[7, 8, 9, 10]]
 Println.(ConvolutionTriangle(T))
 [1]
-[3, 4]
-[6, 10, 16]
-[10, 18, 32, 49]
+[4, 12]
+[16, 40, 73]
+[49, 112, 190, 284]
 ```
 """
-function ConvolutionTriangle(T::ℤTri)
-    dim = length(T)
-    U = ZTri(dim)
-    for n = 1:dim
-        U[n] = [T[k][1]*T[n][n-k+1] for k in 1:n]
-    end
-    U
-end
+ConvolutionTriangle(T::ℤTri) = Convolution.(T)
+ConvTri(T::ℤTri) = ConvolutionTriangle(T) # alias
 
-ConvTri(T::ℤTri) = ConvolutionTriangle(T)
+"""
+```
+julia> Println.(ConvolutionTransformation(T))
+[1, 16, 129, 635]
+```
+"""
+ConvolutionTransformation(T::ℤTri) = sum.(Convolution.(T))
+ConvTrans(T::ℤTri) = ConvolutionTransformation(T::ℤTri) # alias
+
+# --------------------------------------------------
 
 """
 The sum of a ℤTri is the sequence of the sum of the rows.

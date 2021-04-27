@@ -20,6 +20,7 @@ const WARNING_ON_NOTFOUND = false
 const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
 
 const Triangles = LittleDict{String, Function}(
+    "Uni"           => UniTriangle,
     "Binomial"      => BinomialTriangle,
     "Catalan"       => CatalanTriangle,
     "Euler"         => EulerTriangle,

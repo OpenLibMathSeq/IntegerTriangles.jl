@@ -264,24 +264,12 @@ function test()
     TraitCard(JacobsthalTriangle, dim)
     TraitCard(FibonacciTriangle, dim)
     TraitCard(EulerianTriangle, dim)
+    TraitCard(UniTriangle, dim) 
 
     TransTraits(BinomialTriangle)
 end
 
 function demo()
-    xTraitCard(BinomialTriangle)
-    xTraitCard(LaguerreTriangle)
-    xTraitCard(LahTriangle)
-    xTraitCard(CatalanTriangle)
-    xTraitCard(MotzkinTriangle)
-    xTraitCard(NarayanaTriangle)
-    xTraitCard(SchroederBigTriangle)
-    xTraitCard(JacobsthalTriangle)
-    xTraitCard(FibonacciTriangle)
-    xTraitCard(EulerianTriangle)
-    xTraitCard(EulerianTriangle2)
-    xTraitCard(FallingFactTriangle)
-    xTraitCard(RisingFactTriangle)
 end
 
 function perf()
@@ -297,5 +285,6 @@ function main()
 end
 
 main()
+
 
 end # module

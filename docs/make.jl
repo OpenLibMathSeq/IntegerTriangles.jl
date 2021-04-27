@@ -40,6 +40,7 @@ makedocs(
         "StirlingCycle" => "StirlingCycle.md",
         "StirlingSet" => "StirlingSet.md",
         "TTree" => "TTree.md",
+        "Uni" => "Uni.md",
         "Worpitzky" => "Worpitzky.md"
     ]
 )

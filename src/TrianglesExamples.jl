@@ -11,8 +11,9 @@ export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTria
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
 export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle, AitkenTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
-export EulerTriangle, EulerTanTriangle, EulerSecTriangle
+export EulerTriangle, EulerTanTriangle, EulerSecTriangle, UniTriangle
 export EulerianTransform, MotzkinTransform, SchroederBigTransform, FubiniTriangle
+export Laguerre, LaguerreTriangle, LaguerreTransform
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
 export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle, RencontresTriangle
@@ -351,6 +352,14 @@ SwingTransform(A::ℤSeq) = Swing.(Telescope(A))
 
 # ------------------------------------------------
 
+Uni(n, k) = 1
+
+UniTriangle(dim) = [[ZZ(1) for k = 0:n] for n = 0:dim - 1]
+Uni(A::ℤSeq) = LinMap(Uni, A, length(A))
+UniTransform(A::ℤSeq) = Uni.(Telescope(A))
+
+# ------------------------------------------------
+
 
 bs(n) = iszero(n) ? 0 : isodd(n) ? 2 : 1
 SchröderBTriangle(dim) = DelehamΔ(dim, bs, n -> 0^n)
@@ -580,8 +589,6 @@ RisingFact(n, k) = RisingFact(n)[k + 1]
 RisingFact(A::ℤSeq) = LinMap(RisingFact, A, length(A))
 RisingFactTransform(A::ℤSeq) = RisingFact.(Telescope(A))
 
-export Laguerre, LaguerreTriangle, LaguerreTransform
-
 const CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
 
 function Laguerre(n::Int)
@@ -650,29 +657,30 @@ end
 const TRIANGLES = Function[
     BinomialTriangle,
     CatalanTriangle,
+    DArcaisTriangle, 
     DelannoyTriangle,
-    EulerTriangle,
-    EulerTanTriangle,
-    EulerSecTriangle,
-    EulerianTriangle,
     EulerianS2Triangle,
+    EulerianTriangle,
+    EulerSecTriangle,
+    EulerTanTriangle,
+    EulerTriangle,
+    FallingFactTriangle,
     FibonacciTriangle,
+    FineTriangle,
+    FubiniTriangle,
     LaguerreTriangle,
     LahTriangle,
     MotzkinTriangle,
     NarayanaTriangle,
+    RencontresTriangle,
+    RisingFactTriangle,
     SchröderBTriangle,
     SchröderLTriangle,
     StirlingCycleTriangle,
     StirlingSetTriangle,
-    FallingFactTriangle,
-    RisingFactTriangle,
-    FubiniTriangle,
-    RencontresTriangle,
-    DArcaisTriangle, 
-    WorpitzkyTriangle, 
-    FineTriangle,
     TTreeTriangle,
+    UniTriangle,
+    WorpitzkyTriangle 
 ]
 
 
