@@ -436,6 +436,9 @@ ZSeq
 ZTri
 ```
 ```@docs
+datapath
+```
+```@docs
 oeis_notinstalled
 ```
 ```@docs

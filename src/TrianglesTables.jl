@@ -100,7 +100,7 @@ function test()
     # ... as Html:
     # pretty_table(data, header, backend = :html, alignment=[:l,:l,:l,:l,:l])
 
-    path = profilepath("test")
+    path = datapath("test.md")
     rm(path; force=true)
     open(path, "w") do io
         pretty_table(io, mat, header, alignment=[:l,:l,:l,:l,:l])
