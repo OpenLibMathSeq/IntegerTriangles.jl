@@ -18,6 +18,7 @@ const ModuleTrianglesUtils = ""
 const srcdir = realpath(joinpath(dirname(@__FILE__)))
 const ROOTDIR = dirname(srcdir)
 const datadir = joinpath(ROOTDIR, "data")
+const profiledir = joinpath(ROOTDIR, "profile")
 oeis_file() = joinpath(datadir, "stripped")
 is_oeis_installed() = isfile(oeis_file())
 
@@ -31,8 +32,8 @@ end
 function profilepath(name)
     srcdir = realpath(joinpath(dirname(@__FILE__)))
     ROOTDIR = dirname(srcdir)
-    datadir = joinpath(ROOTDIR, "profiles")
-    profilepath = joinpath(datadir, name)
+    profiledir = joinpath(ROOTDIR, "profiles")
+    profilepath = joinpath(profiledir, name)
 end
 
 function oeis_notinstalled()

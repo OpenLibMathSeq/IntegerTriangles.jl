@@ -49,7 +49,7 @@ function PrettyTraits(T, name)
         mat = [mat; reshape(s, 1, 3)]
     end
 
-    path = profilepath(name * ".md")
+    path = datapath(name * ".md")
     rm(path; force=true)
     open(path, "w") do io
         println(io, "```@raw html")
