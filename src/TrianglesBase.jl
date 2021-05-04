@@ -23,8 +23,8 @@ export PolyVal2, PolyVal3, Coefficients
 export RiordanSquare, Println, Print, Telescope, LinMap, Trans
 export EvenSum, OddSum, AltSum, DiagSum, Central, Middle
 export LeftSide, RightSide, PosHalf, NegHalf, Flat, Factorial
-export Binomial, BinomialTransform, BinTrans, BinomialTriangle
-export IBinomial, IBinomialTransform, IBinTrans, IBinomialTriangle
+export Binomial, BinomialTransform, BinConv, BinomialTriangle
+export IBinomial, IBinomialTransform, IBinConv, IBinomialTriangle
 export TransUnos, TransAlts, TransSqrs, TransNat0, TransNat1
 export Convolution, ConvolutionTriangle, ConvolutionTransformation 
 export ConvSum, ConvTri, ConvTrans
@@ -638,7 +638,7 @@ BinomialTriangle(dim) = [Binomial(n) for n = 0:dim - 1]
 """
 BinomialTransform(A::ℤSeq) = Binomial.(Telescope(A))
 BinomialTransform(A::ℤTri) = Binomial.(A)
-BinTrans(A::ℤTri) = BinomialTransform(A::ℤTri)
+BinConv(A::ℤTri) = BinomialTransform(A::ℤTri)
 
 # --------------------------------------------------
 
@@ -655,7 +655,7 @@ IBinomialTriangle(dim) = [IBinomial(n) for n = 0:dim - 1]
 """
 IBinomialTransform(A::ℤSeq) = IBinomial.(Telescope(A))
 IBinomialTransform(A::ℤTri) = IBinomial.(A)
-IBinTrans(A::ℤTri) = IBinomialTransform(A::ℤTri)
+IBinConv(A::ℤTri) = IBinomialTransform(A::ℤTri)
 
 # --------------------------------------------------
 
@@ -982,8 +982,8 @@ const TRAITS = Function[
     NegHalf,
     PolyVal2,
     PolyVal3,
-    BinTrans,
-    IBinTrans,
+    BinConv,
+    IBinConv,
     TransSqrs,
     TransNat0,
     TransNat1

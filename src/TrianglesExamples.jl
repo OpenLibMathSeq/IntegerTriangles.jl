@@ -679,10 +679,11 @@ function Laguerre(n::Int)
     row = ZSeq(n + 1)
     row[n + 1] = ZZ(1)
     for k ∈ 1:n
-        row[k] = ( get(prevrow, k - 1, 0)
+        row[k] = (  get(prevrow, k - 1, 0)
                   + get(prevrow, k, 0) * (2 * k - 1)
                   + get(prevrow, k + 1, 0) * k^2 )
     end
+    # println(row)
     CacheLaguerre[n] = row
 end
 
@@ -869,5 +870,6 @@ function main()
 end
 
 main()
+
 
 end # module

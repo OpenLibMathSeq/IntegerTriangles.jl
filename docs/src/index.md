@@ -37,7 +37,7 @@ Bessel1Transform
 Bessel1Triangle
 ```
 ```@docs
-BinTrans
+BinConv
 ```
 ```@docs
 Binomial
@@ -184,7 +184,7 @@ HermiteTransform
 HermiteTriangle
 ```
 ```@docs
-IBinTrans
+IBinConv
 ```
 ```@docs
 IBinomial

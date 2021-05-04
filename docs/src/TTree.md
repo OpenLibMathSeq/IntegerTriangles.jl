@@ -114,12 +114,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
     <td style = "text-align: left;">1, 4, 24, 156, 1048, 7164, 49488, 344208, 2405496, 16868604</td>
   </tr>
   <tr>
-    <td style = "text-align: left;">BinTrans </td>
+    <td style = "text-align: left;">BinConv </td>
     <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 2 12 88 700 5814 49588 430560 3786588 33622600 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 2, 12, 88, 700, 5814, 49588, 430560, 3786588, 33622600</td>
   </tr>
   <tr>
-    <td style = "text-align: left;">IBinTrans </td>
+    <td style = "text-align: left;">IBinConv </td>
     <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 -4 22 -84 238 -380 -828 10556 -56144 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, -4, 22, -84, 238, -380, -828, 10556, -56144</td>
   </tr>

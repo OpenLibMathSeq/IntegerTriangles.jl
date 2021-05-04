@@ -149,15 +149,15 @@ function TraitCard(T::ℤTri, name, N, an=false)
     S[1:len] |> Println
 
 
-    S = BinTrans(T);
+    S = BinConv(T);
     an && print(GetSeqnum(S, SEARCHONLINE), " ")
-    print(name); print("BinTrans ")
+    print(name); print("BinConv ")
     S[1:len] |> Println
 
 
-    S = IBinTrans(T);
+    S = IBinConv(T);
     an && print(GetSeqnum(S, SEARCHONLINE), " ")
-    print(name); print("IBinTrans ")
+    print(name); print("IBinConv ")
     S[1:len] |> Println
 
 
@@ -298,11 +298,11 @@ PolyVal3:  A277382 [1, 4, 23, 168, 1473, 14988, 173007, 2228544, 31636449]
 ```
 """
 function xTraitCard(triangle::Function)
-    dim = 32
+    dim = 20
     T = triangle(dim)
     Println.(T)
-    name = "$triangle"
-    println(name)
+    #name = "$triangle"
+    #println(name)
     #c = findfirst("Triangle", name)
     #TraitCard(T, name[1:c[1]-1] * " ", dim, true)
 end
@@ -337,13 +337,10 @@ function test()
     TraitCard(UniTriangle, dim)
 
     TransTraits(BinomialTriangle)
-    xTraitCard(LaguerreTriangle)
+    #xTraitCard(LaguerreTriangle)
 end
 
 function demo()
-    for t in TRIANGLES
-        xTraitCard(t)
-    end
 end
 
 function perf()
@@ -357,5 +354,6 @@ function main()
 end
 
 main()
+
 
 end # module
