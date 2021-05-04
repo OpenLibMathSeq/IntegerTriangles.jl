@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
@@ -49,7 +49,7 @@ function PrettyTraits(T, name)
         mat = [mat; reshape(s, 1, 3)]
     end
 
-    path = profilepath(name)
+    path = profilepath(name * ".md")
     rm(path; force=true)
     open(path, "w") do io
         println(io, "```@raw html")
@@ -65,7 +65,6 @@ function AllPrettyTraits()
     for T in Triangles
         println("-- ", T[1])
         PrettyTraits(Triangles[T[1]](32), T[1])
-        println(".")
     end
 end
 
@@ -111,17 +110,17 @@ function test()
 end
 
 function demo()
+    PrettyTraits(A046802Triangle(32), "A046802")
 end
 
 function perf()
-   AllPrettyTraits()
+   #AllPrettyTraits()
 end
 
 function main()
-   # test()
-   # demo()
+   test()
+   demo()
    perf()
-   
 end
 
 main()

@@ -1,7 +1,7 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
-# Builds the modules IntegerTriangles, runtests and perftests from the src modules.
+# Builds the module IntegerTriangles, runtests and perftests from the src modules.
 # 
 # The source files are scanned and the source modules are joined together,
 # not merely included. This architecture has three advantages:

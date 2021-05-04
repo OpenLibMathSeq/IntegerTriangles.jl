@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
@@ -20,33 +20,36 @@ const WARNING_ON_NOTFOUND = false
 const Kind = ["Std", "Rev", "Inv", "RevInv", "InvRev"]
 
 const Triangles = LittleDict{String, Function}(
-    "Uni"           => UniTriangle,
+    "Aitken"        => AitkenTriangle,
+    "Bessel1"       => Bessel1Triangle,
     "Binomial"      => BinomialTriangle,
     "Catalan"       => CatalanTriangle,
+    "DArcais"       => DArcaisTriangle,
+    "Delannoy"      => DelannoyTriangle,
     "Euler"         => EulerTriangle,
     "EulerS"        => EulerSecTriangle,
     "EulerT"        => EulerTanTriangle,
     "Eulerian"      => EulerianTriangle,
-    "EulerianS2"    => EulerianS2Triangle,
+    "EulerianSO2"   => EulerianSO2Triangle,
+    "FallingFact"   => FallingFactTriangle,
     "Fibonacci"     => FibonacciTriangle,
+    "Fine"          => FineTriangle,
+    "Fubini"        => FubiniTriangle,
+    "Hermite"       => HermiteTriangle,
     "Laguerre"      => LaguerreTriangle,
     "Lah"           => LahTriangle,
     "Motzkin"       => MotzkinTriangle,
     "Narayana"      => NarayanaTriangle,
+    "RisingFact"    => RisingFactTriangle,
     "SchroederB"    => SchröderBTriangle,
     "SchroederL"    => SchröderLTriangle,
     "StirlingCycle" => StirlingCycleTriangle,
     "StirlingSet"   => StirlingSetTriangle,
-    "FallingFact"   => FallingFactTriangle,
-    "RisingFact"    => RisingFactTriangle,
-    "Fubini"        => FubiniTriangle,
-    "Aitken"        => AitkenTriangle,
     "Rencontres"    => RencontresTriangle,
-    "DArcais"       => DArcaisTriangle,
-    "Worpitzky"     => WorpitzkyTriangle,
-    "Fine"          => FineTriangle,
+    "Trinomial"     => TrinomialTriangle,
     "TTree"         => TTreeTriangle,
-    "Delannoy"      => DelannoyTriangle
+    "Uni"           => UniTriangle,
+    "Worpitzky"     => WorpitzkyTriangle
 )
 
 const Traits = LittleDict{String, Function}(
@@ -78,14 +81,18 @@ const Traits = LittleDict{String, Function}(
 )
 
 function Show(io, name, kind, trait, seq, savetofile=false)
+    seq == [] && return []
+    if typeof(seq) === ℤTri 
+        seq = Flat(seq)
+    end
     anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
     if savetofile
         print(".")
-        print(io, anum, " ", name, " ", kind, " ", trait, " ")
-        Println(io, seq[1:min(8, end)])
+        print(io, anum, ",", name, ",", kind, ",", trait, ",")
+        Println(io, SeqToString(seq, 10)) # seq[1:min(10, end)])
     else
         print(anum, " ", name, " ", kind, " ", trait, " ")
-        Println(seq[1:min(8, end)])
+        Println(IOContext(stdout), SeqToString(seq, 10)) # seq[1:min(10, end)])
     end
 end
 
@@ -139,7 +146,7 @@ function Explore(triangle, kind, trait)
     seq = Traits[trait](T)
     anum = GetSeqnum(seq)
     anum === nothing && (anum = "nothing")
-    seqstr = string(seq[1:min(8, end)])[max(0,11):max(0,end-1)]
+    seqstr = string(seq[1:min(10, end)])[max(0,11):max(0,end-1)]
     String[anum, triangle, kind, trait, seqstr]
 end
 
@@ -157,9 +164,12 @@ end
 
 # The BIG LIST goes to data/profile.txt.
 function Explore(savetofile::Bool)
-    @warn "This will take several minutes and produce the file 'BIGLIST.md' in the data directory."
+    @warn "This will take several minutes and produce the file 'BIGLIST.csv' in the data directory."
 
-    open(profilepath("BIGLIST"), "a") do io
+    path = profilepath("BIGLIST")
+    rm(path; force=true)
+    open(path, "w") do io
+        println(io, "Anumber,Triangle,Type,Trait,Sequence")
         for (name, triangle) in Triangles
             for kind in Kind
                 T = TriangleVariant(triangle, LEN, kind)
@@ -178,7 +188,6 @@ end
 
 function test()
     Explore("SchroederB", "Inv", "AltSum",    32)
-    Explore("PosHalf", 32)
 end
 
 function demo()
@@ -198,11 +207,12 @@ function perf()
 end
 
 function main()
-    test()
+    #test()
     demo()
     #perf()
 end
 
 main()
+
 
 end # module

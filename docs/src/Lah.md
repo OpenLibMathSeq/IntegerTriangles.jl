@@ -25,7 +25,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Reverse </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,0,1,2,0,1,6,6,0,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 2 0 1 6 6 0 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 0, 1, 2, 0, 1, 6, 6, 0</td>
   </tr>
   <tr>
@@ -35,7 +35,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">RevInv </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,0,1,2,0,1,6,6,0,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 -2 0 1 -6 6 0 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 0, 1, -2, 0, 1, -6, 6, 0</td>
   </tr>
   <tr>
@@ -75,7 +75,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Middle </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,2,6,36,240,1200,12600,58800,846720,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 2 6 36 240 1200 12600 58800 846720 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, 2, 6, 36, 240, 1200, 12600, 58800, 846720</td>
   </tr>
   <tr>
@@ -115,12 +115,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">BinTrans </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,5,37,361,4301,60001,954325,16984577,333572041,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 5 37 361 4301 60001 954325 16984577 333572041 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 5, 37, 361, 4301, 60001, 954325, 16984577, 333572041</td>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinTrans </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,3,1,73,699,3001,24697,783999,10946233,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 -3 1 73 -699 3001 24697 -783999 10946233 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, -3, 1, 73, -699, 3001, 24697, -783999, 10946233</td>
   </tr>
   <tr>

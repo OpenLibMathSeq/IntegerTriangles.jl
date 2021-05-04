@@ -26,7 +26,3 @@ Build the trait card of one or many triangles.
 ##   🔶  [TrianglesUtils](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesUtils.jl)
 
 Search the OEIS for a sequence. Saved a file in the 'data' directory in json format. Ect.
-
-##   🔶  [xFromIntegerSequences](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/xFromIntegerSequences.jl)
-
-Provisional. Includes some functions from IntegerSequences. Will be deleted.

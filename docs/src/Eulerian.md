@@ -30,12 +30,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">InvRev </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,1,0,1,1,0,3,4,1,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 0 -1 1 0 3 -4 1 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, 1, 0, -1, 1, 0, 3, -4, 1</td>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,0,1,1,1,4,0,1,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 0 1 1 1 4 0 1 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 1, 0, 1, 1, 1, 4, 0, 1</td>
   </tr>
   <tr>
@@ -115,12 +115,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinTrans </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,8,19,276,1002,21216,103395,2881180,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 -1 -1 8 19 -276 -1002 21216 103395 -2881180 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, -1, -1, 8, 19, -276, -1002, 21216, 103395, -2881180</td>
   </tr>
   <tr>
     <td style = "text-align: left;">TransSqrs </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=0,0,1,8,64,540,4920,48720,524160,6108480,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[0 0 1 8 64 540 4920 48720 524160 6108480 ]'>nomatch</a></td>
     <td style = "text-align: left;">0, 0, 1, 8, 64, 540, 4920, 48720, 524160, 6108480</td>
   </tr>
   <tr>

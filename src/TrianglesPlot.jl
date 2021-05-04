@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))

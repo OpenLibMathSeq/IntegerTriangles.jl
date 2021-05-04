@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
@@ -25,7 +25,7 @@ function profilepath(name)
     srcdir = realpath(joinpath(dirname(@__FILE__)))
     ROOTDIR = dirname(srcdir)
     datadir = joinpath(ROOTDIR, "profiles")
-    profilepath = joinpath(datadir, name * ".md")
+    profilepath = joinpath(datadir, name)
 end
 
 function oeis_notinstalled()
@@ -54,7 +54,7 @@ Search the OEIS for a sequence. The file is saved in the 'data' directory in jso
 """
 function oeis_search(seq)
 
-    seqstr = SeqToString(seq[1:min(end,12)])
+    seqstr = AbsSeqToString(seq[1:min(end,12)])
     filename = joinpath(datadir, seqstr[1:min(end,12)] * ".json")
     uristr = "https://oeis.org/search?q=" * seqstr * "&go=Search&fmt=json"
 
@@ -87,7 +87,7 @@ function oeis_search(seq)
 end
 
 
-function SeqToString(seq::ℤSeq, max=100)
+function AbsSeqToString(seq::ℤSeq, max=100)
     separator = ","
     str = ""
     c = 1
@@ -99,11 +99,23 @@ function SeqToString(seq::ℤSeq, max=100)
     str
 end
 
+function SeqToString(seq::ℤSeq, max=100)
+    separator = " "
+    str = "["
+    c = 1
+    for term in seq
+        str *= string(term) * separator
+        c += 1
+        c > max && break
+    end
+    str * "]"
+end
+
 # increases accuracy and prevents premature matches
 const minlen = 30  # fragil! do not reduce!
 
 function GetSeqnum(seq::ℤSeq)
-    str = SeqToString(seq)
+    str = AbsSeqToString(seq)
     soff = 1; loff = 10 
     #println(seq)
     #println(str)
@@ -180,7 +192,6 @@ function print_without_type(io, v::AbstractVector)
 end
 
 """
-
 Print the array ``A`` in the format ``n ↦ A[n]`` for n in the given range.
 """
 function MappedShow(A::Array, R::AbstractRange, offset=0)
@@ -194,7 +205,6 @@ function MappedShow(A::Array, R::AbstractRange, offset=0)
 end
 
 """
-
 Print an integer triangle without typeinfo.
 """
 function Show(T::ℤTri, format="std")
@@ -293,8 +303,6 @@ function demo()
     println()
     Println.(PolyArray(T))
     println()
-
-    # oeis_search(ℤInt[1,2,3,4,5,6,7])
 end
 
 

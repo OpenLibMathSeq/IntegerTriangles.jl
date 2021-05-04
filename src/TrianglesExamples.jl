@@ -1,11 +1,11 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
 
 module TrianglesExamples
 
-using Nemo, TrianglesBase, xFromIntegerSequences
+using Nemo, TrianglesBase
 
 export LahNumbers, LahTriangle, LahTransform, SchröderBTriangle, SchröderLTriangle, MotzkinTriangle
 export Catalan, CatalanTriangle, CatalanTransform, CatalanBallot, ExtCatalanTriangle
@@ -13,19 +13,62 @@ export BernoulliPolynomial, PascalTriangle, SchroederBigTriangle, AitkenTriangle
 export EulerianTriangle, EulerianTriangle2, NarayanaTriangle, NarayanaTransform
 export EulerTriangle, EulerTanTriangle, EulerSecTriangle, UniTriangle
 export EulerianTransform, MotzkinTransform, SchroederBigTransform, FubiniTriangle
-export Laguerre, LaguerreTriangle, LaguerreTransform
+export Laguerre, LaguerreTriangle, LaguerreTransform, TrinomialTriangle, TrinomialTransform
 export JacobsthalTriangle, JacobsthalTransform, FibonacciTriangle, FibonacciTransform
 export StirlingSetTriangle, StirlingCycleTriangle, FallingFactTriangle, RisingFactTriangle
 export StirlingSetTransform, StirlingCycleTransform, FubiniTriangle, RencontresTriangle
-export DArcaisTriangle, WorpitzkyTriangle, EulerianS2Triangle, SwingTriangle, DelannoyTriangle
+export DArcaisTriangle, WorpitzkyTriangle, EulerianSO2Triangle, SwingTriangle, DelannoyTriangle
+export Bessel1Triangle, Bessel1Transform, HermiteTriangle, HermiteTransform
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703, FineTriangle, TTreeTriangle
+export A046802Triangle, A046802Transform
+export A000166, A038048, V000111, Fine
 export TRIANGLES
 
 """
 Recurrences and iterations for many triangles.
 """
 const ModuleTrianglesExamples = ""
+
+# ------------------------------------------------
+
+const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
+
+function A000166(n::Int)
+    n <= 1 && return ZZ(1 - n)
+    haskey(CacheA000166, n) && return CacheA000166[n]
+    a = (n - 1) * (A000166(n - 1) + A000166(n - 2))
+    return CacheA000166[n] = a
+end
+
+const CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
+function A038048(n::Int)
+    haskey(CacheA038048, n) && return CacheA038048[n]
+	s = Factorial(n - 1) * divisor_sigma(n, 1)
+    return CacheA038048[n] = s
+end
+
+const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
+function Fine(n::Int)
+    haskey(CacheFine, n) && return CacheFine[n]
+    s = div((7*n - 12)*Fine(n-1) + (4*n - 6)*Fine(n-2), 2*n)
+    CacheFine[n] = s
+end
+
+const CacheAndré = Dict{Tuple{Int,Int},fmpz}()
+
+function André(m::Int, n::Int)
+    haskey(CacheAndré, (m, n)) && return CacheAndré[(m, n)]
+    n ≤ 0 && return ZZ(1)
+    r = range(0, step = m, stop = n - 1)
+    S = sum(binomial(ZZ(n), ZZ(k)) * André(m, k) for k ∈ r)
+    return CacheAndré[(m, n)] = n % m == 0 ? -S : S
+end
+
+"""
+Return the up-down numbers (2-alternating permutations).
+"""
+V000111(n::Int) = abs(André(2, n))
 
 function PrimeDivisors(n)
     n < 2 && return ℤInt[]
@@ -84,7 +127,6 @@ end
 
 EulerTanTriangle(dim) = [Coefficients(TanPoly(n), n) for n in 0:dim-1]
 EulerSecTriangle(dim) = Coefficients([SecPoly(n) for n in 0:dim-1])
-
 
 # ------------------------------------------------
 
@@ -222,7 +264,6 @@ BernoulliPolynomial(n) = EgfExpansionPoly(n, egfBernoulli)
 G278075(x, t) = divexact(1, 1 - x * (1 - exp(-t)))
 FubiniPolynomial(n) = EgfExpansionPoly(n, G278075)
 
-
 function MotzkinTriangle2(dim::Int)
     T = ZTri(dim)
     for n = 1:dim
@@ -321,18 +362,21 @@ WorpitzkyTransform(A::ℤSeq) = Worpitzky.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheEulerianS2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+const CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
 
-function EulerianS2(n, k) 
+"""
+Return the second order Eulerian number E2(n,k).
+"""
+function EulerianSO2(n, k) 
     n < 0 && return ZZ(0) 
-    haskey(CacheEulerianS2, (n, k)) && return CacheEulerianS2[(n, k)]
-    S = EulerianS2(n-1, k)*k + EulerianS2(n-1, k-1)*(2*n - k) 
-    CacheEulerianS2[(n, k)] = S
+    haskey(CacheEulerianSO2, (n, k)) && return CacheEulerianSO2[(n, k)]
+    S = EulerianSO2(n-1, k)*k + EulerianSO2(n-1, k-1)*(2*n - k) 
+    CacheEulerianSO2[(n, k)] = S
 end
 
-EulerianS2Triangle(dim) = [[EulerianS2(n, k) for k = 0:n] for n = 0:dim - 1]
-EulerianS2(A::ℤSeq) = LinMap(EulerianS2, A, length(A))
-EulerianS2Transform(A::ℤSeq) = EulerianS2.(Telescope(A))
+EulerianSO2Triangle(dim) = [[EulerianSO2(n, k) for k = 0:n] for n = 0:dim - 1]
+EulerianSO2(A::ℤSeq) = LinMap(EulerianSO2, A, length(A))
+EulerianSO2Transform(A::ℤSeq) = EulerianSO2.(Telescope(A))
 
 # ------------------------------------------------
 
@@ -357,6 +401,39 @@ Uni(n, k) = 1
 UniTriangle(dim) = [[ZZ(1) for k = 0:n] for n = 0:dim - 1]
 Uni(A::ℤSeq) = LinMap(Uni, A, length(A))
 UniTransform(A::ℤSeq) = Uni.(Telescope(A))
+
+# ------------------------------------------------
+
+function Bessel1(n, k) 
+    (k == 0) && return ZZ(k^n) 
+    div(Factorial(2*n - k - 1),((-2)^(n - k)*Factorial(k - 1)*Factorial(n - k)))
+end
+
+Bessel1Triangle(dim) = [[Bessel1(n, k) for k = 0:n] for n = 0:dim - 1]
+Bessel1(A::ℤSeq) = LinMap(Bessel1, A, length(A))
+Bessel1Transform(A::ℤSeq) = Bessel1.(Telescope(A))
+
+# ------------------------------------------------
+
+function Hermite(n, k) 
+    isodd(n - k) && return ZZ(0) 
+    m = div(n - k, 2)
+    div(Factorial(n), Factorial(k)*Factorial(m)*2^m) 
+end
+
+HermiteTriangle(dim) = [[Hermite(n, k) for k = 0:n] for n = 0:dim - 1]
+Hermite(A::ℤSeq) = LinMap(Hermite, A, length(A))
+HermiteTransform(A::ℤSeq) = Hermite.(Telescope(A))
+
+# ------------------------------------------------
+
+function Trinomial(n, k) 
+    sum(Binomial(n, j) * Binomial(j, k-j) for j in 0:n)
+end
+
+TrinomialTriangle(dim) = [[Trinomial(n, k) for k = 0:n] for n = 0:dim - 1]
+Trinomial(A::ℤSeq) = LinMap(Trinomial, A, length(A))
+TrinomialTransform(A::ℤSeq) = Trinomial.(Telescope(A))
 
 # ------------------------------------------------
 
@@ -531,31 +608,36 @@ Eulerian(n, k) = Eulerian(n)[k + 1]
 Eulerian(A::ℤSeq) = LinMap(Eulerian, A, length(A))
 EulerianTransform(A::ℤSeq) = Eulerian.(Telescope(A))
 
-#########################################################
-# def A130850(n, k):
-#    return add(EulerianNumber(n, j)*binomial(n-j, k) for j in (0..n))
-# for n in (0..7): [A130850(n, k) for k in (0..n)]
-# (PARI) t(n, k) = (n-k)!*stirling(n+1, n-k+1, 2);
-#########################################################
+# ------------------------------------------------
 
-const CacheEulerian2 = Dict{Tuple{Int,Int},fmpz}()
-function EulerianNumbers2(n, k)
-    haskey(CacheEulerian2, (n, k)) && return CacheEulerian2[(n, k)]
-    CacheEulerian2[(n, k)] = if (k == n) 
+function A046802(n, k) 
+    sum(Binomial(n, j) * Eulerian(j, j-k) for j in k:n)
+end
+
+A046802Triangle(dim) = [[A046802(n, k) for k = 0:n] for n = 0:dim - 1]
+A046802(A::ℤSeq) = LinMap(A046802, A, length(A))
+A046802Transform(A::ℤSeq) = A046802.(Telescope(A))
+
+# ------------------------------------------------
+
+const CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
+function EulerianNumbersClassic(n, k)
+    haskey(CacheEulerianClassic, (n, k)) && return CacheEulerianClassic[(n, k)]
+    CacheEulerianClassic[(n, k)] = if (k == n) 
         ZZ(1)
     elseif (k <= 0) || (k > n)
         ZZ(0)
     else
-        (n - k + 1) * EulerianNumbers2(n - 1, k - 1) +
-        (k) * EulerianNumbers2(n - 1, k)
+        (n - k + 1) * EulerianNumbersClassic(n - 1, k - 1) +
+        (k) * EulerianNumbersClassic(n - 1, k)
     end
 end
 
-EulerianTriangle2(dim) = [[EulerianNumbers2(n, k) for k = 0:n] for n = 0:dim - 1]
-Eulerian2(n) = EulerianTriangle2(n + 1)[n + 1]
-Eulerian2(n, k) = Eulerian2(n)[k + 1]
-Eulerian2(A::ℤSeq) = LinMap(Eulerian2, A, length(A))
-EulerianTransform2(A::ℤSeq) = Eulerian2.(Telescope(A))
+EulerianTriangleClassic(dim) = [[EulerianNumbersClassic(n, k) for k = 0:n] for n = 0:dim - 1]
+EulerianClassic(n) = EulerianTriangleClassic(n + 1)[n + 1]
+EulerianClassic(n, k) = EulerianClassic(n)[k + 1]
+EulerianClassic(A::ℤSeq) = LinMap(EulerianClassic, A, length(A))
+EulerianTransform2(A::ℤSeq) = EulerianClassic.(Telescope(A))
 
 const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
 function NarayanaNumbers(n::Int, k::Int)
@@ -655,12 +737,14 @@ function transforms(trans)
 end
 
 const TRIANGLES = Function[
+    AitkenTriangle,
+    Bessel1Triangle,
     BinomialTriangle,
     CatalanTriangle,
     DArcaisTriangle, 
     DelannoyTriangle,
-    EulerianS2Triangle,
     EulerianTriangle,
+    EulerianSO2Triangle,
     EulerSecTriangle,
     EulerTanTriangle,
     EulerTriangle,
@@ -668,6 +752,7 @@ const TRIANGLES = Function[
     FibonacciTriangle,
     FineTriangle,
     FubiniTriangle,
+    HermiteTriangle,
     LaguerreTriangle,
     LahTriangle,
     MotzkinTriangle,
@@ -678,11 +763,11 @@ const TRIANGLES = Function[
     SchröderLTriangle,
     StirlingCycleTriangle,
     StirlingSetTriangle,
+    TrinomialTriangle,
     TTreeTriangle,
     UniTriangle,
     WorpitzkyTriangle 
 ]
-
 
 # START-TEST-########################################################
 using Test
@@ -740,10 +825,10 @@ function demo()
     transforms(LaguerreTransform)
 
     Println.(EulerianTriangle(8))
-    Println.(EulerianTriangle2(8))
+    #Println.(EulerianTriangle2(8))
     transforms(EulerianTransform)
 
-    Println.(Inverse(EulerianTriangle2(8)))
+   # Println.(Inverse(EulerianTriangle2(8)))
 
     Println.(NarayanaTriangle(8))
     transforms(NarayanaTransform)
@@ -784,6 +869,5 @@ function main()
 end
 
 main()
-
 
 end # module

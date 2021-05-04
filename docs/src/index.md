@@ -1,6 +1,12 @@
 # Library
 
 ```@docs
+A046802Transform
+```
+```@docs
+A046802Triangle
+```
+```@docs
 AbstractSequence
 ```
 ```@docs
@@ -13,6 +19,9 @@ AitkenTriangle
 AllPrettyTraits
 ```
 ```@docs
+AllTraitCards
+```
+```@docs
 AltSum
 ```
 ```@docs
@@ -20,6 +29,12 @@ AssociatedTriangles
 ```
 ```@docs
 BernoulliPolynomial
+```
+```@docs
+Bessel1Transform
+```
+```@docs
+Bessel1Triangle
 ```
 ```@docs
 BinTrans
@@ -103,7 +118,7 @@ EulerTanTriangle
 EulerTriangle
 ```
 ```@docs
-EulerianS2Triangle
+EulerianSO2Triangle
 ```
 ```@docs
 EulerianTransform
@@ -125,6 +140,9 @@ Explore
 ```
 ```@docs
 ExtCatalanTriangle
+```
+```@docs
+Factorial
 ```
 ```@docs
 Factorial
@@ -158,6 +176,12 @@ GetSeqnum
 ```
 ```@docs
 GetSeqnumUri
+```
+```@docs
+HermiteTransform
+```
+```@docs
+HermiteTriangle
 ```
 ```@docs
 IBinTrans
@@ -383,6 +407,12 @@ TransUnos
 ```
 ```@docs
 Triangles
+```
+```@docs
+TrinomialTransform
+```
+```@docs
+TrinomialTriangle
 ```
 ```@docs
 UniTriangle

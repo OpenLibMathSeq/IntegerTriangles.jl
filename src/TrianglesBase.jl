@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
@@ -13,7 +13,7 @@ export ℤInt, ℤSeq, ℤTri, ℚInt, ℚSeq, ℚTri
 export ℤPolySeq, ℚPolySeq, ℤPolyRing, ℚPolyRing
 export ZInt, ZSeq, ZTri, QInt, QSeq, QTri
 export ZPolySeq, QPolySeq, ZPolyRing, QPolyRing
-export Polynomial, Evaluate, PolyArray 
+export Polynomial, Evaluate, PolyArray, Factorial
 export PolyTriangle, PolyTri, DiagTri, DiagonalTriangle
 export OrthoPoly, DelehamΔ, RecTriangle
 export EgfExpansionCoeff, EgfExpansionPoly
@@ -102,7 +102,7 @@ QSeq(len::Int, f::Function) = [QQ(f(n)) for n in 0:len-1]
 Constructor for ZTri.
 """
 function ZTri(dim::Int; reg=false)
-    reg ? ZSeq.(1:dim) : ℤTri(undef, dim)
+    reg ? ℤTri(ZSeq.(1:dim)) : ℤTri(undef, dim)
 end
 
 ZTri(dim, f::Function) = f.(0:dim-1)
@@ -222,6 +222,26 @@ julia> Println.(ConvolutionTransformation(T))
 """
 ConvolutionTransformation(T::ℤTri) = sum.(Convolution.(T))
 ConvTrans(T::ℤTri) = ConvolutionTransformation(T::ℤTri) # alias
+
+
+# --------------------------------------------------
+
+function BinomialConvolution(S::ℤSeq, T::ℤSeq) 
+    L = length(S); L != length(T) && return []
+    [sum(Binomial(n,k)*S[k + 1] * T[n - k + 1] for k in 0:n) for n in 0:L-1]
+end
+
+BinomialConvolution(S::ℤSeq) = BinomialConvolution(S, S) 
+BinConvSum(S::ℤSeq) = sum(BinomialConvolution(S))
+
+"""
+Return the binomial convolution triangle of T.
+"""
+BinomialConvolutionTriangle(T::ℤTri) = BinomialConvolution.(T)
+BinConvTri(T::ℤTri) = BinomialConvolutionTriangle(T) # alias
+
+BinomialConvolutionTransformation(T::ℤTri) = sum.(BinomialConvolution.(T))
+BinConvTrans(T::ℤTri) = BinomialConvolutionTransformation(T::ℤTri) # alias
 
 # --------------------------------------------------
 
@@ -772,7 +792,7 @@ function InverseTriangle(T)
             if WARNING_ON_NOTINVERTIBLE
                 @warn("\n\n Not invertible!\n\n")
             end
-            return []
+            return ℤSeq[]
         end
     end
 
@@ -781,7 +801,7 @@ function InverseTriangle(T)
         if WARNING_ON_NOTINVERTIBLE
             @warn("\n\n Inverse not in MatrixSpace(ZZ)!\n\n")
         end
-        return []
+        return ℤSeq[]
     end
 
     return [[numerator(invM[n, k]) for k = 1:n] for n = 1:dim]
@@ -802,7 +822,7 @@ Reverse(T::ℤTri) = reverse.(T)
 """
 function RevInv(T::ℤTri)
     I = Inverse(T)
-    return I != [] ? Reverse(I) : []
+    return I != [] ? Reverse(I) : ℤSeq[]
 end
 
 """
@@ -834,15 +854,14 @@ end
 
 # TransformTriangle(Trans::Function, dim::Int, f::Function) =  ℤTri(dim, n -> Trans(n+1, x -> f(x, n)))
 
-
 # Print the array without typeinfo.
 Println(io, str::String) = println(io, str)
-Println(T::ℤTri) = Println.(IOContext(stdout), T)
 Println(T::ℤSeq) = Println(IOContext(stdout), T)
+Println(T::ℤTri) = Println.(IOContext(stdout), T)
 
 Print(io, str::String) = print(io, str)
-Print(T::ℤTri) = Println.(IOContext(stdout), T, false)
 Print(T::ℤSeq) = Println(IOContext(stdout), T, false)
+Print(T::ℤTri) = Println.(IOContext(stdout), T, false)
 
 
 """
@@ -1056,5 +1075,6 @@ function main()
 end
 
 main()
+
 
 end # module

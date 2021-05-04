@@ -25,17 +25,17 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Reverse </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,0,2,1,0,6,6,1,0,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 2 1 0 6 6 1 0 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 0, 2, 1, 0, 6, 6, 1, 0</td>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,0,1,0,1,0,1,2,0,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 0 1 0 1 0 1 2 0 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, 0, 1, 0, 1, 0, 1, 2, 0</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,1,0,1,1,0,3,2,1,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 0 1 1 0 3 2 1 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, 1, 0, 1, 1, 0, 3, 2, 1</td>
   </tr>
   <tr>
@@ -65,7 +65,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Middle </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,1,1,14,30,540,1806,40824,186480,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 1 14 30 540 1806 40824 186480 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, 1, 1, 14, 30, 540, 1806, 40824, 186480</td>
   </tr>
   <tr>
@@ -110,7 +110,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinTrans </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,0,9,40,125,3444,18571,241872,5796711,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 -9 -40 125 3444 18571 -241872 -5796711 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 0, -9, -40, 125, 3444, 18571, -241872, -5796711</td>
   </tr>
   <tr>

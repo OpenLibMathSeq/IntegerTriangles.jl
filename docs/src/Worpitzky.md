@@ -35,12 +35,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,1,1,3,1,7,2,1,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 1 1 3 1 7 2 1 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 1, 1, 1, 3, 1, 7, 2, 1</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,1,1,2,1,1,6,3,1,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 1 2 1 1 6 3 1 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 1, 1, 2, 1, 1, 6, 3, 1</td>
   </tr>
   <tr>
@@ -70,7 +70,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Middle </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,1,3,7,50,180,2100,10206,166824,1020600,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 3 7 50 180 2100 10206 166824 1020600 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 1, 3, 7, 50, 180, 2100, 10206, 166824, 1020600</td>
   </tr>
   <tr>
@@ -115,17 +115,17 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinTrans </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=1,0,3,10,25,574,2653,30234,644079,2438722,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 -3 -10 25 574 2653 -30234 -644079 -2438722 ]'>nomatch</a></td>
     <td style = "text-align: left;">1, 0, -3, -10, 25, 574, 2653, -30234, -644079, -2438722</td>
   </tr>
   <tr>
     <td style = "text-align: left;">TransSqrs </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=0,1,11,109,1139,13021,164051,2273629,34497299,569871901,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[0 1 11 109 1139 13021 164051 2273629 34497299 569871901 ]'>nomatch</a></td>
     <td style = "text-align: left;">0, 1, 11, 109, 1139, 13021, 164051, 2273629, 34497299, 569871901</td>
   </tr>
   <tr>
     <td style = "text-align: left;">TransNat0 </td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=0,1,7,49,391,3601,37927,451249,5995591,88073041,'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[0 1 7 49 391 3601 37927 451249 5995591 88073041 ]'>nomatch</a></td>
     <td style = "text-align: left;">0, 1, 7, 49, 391, 3601, 37927, 451249, 5995591, 88073041</td>
   </tr>
   <tr>

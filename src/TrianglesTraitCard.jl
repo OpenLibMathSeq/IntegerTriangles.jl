@@ -1,4 +1,4 @@
-# This file is part of IntegerTriangles.
+# This file is part of IntegerTriangles.jl.
 # Copyright Peter Luschny. License is MIT.
 
 (@__DIR__) ∉ LOAD_PATH && push!(LOAD_PATH, (@__DIR__))
@@ -7,7 +7,7 @@ module TrianglesTraitCard
 
 using Nemo, TrianglesBase, TrianglesExamples, TrianglesUtils
 
-export TraitCard, xTraitCard, TransTraits, AssociatedTriangles
+export TraitCard, xTraitCard, TransTraits, AssociatedTriangles, AllTraitCards
 
 """
 Build the trait card of one or many triangles.
@@ -15,13 +15,10 @@ Build the trait card of one or many triangles.
 const ModuleTrianglesTraitCard = ""
 
 
-const SEARCH = true
+const SEARCHONLINE = false # true
 
 function TraitCard(T::ℚTri, name)
-
-    println("WRONG TYPE! Will not process!")
-    println(name)
-    println()
+    @warn "WRONG TYPE! Will not process!"
 end
 
 """
@@ -37,105 +34,160 @@ function TraitCard(T::ℤTri, name, N, an=false)
     len = max(N, min(N - 1, length(T)))
     len = len < 10 ? len : 10
 
-    S = Flat(T); print("Triangle:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = Flat(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("Triangle ")
     S[1:len] |> Println
 
-    R = Reverse(T)
-    FR = Flat(R); print("Reverse:   ")
-    an && print(GetSeqnum(FR, SEARCH), " ")
+
+    R = Reverse(T); FR = Flat(R);
+    an && print(GetSeqnum(FR, SEARCHONLINE), " ")
+    print(name); print("Reverse ")
     FR[1:len] |> Println
 
     I = Inverse(T)
     if I != []
-        FI = Flat(I); print("Inverse:   ")
-        an && print(GetSeqnum(FI, SEARCH), " ")
+
+        FI = Flat(I);
+        an && print(GetSeqnum(FI, SEARCHONLINE), " ")
+        print(name); print("Inverse ")
         FI[1:len] |> Println
 
-        RI = Reverse(I)
-        RI = Flat(RI); print("RevInv:    ")
-        an && print(GetSeqnum(RI, SEARCH), " ")
+
+        RI = Reverse(I); RI = Flat(RI);
+        an && print(GetSeqnum(RI, SEARCHONLINE), " ")
+        print(name); print("RevInv ")
         RI[1:len] |> Println
     end
-    
+
     IR = Inverse(R)
     if IR != []
-        IR = Flat(IR); print("InvRev:    ")
-        an && print(GetSeqnum(IR, SEARCH), " ")
+
+        IR = Flat(IR);
+        an && print(GetSeqnum(IR, SEARCHONLINE), " ")
+        print(name); print("InvRev ")
         IR[1:len] |> Println
     end
 
-    S = DiagonalTriangle(T)
-    S = Flat(S);
-    print("Diagonal:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = DiagonalTriangle(T); S = Flat(S);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("DiagTri ")
     S[1:len] |> Println
 
-    S = ConvolutionTriangle(T)
-    S = Flat(S);
-    print("Convolut:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = ConvolutionTriangle(T); S = Flat(S);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("ConvTri ")
     S[1:len] |> Println
 
-    S = PolyTriangle(T)
-    S = Flat(S);
-    print("Poly:      ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = PolyTriangle(T); S = Flat(S);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("PolyTri ")
     S[1:len] |> Println
 
-    S = sum(T);       print("Sum:       ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = sum(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("Sum ")
     S[1:len] |> Println
-    S = EvenSum(T);   print("EvenSum:   ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = EvenSum(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("EvenSum ")
     S[1:len] |> Println
-    S = OddSum(T);    print("OddSum:    ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = OddSum(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("OddSum ")
     S[1:len] |> Println
-    S = AltSum(T);    print("AltSum:    ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = AltSum(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("AltSum ")
     S[1:len] |> Println
-    S = DiagSum(T);   print("DiagSum:   ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = DiagSum(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("DiagSum ")
     S[1:len] |> Println
-    S = Central(T);   print("Central:   ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = Central(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("Central ")
     S[1:min(len, length(S))] |> Println
-    S = LeftSide(T);  print("LeftSide:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
-    S[1:len] |> Println
-    S = RightSide(T); print("RightSide: ")
-    an && print(GetSeqnum(S, SEARCH), " ")
-    S[1:len] |> Println
-    S = PosHalf(P);  print("PosHalf:   ")
-    an && print(GetSeqnum(S, SEARCH), " ")
-    S[1:len] |> Println
-    S = NegHalf(P);  print("NegHalf:   ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = LeftSide(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("LeftSide ")
     S[1:len] |> Println
 
-    S = BinTrans(T); print("BinTrans:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = RightSide(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("RightSide ")
     S[1:len] |> Println
 
-    S = IBinTrans(T); print("IBinTrans: ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+    S = PosHalf(P);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("PosHalf ")
     S[1:len] |> Println
-    
-    S = Trans(T, [ZZ(n^2) for n = 0:32]); print("TransSqrs: ");
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = NegHalf(P);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("NegHalf ")
     S[1:len] |> Println
-    S = Trans(T, [ZZ(n) for n = 0:32]); print("TransNat0: ");
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = BinTrans(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("BinTrans ")
     S[1:len] |> Println
-    S = Trans(T, [ZZ(n) for n = 1:32]); print("TransNat1: ");
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = IBinTrans(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("IBinTrans ")
     S[1:len] |> Println
-    S = PolyVal2(T); print("PolyVal2:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = Trans(T, [ZZ(n^2) for n = 0:32]);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("TransSqrs ");
     S[1:len] |> Println
-    S = PolyVal3(T); print("PolyVal3:  ")
-    an && print(GetSeqnum(S, SEARCH), " ")
+
+
+    S = Trans(T, [ZZ(n) for n = 0:32]);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("TransNat0 ");
+    S[1:len] |> Println
+
+
+    S = Trans(T, [ZZ(n) for n = 1:32]);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("TransNat1 ");
+    S[1:len] |> Println
+
+
+    S = PolyVal2(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("PolyVal2 ")
+    S[1:len] |> Println
+
+
+    S = PolyVal3(T);
+    an && print(GetSeqnum(S, SEARCHONLINE), " ")
+    print(name); print("PolyVal3 ")
     S[1:len] |> Println
 end
 
@@ -178,7 +230,9 @@ function AssociatedTriangles(T::ℤTri, N)
     println("\nTriangle:\n")
     for row in T[1:len] Println(row) end
     println()
-    S = Flat(T); print("Flat triangle:  "); S[1:len] |> Println
+    print("Flat triangle:  ");
+    S = Flat(T);
+    S[1:len] |> Println
 
     println("\nInverse triangle:\n")
     S = InverseTriangle(T)
@@ -246,7 +300,23 @@ PolyVal3:  A277382 [1, 4, 23, 168, 1473, 14988, 173007, 2228544, 31636449]
 function xTraitCard(triangle::Function)
     dim = 32
     T = triangle(dim)
-    TraitCard(T, "$triangle ", dim, true)
+    Println.(T)
+    name = "$triangle"
+    println(name)
+    #c = findfirst("Triangle", name)
+    #TraitCard(T, name[1:c[1]-1] * " ", dim, true)
+end
+
+
+function AllTraitCards()
+    path = profilepath("AllTraits.csv")
+    rm(path; force=true)
+    open(path, "w") do io
+        for T in TRIANGLES
+            # println("$T")
+            xTraitCard(T)
+        end
+    end
 end
 
 # START-TEST-########################################################
@@ -264,18 +334,20 @@ function test()
     TraitCard(JacobsthalTriangle, dim)
     TraitCard(FibonacciTriangle, dim)
     TraitCard(EulerianTriangle, dim)
-    TraitCard(UniTriangle, dim) 
+    TraitCard(UniTriangle, dim)
 
     TransTraits(BinomialTriangle)
+    xTraitCard(LaguerreTriangle)
 end
 
 function demo()
-end
-
-function perf()
     for t in TRIANGLES
         xTraitCard(t)
     end
+end
+
+function perf()
+    #AllTraitCards()
 end
 
 function main()
@@ -285,6 +357,5 @@ function main()
 end
 
 main()
-
 
 end # module
