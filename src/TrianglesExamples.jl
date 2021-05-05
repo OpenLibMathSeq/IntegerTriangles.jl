@@ -26,7 +26,18 @@ export A000166, A038048, V000111, Fine
 export TRIANGLES
 
 """
-Recurrences and iterations for many triangles.
+Recurrences and iterations for some triangles.
+The examples given are:
+
+Aitken, Bessel1, Binomial, Catalan, DArcais, Delannoy,
+
+Eulerian, EulerianSO2, EulerSec, EulerTan, Euler, FallingFact,
+
+Fibonacci, Fine, Fubini, Hermite, Laguerre, Lah, Motzkin, 
+
+Narayana, Rencontres, RisingFact, SchröderB, SchröderL, StirlingCycle,
+
+StirlingSet, Trinomial, TTree, Uni, Worpitzky
 """
 const ModuleTrianglesExamples = ""
 

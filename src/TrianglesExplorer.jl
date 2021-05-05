@@ -12,6 +12,8 @@ export Explore, Triangles
 
 """
 Explore integer triangles via their traits.
+The traits and their references will be saved 
+as csv-files in the data directory.
 """
 const ModuleTrianglesExplorer = ""
 
@@ -52,7 +54,7 @@ const Triangles = LittleDict{String, Function}(
     "Worpitzky"     => WorpitzkyTriangle
 )
 
-const Traits = LittleDict{String, Function}(
+const TraitFunc = LittleDict{String, Function}(
     "Triangle"   => Flat,
     "Reverse"    => Reverse,
     "Inverse"    => Inverse,
@@ -89,10 +91,10 @@ function Show(io, name, kind, trait, seq, savetofile=false)
     if savetofile
         print(".")
         print(io, anum, ",", name, ",", kind, ",", trait, ",")
-        Println(io, SeqToString(seq, 10)) # seq[1:min(10, end)])
+        Println(io, SeqToString(seq, 10)) 
     else
         print(anum, " ", name, " ", kind, " ", trait, " ")
-        Println(IOContext(stdout), SeqToString(seq, 10)) # seq[1:min(10, end)])
+        Println(IOContext(stdout), SeqToString(seq, 10)) 
     end
 end
 
@@ -112,14 +114,14 @@ function TriangleVariant(Tri, dim, kind="Std")
     return reverse.(invM)
 end
 
-const LEN = 32
+const LEN = 19
 
 """
 (SIGNATURES)
 """
 function Explore(triangle, kind, trait, dim)
     T = TriangleVariant(Triangles[triangle], dim, kind)
-    seq = Traits[trait](T)
+    seq = TraitFunc[trait](T)
     Show(stdout, triangle, kind, trait, seq)
 end
 
@@ -141,9 +143,9 @@ end
 
 """
 function Explore(triangle, kind, trait)
-    dim = 32
+    dim = 19
     T = TriangleVariant(Triangles[triangle], dim, kind)
-    seq = Traits[trait](T)
+    seq = TraitFunc[trait](T)
     anum = GetSeqnum(seq)
     anum === nothing && (anum = "nothing")
     seqstr = string(seq[1:min(10, end)])[max(0,11):max(0,end-1)]
@@ -155,7 +157,7 @@ function Explore(trait::String, dim::Int)
         for kind in Kind
             T = TriangleVariant(triangle, dim, kind)
             if T != []
-                seq = Traits[trait](T)
+                seq = TraitFunc[trait](T)
                 Show(stdout, name, kind, trait, seq)
             end
         end
@@ -166,53 +168,84 @@ end
 function Explore(savetofile::Bool)
     @warn "This will take several minutes and produce the file 'BIGLIST.csv' in the data directory."
 
-    path = profilepath("BIGLIST")
+    path = datapath("BIGLIST.csv")
     rm(path; force=true)
     open(path, "w") do io
         println(io, "Anumber,Triangle,Type,Trait,Sequence")
         for (name, triangle) in Triangles
-            for kind in Kind
+            #for kind in Kind
+            kind = "Std"
                 T = TriangleVariant(triangle, LEN, kind)
                 if T != []
-                    for (trait, f) in Traits
+                    for (trait, f) in TraitFunc
                         Show(io, name, kind, trait, f(T), savetofile)
                     end
                 end
-            end
+            #end
         end
     end
 end
 
 
+function SaveToCSV(name, kind="Std")
+    T = Triangles[name](LEN)
+    path = datapath(name * ".csv")
+    rm(path; force=true)
+    open(path, "w") do io
+        println(io, "ANumber,Triangle,Type,Trait,Sequence")
+        for (trait, f) in TraitFunc
+            seq = f(T)
+            seq == [] && continue
+            if typeof(seq) === ℤTri 
+                seq = Flat(seq)
+            end
+            anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
+            print(io, anum, ",", name, ",", kind, ",", trait, ",")
+            Println(io, SeqToString(seq, 10)) 
+        end
+    end
+end
+
+function SaveAllToCSV()
+    @warn "This will take several minutes and produce the csv-files in the data directory."
+
+    for (name, f) in Triangles
+        println(name) 
+        SaveToCSV(name)
+    end
+end    
+
+
 # START-TEST-##############################################
 
 function test()
-    Explore("SchroederB", "Inv", "AltSum",    32)
+    TLEN = 19
+    Explore("SchroederB", "Inv", "AltSum",    TLEN)
 end
 
 function demo()
-    Explore("Binomial",   "Std", "PolyVal3",  32)
-    Explore("SchroederB", "Inv", "AltSum",    32)
-    Explore("SchroederL", "Inv", "AltSum",    32)
-    Explore("Motzkin",    "Rev", "Central",   32)
-    Explore("Laguerre",   "Std", "PosHalf",   32)
-    Explore("Laguerre",   "Std", "TransNat0", 32)
-    Explore("Laguerre",   "Std", "TransNat1", 32)
-    Explore("Lah",        "Std", "TransSqrs", 32)
+    TLEN = 19
+    Explore("Binomial",   "Std", "PolyVal3",  TLEN)
+    Explore("SchroederB", "Inv", "AltSum",    TLEN)
+    Explore("SchroederL", "Inv", "AltSum",    TLEN)
+    Explore("Motzkin",    "Rev", "Central",   TLEN)
+    Explore("Laguerre",   "Std", "PosHalf",   TLEN)
+    Explore("Laguerre",   "Std", "TransNat0", TLEN)
+    Explore("Laguerre",   "Std", "TransNat1", TLEN)
+    Explore("Lah",        "Std", "TransSqrs", TLEN)
     println()
 end
 
 function perf()
-    Explore(true)
+    #Explore(true)
 end
 
 function main()
-    #test()
+    test()
     demo()
-    #perf()
+    perf()
 end
 
 main()
-
 
 end # module

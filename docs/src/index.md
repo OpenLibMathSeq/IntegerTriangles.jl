@@ -451,9 +451,6 @@ profilepath
 search_failed
 ```
 ```@docs
-xTraitCard
-```
-```@docs
 ℚInt
 ```
 ```@docs
