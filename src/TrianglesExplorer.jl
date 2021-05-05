@@ -192,16 +192,16 @@ function SaveToCSV(name, kind="Std")
     path = datapath(name * ".csv")
     rm(path; force=true)
     open(path, "w") do io
-        println(io, "ANumber,Triangle,Type,Trait,Sequence")
+        println(io, "Trait,ANumber,Sequence")
         for (trait, f) in TraitFunc
             seq = f(T)
             seq == [] && continue
             if typeof(seq) === ℤTri 
                 seq = Flat(seq)
             end
-            anum = GetSeqnum(seq, WARNING_ON_NOTFOUND)
-            print(io, anum, ",", name, ",", kind, ",", trait, ",")
-            Println(io, SeqToString(seq, 10)) 
+            anum = GetSeqnumUri(seq)
+            anum === nothing && (anum = "nothing")
+            println(io, trait, ",", anum, ",", SeqToString(seq, 10))
         end
     end
 end
@@ -247,5 +247,7 @@ function main()
 end
 
 main()
+#SaveToCSV("Laguerre")
+#SaveAllToCSV()
 
 end # module

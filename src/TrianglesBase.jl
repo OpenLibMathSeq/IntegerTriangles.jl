@@ -34,15 +34,17 @@ export TRAITS
 Basic definitions used in the library IntegerTriangles.
 We consider the following traits of an triangle:
 
-Flat, Reverse, Inverse, RevInv, InvRev,
+```
+Flat, Reverse, Inverse, RevInv, InvRev, DiagTri, 
 
-DiagTri, PolyTri, Sum, EvenSum, OddSum, AltSum,
+PolyTri, Sum, EvenSum, OddSum, AltSum, DiagSum, 
 
-DiagSum, Middle, Central, LeftSide, RightSide,
+Middle, Central, LeftSide, RightSide, PosHalf, 
 
-PosHalf, NegHalf, PolyVal2, PolyVal3, BinConv,
+NegHalf, PolyVal2, PolyVal3, BinConv, IBinConv, 
 
-IBinConv, TransSqrs, TransNat0, TransNat1
+TransSqrs, TransNat0, TransNat1
+```
 """
 const ModuleTrianglesBase = ""
 

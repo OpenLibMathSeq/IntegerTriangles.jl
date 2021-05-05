@@ -418,6 +418,9 @@ TrinomialTriangle
 UniTriangle
 ```
 ```@docs
+UpdateDocs
+```
+```@docs
 WorpitzkyTriangle
 ```
 ```@docs
@@ -436,7 +439,13 @@ ZSeq
 ZTri
 ```
 ```@docs
+csv_files
+```
+```@docs
 datapath
+```
+```@docs
+docsrcpath
 ```
 ```@docs
 oeis_notinstalled
@@ -445,7 +454,7 @@ oeis_notinstalled
 oeis_search
 ```
 ```@docs
-profilepath
+profilespath
 ```
 ```@docs
 search_failed

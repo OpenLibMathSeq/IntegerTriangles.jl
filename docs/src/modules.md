@@ -4,30 +4,37 @@
 Basic definitions used in the library IntegerTriangles.
 We consider the following traits of an triangle:
 
-Flat, Reverse, Inverse, RevInv, InvRev,
+```
+Flat, Reverse, Inverse, RevInv, InvRev, DiagTri, 
 
-DiagTri, PolyTri, Sum, EvenSum, OddSum, AltSum,
+PolyTri, Sum, EvenSum, OddSum, AltSum, DiagSum, 
 
-DiagSum, Middle, Central, LeftSide, RightSide,
+Middle, Central, LeftSide, RightSide, PosHalf, 
 
-PosHalf, NegHalf, PolyVal2, PolyVal3, BinConv,
+NegHalf, PolyVal2, PolyVal3, BinConv, IBinConv, 
 
-IBinConv, TransSqrs, TransNat0, TransNat1
+TransSqrs, TransNat0, TransNat1
+```
 
 ##   🔶  [TrianglesExamples](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesExamples.jl)
 
 Recurrences and iterations for some triangles.
 The examples given are:
+```
+Aitken, Bessel1, Binomial, Catalan, DArcais, 
 
-Aitken, Bessel1, Binomial, Catalan, DArcais, Delannoy,
+Delannoy, Eulerian, EulerianSO2, EulerSec, 
 
-Eulerian, EulerianSO2, EulerSec, EulerTan, Euler, FallingFact,
+EulerTan, Euler, FallingFact, Fibonacci, 
 
-Fibonacci, Fine, Fubini, Hermite, Laguerre, Lah, Motzkin, 
+Fine, Fubini, Hermite, Laguerre, Lah, Motzkin, 
 
-Narayana, Rencontres, RisingFact, SchröderB, SchröderL, StirlingCycle,
+Narayana, Rencontres, RisingFact, SchröderB, 
 
-StirlingSet, Trinomial, TTree, Uni, Worpitzky
+SchröderL, StirlingCycle, StirlingSet, Trinomial, 
+
+TTree, Uni, Worpitzky
+```
 
 ##   🔶  [TrianglesExplorer](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesExplorer.jl)
 
@@ -41,28 +48,17 @@ Plotting triangles.
 
 ##   🔶  [TrianglesTables](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesTables.jl)
 
-Pretty printing triangles trait cards.
-┌──────────┬────────────┬──────┬───────────┬─────────────────────────────────────────────┐
+Pretty printing of triangles trait cards.
 
-│ A-number │ Triangle   │ Form │ Function  │ Sequence                                    │
-
-├──────────┼────────────┼──────┼───────────┼─────────────────────────────────────────────┤
-
-│ A000302  │ Binomial   │ Std  │ PolyVal3  │ 1, 4, 16, 64, 256, 1024, 4096, 16384        │
-
-│ A001333  │ SchroederB │ Inv  │ AltSum    │ 1, -1, 3, -7, 17, -41, 99, -239             │
-
-│ A006012  │ SchroederL │ Inv  │ AltSum    │ 1, -2, 6, -20, 68, -232, 792, -2704         │
-
-│ A026302  │ Motzkin    │ Rev  │ Central   │ 1, 2, 9, 44, 230, 1242, 6853, 38376         │
-
-│ A103194  │ Laguerre   │ Std  │ TransNat0 │ 0, 1, 6, 39, 292, 2505, 24306, 263431       │
-
-│ A111884  │ Lah        │ Std  │ TransAlts │ 1, -1, -1, -1, 1, 19, 151, 1091             │
-
-│ nothing  │ Laguerre   │ Rev  │ TransNat1 │ 1, 3, 15, 97, 753, 6771, 68983, 783945      │
-
-└──────────┴────────────┴──────┴───────────┴─────────────────────────────────────────────┘
+| A-number | Triangle   | Form | Function  | Sequence                                    |
+|----------|------------|------|-----------|---------------------------------------------|
+| A000302  | Binomial   | Std  | PolyVal3  | 1, 4, 16, 64, 256, 1024, 4096, 16384        |
+| A001333  | SchroederB | Inv  | AltSum    | 1, -1, 3, -7, 17, -41, 99, -239             |
+| A006012  | SchroederL | Inv  | AltSum    | 1, -2, 6, -20, 68, -232, 792, -2704         |
+| A026302  | Motzkin    | Rev  | Central   | 1, 2, 9, 44, 230, 1242, 6853, 38376         |
+| A103194  | Laguerre   | Std  | TransNat0 | 0, 1, 6, 39, 292, 2505, 24306, 263431       |
+| A111884  | Lah        | Std  | TransAlts | 1, -1, -1, -1, 1, 19, 151, 1091             |
+| nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 
 ##   🔶  [TrianglesTraitCard](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesTraitCard.jl)
 
@@ -94,4 +90,46 @@ PolyVal3:  A277382 [1, 4, 23, 168, 1473, 14988, 173007, 2228544, 31636449]
 
 ##   🔶  [TrianglesUtils](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesUtils.jl)
 
-Search the OEIS for a sequence. Saved a file in the 'data' directory in json format. Ect.
+* Search the OEIS for a sequence. 
+* Save a file in the 'data' directory in json format. 
+
+* Triangle in standard format (without typeinfo):
+```
+[1]
+[1, 1]
+[2, 4, 1]
+[6, 18, 9, 1]
+[24, 96, 72, 16, 1]
+[120, 600, 600, 200, 25, 1]
+[720, 4320, 5400, 2400, 450, 36, 1]
+```
+* Triangle as a nested array:
+```
+[[1], [1, 1], [2, 4, 1], [6, 18, 9, 1], [24, 96, 72, 16, 1], [120, 600, 600, 200, 25, 1], [720, 4320, 5400, 2400, 450, 36, 1]]
+```
+* Triangle in flattened format:
+```
+1, 1, 1, 2, 4, 1, 6, 18, 9, 1, 24, 96, 72, 16, 1, 120, 600, 600, 200, 25, 1, 720, 4320, 5400, 2400, 450, 36, 1,
+```
+* Triangle in info format with sequence ID:
+```
+[A021009] 1, 1, 1, 2, 4, 1, 6, 18, 9, 1, 24, 96, 72, 16, 1, ...
+```
+* Triangle in mapped format:
+```
+0 ↦ 1
+1 ↦ 1
+2 ↦ 1
+3 ↦ 2
+4 ↦ 4
+5 ↦ 1
+6 ↦ 6
+7 ↦ 18
+8 ↦ 9
+9 ↦ 1
+10 ↦ 24
+11 ↦ 96
+12 ↦ 72
+13 ↦ 16
+14 ↦ 1
+```

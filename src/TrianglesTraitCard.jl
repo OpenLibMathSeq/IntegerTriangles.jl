@@ -49,8 +49,8 @@ end
 (SIGNATURES)
 """
 function Traits(T::ℤTri, name, N, an=false)
-    sep = ","
     an = an && ! oeis_notinstalled()
+    sep = " "
 
     println("\n=================")
     println(name)
@@ -277,7 +277,9 @@ and, if assoc=true, also a list of associated triangles.
 """
 function TraitCard(triangle::Function, dim, assoc=false)
     T = triangle(dim)
-    Traits(T, "$triangle ", dim)
+    name = "$triangle"
+    c = findfirst("Triangle", name)
+    Traits(T, name[1:c[1]-1], dim)
     AssociatedTriangles(T, dim)
 end
 

@@ -5,6 +5,8 @@ srcdir ∉ LOAD_PATH && push!(LOAD_PATH, srcdir)
 using Documenter
 using IntegerTriangles
 
+#UpdateDocs()
+
 makedocs(
     modules = [IntegerTriangles],
     sitename = "IntegerTriangles.jl",

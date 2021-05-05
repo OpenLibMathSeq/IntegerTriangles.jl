@@ -25,25 +25,50 @@ export A046802Triangle, A046802Transform
 export A000166, A038048, V000111, Fine
 export TRIANGLES
 
+#function __init__()
+    const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
+    const CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
+    const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
+    const CacheAndré = Dict{Tuple{Int,Int},fmpz}()
+
+    const CacheBeta = Dict{Tuple{Int,Int},fmpz}()
+    const CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    const CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    const CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
+    const CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    const CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
+    const CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
+    const CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
+    const CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+    const CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+    const CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
+    const CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
+    const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
+    const CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
+#end
+
 """
 Recurrences and iterations for some triangles.
 The examples given are:
+```
+Aitken, Bessel1, Binomial, Catalan, DArcais, 
 
-Aitken, Bessel1, Binomial, Catalan, DArcais, Delannoy,
+Delannoy, Eulerian, EulerianSO2, EulerSec, 
 
-Eulerian, EulerianSO2, EulerSec, EulerTan, Euler, FallingFact,
+EulerTan, Euler, FallingFact, Fibonacci, 
 
-Fibonacci, Fine, Fubini, Hermite, Laguerre, Lah, Motzkin, 
+Fine, Fubini, Hermite, Laguerre, Lah, Motzkin, 
 
-Narayana, Rencontres, RisingFact, SchröderB, SchröderL, StirlingCycle,
+Narayana, Rencontres, RisingFact, SchröderB, 
 
-StirlingSet, Trinomial, TTree, Uni, Worpitzky
+SchröderL, StirlingCycle, StirlingSet, Trinomial, 
+
+TTree, Uni, Worpitzky
+```
 """
 const ModuleTrianglesExamples = ""
 
 # ------------------------------------------------
-
-const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
 
 function A000166(n::Int)
     n <= 1 && return ZZ(1 - n)
@@ -52,21 +77,17 @@ function A000166(n::Int)
     return CacheA000166[n] = a
 end
 
-const CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
 function A038048(n::Int)
     haskey(CacheA038048, n) && return CacheA038048[n]
 	s = Factorial(n - 1) * divisor_sigma(n, 1)
     return CacheA038048[n] = s
 end
 
-const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
 function Fine(n::Int)
     haskey(CacheFine, n) && return CacheFine[n]
     s = div((7*n - 12)*Fine(n-1) + (4*n - 6)*Fine(n-2), 2*n)
     CacheFine[n] = s
 end
-
-const CacheAndré = Dict{Tuple{Int,Int},fmpz}()
 
 function André(m::Int, n::Int)
     haskey(CacheAndré, (m, n)) && return CacheAndré[(m, n)]
@@ -94,8 +115,6 @@ Euler(A::ℤSeq) = LinMap(Euler, A, length(A))
 EulerTransform(A::ℤSeq) = Euler.(Telescope(A))
 
 # ------------------------------------------------
-
-const CacheBeta = Dict{Tuple{Int,Int},fmpz}()
 
 """
 https://oeis.org/wiki/User:Peter_Luschny/SwissKnifePolynomials
@@ -147,7 +166,6 @@ TTreeTriangle(dim::Int) =  RiordanSquare(dim, TernaryTree)
 
 # ------------------------------------------------
 
-const CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
 """
 (SIGNATURES)
 """
@@ -178,7 +196,6 @@ LahTransform(A::ℤSeq) = LahNumbers.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
 """
 (SIGNATURES)
 """
@@ -210,7 +227,6 @@ FubiniTransform(A::ℤSeq) = FubiniNumbers.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
 """
 (SIGNATURES)
 """
@@ -229,7 +245,6 @@ DelannoyTransform(A::ℤSeq) = Delannoy.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
 """
 (SIGNATURES)
 """
@@ -316,8 +331,6 @@ Catalan(n::Int, k::Int) = Catalan(n)[k + 1]
 Catalan(A::ℤSeq) = LinMap(Catalan, A, length(A))
 CatalanTransform(A::ℤSeq) = Catalan.(Telescope(A))
 
-const CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
-
 function CatalanBallot(n::Int, k::Int)
     haskey(CacheBallot, (n, k)) && return CacheBallot[(n, k)]
     (k > n || k < 0) && return ZZ(0)
@@ -344,8 +357,6 @@ RencontresTransform(A::ℤSeq) = Rencontres.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
-
 function DArcais(n, k)  
     haskey(CacheDArcais, (n, k)) && return CacheDArcais[(n, k)]
     k == 0 && return ZZ(0^n)
@@ -359,8 +370,6 @@ DArcaisTransform(A::ℤSeq) = DArcais.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
-
 function Worpitzky(n, k)  
     haskey(CacheWorpitzky, (n, k)) && return CacheWorpitzky[(n, k)]
     S = sum(Eulerian(n, j)*Binomial(n-j, n-k) for j in 0:n)
@@ -372,8 +381,6 @@ Worpitzky(A::ℤSeq) = LinMap(Worpitzky, A, length(A))
 WorpitzkyTransform(A::ℤSeq) = Worpitzky.(Telescope(A))
 
 # ------------------------------------------------
-
-const CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
 
 """
 Return the second order Eulerian number E2(n,k).
@@ -390,8 +397,6 @@ EulerianSO2(A::ℤSeq) = LinMap(EulerianSO2, A, length(A))
 EulerianSO2Transform(A::ℤSeq) = EulerianSO2.(Telescope(A))
 
 # ------------------------------------------------
-
-const CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
 
 function Swing(n, k) 
     haskey(CacheSwing, (n, k)) && return CacheSwing[(n, k)]
@@ -597,7 +602,6 @@ Fibonacci(n, k) = Fibonacci(n)[k + 1]
 Fibonacci(A::ℤSeq) = LinMap(Fibonacci, A, length(A))
 FibonacciTransform(A::ℤSeq) = Fibonacci.(Telescope(A))
 
-const CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
 function EulerianNumbers(n, k)
     haskey(CacheEulerian, (n, k)) && return CacheEulerian[(n, k)]
     CacheEulerian[(n, k)] = if (k == 0) && (n >= 0)
@@ -631,7 +635,6 @@ A046802Transform(A::ℤSeq) = A046802.(Telescope(A))
 
 # ------------------------------------------------
 
-const CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
 function EulerianNumbersClassic(n, k)
     haskey(CacheEulerianClassic, (n, k)) && return CacheEulerianClassic[(n, k)]
     CacheEulerianClassic[(n, k)] = if (k == n) 
@@ -650,7 +653,6 @@ EulerianClassic(n, k) = EulerianClassic(n)[k + 1]
 EulerianClassic(A::ℤSeq) = LinMap(EulerianClassic, A, length(A))
 EulerianTransform2(A::ℤSeq) = EulerianClassic.(Telescope(A))
 
-const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
 function NarayanaNumbers(n::Int, k::Int)
     haskey(CacheNarayana, (n, k)) && return CacheNarayana[(n, k)]
     CacheNarayana[(n, k)] = if (k == n)
@@ -681,8 +683,6 @@ RisingFact(n) = RisingFactTriangle(n + 1)[n + 1]
 RisingFact(n, k) = RisingFact(n)[k + 1]
 RisingFact(A::ℤSeq) = LinMap(RisingFact, A, length(A))
 RisingFactTransform(A::ℤSeq) = RisingFact.(Telescope(A))
-
-const CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
 
 function Laguerre(n::Int)
     haskey(CacheLaguerre, n) && return CacheLaguerre[n]
@@ -866,6 +866,7 @@ function perf()
     # display(@benchmark PolyArray(LaguerreTriangle(100)))
     # @time LaguerreTriangle(1000)
     # @time PolyArray(LaguerreTriangle(100))
+    
     T = LaguerreTriangle(8)
     Println.(PolyTriangle(T))
     Println.(PolyArray(T))

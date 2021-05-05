@@ -8,31 +8,20 @@ module TrianglesTables
 using PrettyTables, TrianglesExplorer
 using TrianglesBase, TrianglesExamples, TrianglesTraitCard, TrianglesUtils
 
-export PrettyTraits, AllPrettyTraits
+export PrettyTraits, AllPrettyTraits, UpdateDocs
 
 """
-Pretty printing triangles trait cards.
-┌──────────┬────────────┬──────┬───────────┬─────────────────────────────────────────────┐
+Pretty printing of triangles trait cards.
 
-│ A-number │ Triangle   │ Form │ Function  │ Sequence                                    │
-
-├──────────┼────────────┼──────┼───────────┼─────────────────────────────────────────────┤
-
-│ A000302  │ Binomial   │ Std  │ PolyVal3  │ 1, 4, 16, 64, 256, 1024, 4096, 16384        │
-
-│ A001333  │ SchroederB │ Inv  │ AltSum    │ 1, -1, 3, -7, 17, -41, 99, -239             │
-
-│ A006012  │ SchroederL │ Inv  │ AltSum    │ 1, -2, 6, -20, 68, -232, 792, -2704         │
-
-│ A026302  │ Motzkin    │ Rev  │ Central   │ 1, 2, 9, 44, 230, 1242, 6853, 38376         │
-
-│ A103194  │ Laguerre   │ Std  │ TransNat0 │ 0, 1, 6, 39, 292, 2505, 24306, 263431       │
-
-│ A111884  │ Lah        │ Std  │ TransAlts │ 1, -1, -1, -1, 1, 19, 151, 1091             │
-
-│ nothing  │ Laguerre   │ Rev  │ TransNat1 │ 1, 3, 15, 97, 753, 6771, 68983, 783945      │
-
-└──────────┴────────────┴──────┴───────────┴─────────────────────────────────────────────┘
+| A-number | Triangle   | Form | Function  | Sequence                                    |
+|----------|------------|------|-----------|---------------------------------------------|
+| A000302  | Binomial   | Std  | PolyVal3  | 1, 4, 16, 64, 256, 1024, 4096, 16384        |
+| A001333  | SchroederB | Inv  | AltSum    | 1, -1, 3, -7, 17, -41, 99, -239             |
+| A006012  | SchroederL | Inv  | AltSum    | 1, -2, 6, -20, 68, -232, 792, -2704         |
+| A026302  | Motzkin    | Rev  | Central   | 1, 2, 9, 44, 230, 1242, 6853, 38376         |
+| A103194  | Laguerre   | Std  | TransNat0 | 0, 1, 6, 39, 292, 2505, 24306, 263431       |
+| A111884  | Lah        | Std  | TransAlts | 1, -1, -1, -1, 1, 19, 151, 1091             |
+| nothing  | Laguerre   | Rev  | TransNat1 | 1, 3, 15, 97, 753, 6771, 68983, 783945      |
 """
 const ModuleTrianglesTables = ""
 
@@ -74,8 +63,8 @@ function AllPrettyTraits()
     end
 end
 
-function CSVtoTable()
-    header = ["A-number", "Triangle", "Form", "Function", "Sequence"]
+function AllCSVtoTable()
+    header = ["ANumber", "Triangle", "Type", "Trait", "Sequence"]
 
     mat = String["" "" "" "" ""]
 
@@ -96,6 +85,46 @@ function CSVtoTable()
         pretty_table(html, mat, header, backend = :html, standalone= false, 
                      alignment=[:l,:l,:l,:l,:l])
         println(html, "```")
+    end
+end
+
+function CSVtoTable(name)
+    header = ["Trait", "ANumber", "Sequence"]
+
+    # Depending on the number of csv data:
+    #mat = String["" "" "" "" ""]
+    #mat = [mat; reshape(split(L, ","), 1, 5)]
+    #alignment=[:l,:l,:l,:l,:l])
+
+    mat = String["" "" ""]
+
+    inpath = profilespath(name)
+    open(inpath, "r") do csv
+        for L ∈ eachline(csv, keep=false)
+            mat = [mat; reshape(split(L, ","), 1, 3)]
+        end
+    end   
+    
+    p = splitext(name)[begin]
+    p = splitpath(p)[end]
+    outpath = docsrcpath(p * ".md")
+
+    rm(outpath; force=true)
+    open(outpath, "w") do html
+        println(html, "```@raw html")
+        for ln in CSS
+            println(html, ln)
+        end
+        pretty_table(html, mat, header, backend = :html, standalone= false, alignment=[:l,:l,:l])
+        println(html, "```")
+    end
+end
+
+function UpdateDocs()
+    csvfiles = csv_files()
+    for filename ∈ csvfiles
+        fullname = profilespath(filename)
+        CSVtoTable(fullname)
     end
 end
 
@@ -124,6 +153,8 @@ end
 
 function perf()
    #AllPrettyTraits()
+   #AllCSVtoTable()
+   #UpdateDocs()
 end
 
 function main()
@@ -132,7 +163,7 @@ function main()
    #perf()
 end
 
-#main()
-CSVtoTable()
+main()
+#UpdateDocs()
 
 end # module

@@ -6,35 +6,74 @@
 module TrianglesUtils
 
 using Nemo, TrianglesBase, HTTP
+
 export Show, GetSeqnum, GetSeqnumUri, SeqToString 
-export profilepath, datapath, oeis_search, oeis_notinstalled, search_failed
+export profilespath, datapath, docsrcpath, csv_files
+export oeis_notinstalled, oeis_search, search_failed
 
 """
-Search the OEIS for a sequence. Saved a file in the 'data' directory in json format. Ect.
+* Search the OEIS for a sequence. 
+* Save a file in the 'data' directory in json format. 
+
+* Triangle in standard format (without typeinfo):
+```
+[1]
+[1, 1]
+[2, 4, 1]
+[6, 18, 9, 1]
+[24, 96, 72, 16, 1]
+[120, 600, 600, 200, 25, 1]
+[720, 4320, 5400, 2400, 450, 36, 1]
+```
+* Triangle as a nested array:
+```
+[[1], [1, 1], [2, 4, 1], [6, 18, 9, 1], [24, 96, 72, 16, 1], [120, 600, 600, 200, 25, 1], [720, 4320, 5400, 2400, 450, 36, 1]]
+```
+* Triangle in flattened format:
+```
+1, 1, 1, 2, 4, 1, 6, 18, 9, 1, 24, 96, 72, 16, 1, 120, 600, 600, 200, 25, 1, 720, 4320, 5400, 2400, 450, 36, 1,
+```
+* Triangle in info format with sequence ID:
+```
+[A021009] 1, 1, 1, 2, 4, 1, 6, 18, 9, 1, 24, 96, 72, 16, 1, ...
+```
+* Triangle in mapped format:
+```
+0 ↦ 1
+1 ↦ 1
+2 ↦ 1
+3 ↦ 2
+4 ↦ 4
+5 ↦ 1
+6 ↦ 6
+7 ↦ 18
+8 ↦ 9
+9 ↦ 1
+10 ↦ 24
+11 ↦ 96
+12 ↦ 72
+13 ↦ 16
+14 ↦ 1
+```
 """
 const ModuleTrianglesUtils = ""
-
 
 const srcdir = realpath(joinpath(dirname(@__FILE__)))
 const ROOTDIR = dirname(srcdir)
 const datadir = joinpath(ROOTDIR, "data")
-const profiledir = joinpath(ROOTDIR, "profile")
+const profilesdir = joinpath(ROOTDIR, "profiles")
+const docsdir = joinpath(ROOTDIR, "docs")
+const docsrcdir = joinpath(docsdir, "src")
+
+datapath(name) = joinpath(datadir, name)
+profilespath(name) = joinpath(profilesdir, name)
+docsrcpath(name) = joinpath(docsrcdir, name)
+
 oeis_file() = joinpath(datadir, "stripped")
 is_oeis_installed() = isfile(oeis_file())
 
-function datapath(name)
-    srcdir = realpath(joinpath(dirname(@__FILE__)))
-    ROOTDIR = dirname(srcdir)
-    datadir = joinpath(ROOTDIR, "data")
-    datapath = joinpath(datadir, name)
-end
+csv_files() = filter!(s -> occursin(r"\.csv$", s), readdir(profilesdir))
 
-function profilepath(name)
-    srcdir = realpath(joinpath(dirname(@__FILE__)))
-    ROOTDIR = dirname(srcdir)
-    profiledir = joinpath(ROOTDIR, "profiles")
-    profilepath = joinpath(profiledir, name)
-end
 
 function oeis_notinstalled()
     if !is_oeis_installed()
@@ -180,10 +219,10 @@ function GetSeqnum(seq, search=false)
     anum 
 end
 
-function GetSeqnumUri(seq::ℤSeq)
+function GetSeqnumUri(seq::ℤSeq, len=10)
     anum = GetSeqnum(seq)
     if anum === nothing 
-        return "<a href='" * "https://oeis.org/?q=" * SeqToString(seq, 10) * "'>" * "nomatch</a>"
+        return "<a href='" * "https://oeis.org/?q=" * SeqToString(seq, len) * "'>" * "nomatch</a>"
     end
     uri = joinpath("https://oeis.org/", anum)
     return "<a href='" * uri * "'>" * anum * "</a>"
