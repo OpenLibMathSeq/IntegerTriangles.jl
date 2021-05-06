@@ -96,19 +96,23 @@ function CSVtoTable(name)
     #mat = [mat; reshape(split(L, ","), 1, 5)]
     #alignment=[:l,:l,:l,:l,:l])
 
-    mat = String["" "" ""]
+    p = splitext(name)[begin]
+    p = splitpath(p)[end]
+
+    mat = String[p "" ""]
+    firstline = true
 
     inpath = profilespath(name)
     open(inpath, "r") do csv
         for L ∈ eachline(csv, keep=false)
-            mat = [mat; reshape(split(L, ","), 1, 3)]
+            firstline && (firstline = false; continue)
+            s = split(L, ",")
+            s[2] = MakeSeqUri(s[2], s[3])
+            mat = [mat; reshape(s, 1, 3)]
         end
     end   
     
-    p = splitext(name)[begin]
-    p = splitpath(p)[end]
     outpath = docsrcpath(p * ".md")
-
     rm(outpath; force=true)
     open(outpath, "w") do html
         println(html, "```@raw html")
@@ -123,8 +127,8 @@ end
 function UpdateDocs()
     csvfiles = csv_files()
     for filename ∈ csvfiles
-        fullname = profilespath(filename)
-        CSVtoTable(fullname)
+        fulname = profilespath(filename)
+        CSVtoTable(fulname)
     end
 end
 
@@ -164,6 +168,5 @@ function main()
 end
 
 main()
-#UpdateDocs()
 
 end # module

@@ -145,9 +145,6 @@ ExtCatalanTriangle
 Factorial
 ```
 ```@docs
-Factorial
-```
-```@docs
 FallingFactTriangle
 ```
 ```@docs
@@ -233,6 +230,9 @@ LeftSide
 ```
 ```@docs
 LinMap
+```
+```@docs
+MakeSeqUri
 ```
 ```@docs
 Middle

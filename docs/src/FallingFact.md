@@ -14,14 +14,9 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
     <th style = "text-align: left;">Sequence</th>
   </tr>
   <tr>
+    <td style = "text-align: left;">FallingFact</td>
     <td style = "text-align: left;"></td>
     <td style = "text-align: left;"></td>
-    <td style = "text-align: left;"></td>
-  </tr>
-  <tr>
-    <td style = "text-align: left;">Trait</td>
-    <td style = "text-align: left;">ANumber</td>
-    <td style = "text-align: left;">Sequence</td>
   </tr>
   <tr>
     <td style = "text-align: left;">Triangle</td>

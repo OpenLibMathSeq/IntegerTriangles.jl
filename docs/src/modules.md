@@ -39,7 +39,7 @@ TTree, Uni, Worpitzky
 ##   🔶  [TrianglesExplorer](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesExplorer.jl)
 
 Explore integer triangles via their traits.
-The traits and their references will be saved 
+The traits and their OEIS references will be saved 
 as csv-files in the data directory.
 
 ##   🔶  [TrianglesPlot](https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/TrianglesPlot.jl)
@@ -127,9 +127,4 @@ PolyVal3:  A277382 [1, 4, 23, 168, 1473, 14988, 173007, 2228544, 31636449]
 7 ↦ 18
 8 ↦ 9
 9 ↦ 1
-10 ↦ 24
-11 ↦ 96
-12 ↦ 72
-13 ↦ 16
-14 ↦ 1
 ```

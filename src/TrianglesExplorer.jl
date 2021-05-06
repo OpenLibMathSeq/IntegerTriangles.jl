@@ -12,7 +12,7 @@ export Explore, Triangles
 
 """
 Explore integer triangles via their traits.
-The traits and their references will be saved 
+The traits and their OEIS references will be saved 
 as csv-files in the data directory.
 """
 const ModuleTrianglesExplorer = ""
@@ -125,7 +125,6 @@ function Explore(triangle, kind, trait, dim)
     Show(stdout, triangle, kind, trait, seq)
 end
 
-
 function Explore(T::ℤTri, trait::Function)
     seq = trait(T)
     if seq == [] || seq === nothing
@@ -186,8 +185,7 @@ function Explore(savetofile::Bool)
     end
 end
 
-
-function SaveToCSV(name, kind="Std")
+function SaveToCSV(name)
     T = Triangles[name](LEN)
     path = datapath(name * ".csv")
     rm(path; force=true)
@@ -199,7 +197,7 @@ function SaveToCSV(name, kind="Std")
             if typeof(seq) === ℤTri 
                 seq = Flat(seq)
             end
-            anum = GetSeqnumUri(seq)
+            anum = GetSeqnum(seq)
             anum === nothing && (anum = "nothing")
             println(io, trait, ",", anum, ",", SeqToString(seq, 10))
         end
@@ -238,6 +236,8 @@ end
 
 function perf()
     #Explore(true)
+    #SaveToCSV("Laguerre")
+    #SaveAllToCSV()
 end
 
 function main()
@@ -247,7 +247,5 @@ function main()
 end
 
 main()
-#SaveToCSV("Laguerre")
-#SaveAllToCSV()
 
 end # module

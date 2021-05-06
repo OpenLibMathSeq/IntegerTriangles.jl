@@ -13,7 +13,7 @@ export ℤInt, ℤSeq, ℤTri, ℚInt, ℚSeq, ℚTri
 export ℤPolySeq, ℚPolySeq, ℤPolyRing, ℚPolyRing
 export ZInt, ZSeq, ZTri, QInt, QSeq, QTri
 export ZPolySeq, QPolySeq, ZPolyRing, QPolyRing
-export Polynomial, Evaluate, PolyArray, Factorial
+export Polynomial, Evaluate, PolyArray
 export PolyTriangle, PolyTri, DiagTri, DiagonalTriangle
 export OrthoPoly, DelehamΔ, RecTriangle
 export EgfExpansionCoeff, EgfExpansionPoly

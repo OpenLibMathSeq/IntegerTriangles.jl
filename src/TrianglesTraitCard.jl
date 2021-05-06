@@ -58,17 +58,14 @@ function Traits(T::ℤTri, name, N, an=false)
     P = Polynomial(T)
     len = max(N, min(N - 1, length(T)))
     len = len < 10 ? len : 10
-
-
+   
     S = Flat(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "Triangle", sep, SeqToString(S, len))
 
-
     R = Reverse(T); S = Flat(R)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "Reverse", sep, SeqToString(S, len))
-
 
     I = Inverse(T)
     if I != []
@@ -76,7 +73,6 @@ function Traits(T::ℤTri, name, N, an=false)
         S = Flat(I);
         anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
         println(anum, sep, name, sep, "Inverse", sep, SeqToString(S, len))
-
 
         RI = Reverse(I); S = Flat(RI);
         anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
@@ -91,106 +87,85 @@ function Traits(T::ℤTri, name, N, an=false)
         println(anum, sep, name, sep, "InvRev", sep, SeqToString(S, len))
     end
 
-
     S = DiagonalTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "DiagTri", sep, SeqToString(S, len))
-
 
     S = ConvolutionTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "ConvTri", sep, SeqToString(S, len))
 
-
     S = PolyTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PolyTri", sep, SeqToString(S, len))
-
 
     S = sum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "Sum", sep, SeqToString(S, len))
 
-
     S = EvenSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "EvenSum", sep, SeqToString(S, len))
-
 
     S = OddSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "OddSum", sep, SeqToString(S, len))
 
-
     S = AltSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "AltSum", sep, SeqToString(S, len))
-
 
     S = DiagSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "DiagSum", sep, SeqToString(S, len))
 
-
     S = Central(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "Central", sep, SeqToString(S, len))
-
 
     S = LeftSide(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "LeftSide", sep, SeqToString(S, len))
 
-
     S = RightSide(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "RightSide", sep, SeqToString(S, len))
-
 
     S = PosHalf(P)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PosHalf", sep, SeqToString(S, len))
 
-
     S = NegHalf(P)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "NegHalf", sep, SeqToString(S, len))
-
 
     S = BinConv(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "BinConv", sep, SeqToString(S, len))
 
-
     S = IBinConv(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "IBinConv", sep, SeqToString(S, len))
-
     
     S = Trans(T, [ZZ(n^2) for n = 0:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "TransSqrs", sep, SeqToString(S, len))
 
-
     S = Trans(T, [ZZ(n) for n = 0:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "TransNat0", sep, SeqToString(S, len))
-
 
     S = Trans(T, [ZZ(n) for n = 1:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "TransNat1", sep, SeqToString(S, len))
 
-
     S = PolyVal2(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PolyVal2", sep, SeqToString(S, len))
 
-
     S = PolyVal3(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PolyVal3", sep, SeqToString(S, len))
-
 end
 
 """
@@ -284,12 +259,8 @@ function TraitCard(triangle::Function, dim, assoc=false)
 end
 
 function AllTraitCards()
-    path = profilepath("AllTraits.csv")
-    rm(path; force=true)
-    open(path, "w") do io
-        for T in TRIANGLES
-            TraitCard(T)
-        end
+    for T in TRIANGLES
+        TraitCard(T)
     end
 end
 

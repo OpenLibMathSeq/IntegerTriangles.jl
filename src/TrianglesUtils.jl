@@ -7,7 +7,7 @@ module TrianglesUtils
 
 using Nemo, TrianglesBase, HTTP
 
-export Show, GetSeqnum, GetSeqnumUri, SeqToString 
+export Show, GetSeqnum, GetSeqnumUri, MakeSeqUri, SeqToString 
 export profilespath, datapath, docsrcpath, csv_files
 export oeis_notinstalled, oeis_search, search_failed
 
@@ -49,11 +49,6 @@ export oeis_notinstalled, oeis_search, search_failed
 7 ↦ 18
 8 ↦ 9
 9 ↦ 1
-10 ↦ 24
-11 ↦ 96
-12 ↦ 72
-13 ↦ 16
-14 ↦ 1
 ```
 """
 const ModuleTrianglesUtils = ""
@@ -73,7 +68,6 @@ oeis_file() = joinpath(datadir, "stripped")
 is_oeis_installed() = isfile(oeis_file())
 
 csv_files() = filter!(s -> occursin(r"\.csv$", s), readdir(profilesdir))
-
 
 function oeis_notinstalled()
     if !is_oeis_installed()
@@ -138,8 +132,8 @@ function AbsSeqToString(seq::ℤSeq, max=100)
     separator = ","
     str = ""
     c = 1
-    for term in seq
-        str *= string(abs(term)) * separator
+    for trm in seq
+        str *= string(abs(trm)) * separator
         c += 1
         c > max && break
     end
@@ -150,8 +144,8 @@ function SeqToString(seq::ℤSeq, max=100)
     separator = " "
     str = "["
     c = 1
-    for term in seq
-        str *= string(term) * separator
+    for trm in seq
+        str *= string(trm) * separator
         c += 1
         c > max && break
     end
@@ -223,6 +217,14 @@ function GetSeqnumUri(seq::ℤSeq, len=10)
     anum = GetSeqnum(seq)
     if anum === nothing 
         return "<a href='" * "https://oeis.org/?q=" * SeqToString(seq, len) * "'>" * "nomatch</a>"
+    end
+    uri = joinpath("https://oeis.org/", anum)
+    return "<a href='" * uri * "'>" * anum * "</a>"
+end
+
+function MakeSeqUri(anum, seq)
+    if anum == "nothing" 
+        return "<a href='" * "https://oeis.org/?q=" * seq * "'>" * "nomatch</a>"
     end
     uri = joinpath("https://oeis.org/", anum)
     return "<a href='" * uri * "'>" * anum * "</a>"
