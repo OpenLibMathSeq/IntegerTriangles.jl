@@ -8,7 +8,7 @@ module TrianglesExplorer
 using Nemo, OrderedCollections
 using TrianglesBase, TrianglesExamples, TrianglesUtils
 
-export Explore, Triangles
+export Explore, Triangles, SaveToCSV, Inspect
 
 """
 Explore integer triangles via their traits.
@@ -115,6 +115,17 @@ function TriangleVariant(Tri, dim, kind="Std")
 end
 
 const LEN = 19
+
+# Prints full sequence
+function Inspect(triangle, kind, trait, dim)
+    T = TriangleVariant(Triangles[triangle], dim, kind)
+    seq = TraitFunc[trait](T)
+    seq == [] && return []
+    typeof(seq) === ℤTri && (seq = Flat(seq))
+    anum = GetSeqnum(seq, false)
+    println(anum, " ", triangle, " ", kind, " ", trait)
+    println(SeqToString(seq)) 
+end
 
 """
 (SIGNATURES)
@@ -231,6 +242,7 @@ function demo()
     Explore("Laguerre",   "Std", "TransNat0", TLEN)
     Explore("Laguerre",   "Std", "TransNat1", TLEN)
     Explore("Lah",        "Std", "TransSqrs", TLEN)
+    Inspect("Lah",        "Std", "TransSqrs", TLEN)
     println()
 end
 

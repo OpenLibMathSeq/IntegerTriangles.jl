@@ -18,7 +18,7 @@ export build_all
 cloudpath = "https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/src/"
 
 #  Version information
-version() = v"0.2.2-dev"
+version() = v"0.3.0"
 print("IntegerTriangles version $(version())\n")
 
 pkgdir = dirname((@__DIR__))

@@ -193,6 +193,9 @@ IBinomialTransform
 IBinomialTriangle
 ```
 ```@docs
+Inspect
+```
+```@docs
 InvRev
 ```
 ```@docs
@@ -335,6 +338,9 @@ RiordanSquare
 ```
 ```@docs
 RisingFactTriangle
+```
+```@docs
+SaveToCSV
 ```
 ```@docs
 SchroederBigTransform

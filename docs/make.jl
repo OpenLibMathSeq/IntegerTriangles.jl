@@ -5,7 +5,7 @@ srcdir ∉ LOAD_PATH && push!(LOAD_PATH, srcdir)
 using Documenter
 using IntegerTriangles
 
-# UpdateDocs()
+#UpdateDocs()
 
 makedocs(
     modules = [IntegerTriangles],
