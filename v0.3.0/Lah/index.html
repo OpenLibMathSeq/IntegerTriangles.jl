@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Lah · IntegerTriangles.jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit">IntegerTriangles.jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../introduction/">Introduction</a></li><li><a class="tocitem" href="../">Library</a></li><li><a class="tocitem" href="../modules/">Modules</a></li><li><a class="tocitem" href="../Aitken/">Aitken</a></li><li><a class="tocitem" href="../Bessel1/">Bessel1</a></li><li><a class="tocitem" href="../Binomial/">Binomial</a></li><li><a class="tocitem" href="../Catalan/">Catalan</a></li><li><a class="tocitem" href="../DArcais/">DArcais</a></li><li><a class="tocitem" href="../Delannoy/">Delannoy</a></li><li><a class="tocitem" href="../Euler/">Euler</a></li><li><a class="tocitem" href="../EulerS/">EulerSec</a></li><li><a class="tocitem" href="../EulerT/">EulerTan</a></li><li><a class="tocitem" href="../Eulerian/">Eulerian</a></li><li><a class="tocitem" href="../EulerianSO2/">EulerianSO2</a></li><li><a class="tocitem" href="../FallingFact/">FallingFact</a></li><li><a class="tocitem" href="../Fibonacci/">Fibonacci</a></li><li><a class="tocitem" href="../Fine/">Fine</a></li><li><a class="tocitem" href="../Fubini/">Fubini</a></li><li><a class="tocitem" href="../Hermite/">Hermite</a></li><li><a class="tocitem" href="../Laguerre/">Laguerre</a></li><li class="is-active"><a class="tocitem" href>Lah</a></li><li><a class="tocitem" href="../Motzkin/">Motzkin</a></li><li><a class="tocitem" href="../Narayana/">Narayana</a></li><li><a class="tocitem" href="../Rencontres/">Rencontres</a></li><li><a class="tocitem" href="../RisingFact/">RisingFact</a></li><li><a class="tocitem" href="../SchroederB/">SchroederBig</a></li><li><a class="tocitem" href="../SchroederL/">SchroederLittle</a></li><li><a class="tocitem" href="../StirlingCycle/">StirlingCycle</a></li><li><a class="tocitem" href="../StirlingSet/">StirlingSet</a></li><li><a class="tocitem" href="../Trinomial/">Trinomial</a></li><li><a class="tocitem" href="../TTree/">TTree</a></li><li><a class="tocitem" href="../Uni/">Uni</a></li><li><a class="tocitem" href="../Worpitzky/">Worpitzky</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Lah</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Lah</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/OpenLibMathSeq/IntegerTriangles.jl/blob/master/docs/src/Lah.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><style> table, td, th {border-collapse: collapse; font-family: sans-serif; color: blue;}
+td, th {border-bottom: 0; padding: 4px}
+tr:nth-child(odd) {background: #eee;}
+tr:nth-child(even) {background: #fff;}
+tr.header {background: orange !important; color: white; font-weight: bold;}
+tr.subheader {background: lightgray !important; color: black;}
+tr.headerLastRow {border-bottom: 2px solid black;}
+th.rowNumber, td.rowNumber {text-align: right;} </style><body>
+<table>
+  <tr class = "header headerLastRow">
+    <th style = "text-align: left;">Trait</th>
+    <th style = "text-align: left;">ANumber</th>
+    <th style = "text-align: left;">Sequence</th>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Lah</td>
+    <td style = "text-align: left;"></td>
+    <td style = "text-align: left;"></td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Triangle</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A111596'>A111596</a></td>
+    <td style = "text-align: left;">[1 0 1 0 2 1 0 6 6 1 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Reverse</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 2 0 1 6 6 0 ]'>nomatch</a></td>
+    <td style = "text-align: left;">[1 1 0 1 2 0 1 6 6 0 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Inverse</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A111596'>A111596</a></td>
+    <td style = "text-align: left;">[1 0 1 0 -2 1 0 6 -6 1 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">RevInv</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 -2 0 1 -6 6 0 ]'>nomatch</a></td>
+    <td style = "text-align: left;">[1 1 0 1 -2 0 1 -6 6 0 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">DiagTri</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A330609'>A330609</a></td>
+    <td style = "text-align: left;">[1 0 0 1 0 2 0 6 1 0 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyTri</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A253286'>A253286</a></td>
+    <td style = "text-align: left;">[1 0 1 0 1 1 0 3 2 1 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Sum</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A000262'>A000262</a></td>
+    <td style = "text-align: left;">[1 1 3 13 73 501 4051 37633 394353 4596553 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">EvenSum</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A088312'>A088312</a></td>
+    <td style = "text-align: left;">[1 0 1 6 37 260 2101 19362 201097 2326536 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">OddSum</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A088313'>A088313</a></td>
+    <td style = "text-align: left;">[0 1 2 7 36 241 1950 18271 193256 2270017 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">AltSum</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A111884'>A111884</a></td>
+    <td style = "text-align: left;">[1 -1 -1 -1 1 19 151 1091 7841 56519 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">DiagSum</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A001053'>A001053</a></td>
+    <td style = "text-align: left;">[1 0 1 2 7 30 157 972 6961 56660 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Middle</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 2 6 36 240 1200 12600 58800 846720 ]'>nomatch</a></td>
+    <td style = "text-align: left;">[1 0 2 6 36 240 1200 12600 58800 846720 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">Central</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A187535'>A187535</a></td>
+    <td style = "text-align: left;">[1 2 36 1200 58800 3810240 307359360 29682132480 3339239904000 428906814336000 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">LeftSide</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A000007'>A000007</a></td>
+    <td style = "text-align: left;">[1 0 0 0 0 0 0 0 0 0 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">RightSide</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
+    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PosHalf</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A025168'>A025168</a></td>
+    <td style = "text-align: left;">[1 1 5 37 361 4361 62701 1044205 19748177 417787921 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">NegHalf</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A318223'>A318223</a></td>
+    <td style = "text-align: left;">[1 1 -3 13 -71 441 -2699 9157 206193 -8443151 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyVal2</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A052897'>A052897</a></td>
+    <td style = "text-align: left;">[1 2 8 44 304 2512 24064 261536 3173888 42483968 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyVal3</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A255806'>A255806</a></td>
+    <td style = "text-align: left;">[1 3 15 99 801 7623 83079 1017495 13808097 205374123 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">BinConv</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 5 37 361 4301 60001 954325 16984577 333572041 ]'>nomatch</a></td>
+    <td style = "text-align: left;">[1 1 5 37 361 4301 60001 954325 16984577 333572041 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">IBinConv</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 -3 1 73 -699 3001 24697 -783999 10946233 ]'>nomatch</a></td>
+    <td style = "text-align: left;">[1 1 -3 1 73 -699 3001 24697 -783999 10946233 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">TransSqrs</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A103194'>A103194</a></td>
+    <td style = "text-align: left;">[0 1 6 39 292 2505 24306 263431 3154824 41368977 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">TransNat0</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A052852'>A052852</a></td>
+    <td style = "text-align: left;">[0 1 4 21 136 1045 9276 93289 1047376 12975561 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">TransNat1</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A002720'>A002720</a></td>
+    <td style = "text-align: left;">[1 2 7 34 209 1546 13327 130922 1441729 17572114 ]</td>
+  </tr>
+</table></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Laguerre/">« Laguerre</a><a class="docs-footer-nextpage" href="../Motzkin/">Motzkin »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Thursday 6 May 2021 10:51">Thursday 6 May 2021</span>. Using Julia version 1.6.1.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
