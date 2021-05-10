@@ -45,7 +45,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 0 1 1 0 2 2 1 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A094587'>A094587</a></td>
     <td style = "text-align: left;">[1 0 1 0 1 1 0 2 2 1 ]</td>
   </tr>
   <tr>
@@ -70,7 +70,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagSum</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 1 3 9 36 176 1030 7039 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343579'>A343579</a></td>
     <td style = "text-align: left;">[1 0 1 1 3 9 36 176 1030 7039 ]</td>
   </tr>
   <tr>
@@ -110,7 +110,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyVal3</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 3 12 60 360 2520 20160 181440 1814400 19958400 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A001710'>A001710</a></td>
     <td style = "text-align: left;">[1 3 12 60 360 2520 20160 181440 1814400 19958400 ]</td>
   </tr>
   <tr>

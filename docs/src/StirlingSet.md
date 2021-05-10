@@ -40,7 +40,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 0 1 0 1 0 1 1 0 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A136011'>A136011</a></td>
     <td style = "text-align: left;">[1 0 0 1 0 1 0 1 1 0 ]</td>
   </tr>
   <tr>
@@ -75,7 +75,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Middle</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 1 7 15 90 301 1701 7770 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343279'>A343279</a></td>
     <td style = "text-align: left;">[1 0 1 1 7 15 90 301 1701 7770 ]</td>
   </tr>
   <tr>
@@ -120,7 +120,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinConv</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 -1 -5 15 56 -455 -237 16947 -64220 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343841'>A343841</a></td>
     <td style = "text-align: left;">[1 1 -1 -5 15 56 -455 -237 16947 -64220 ]</td>
   </tr>
   <tr>

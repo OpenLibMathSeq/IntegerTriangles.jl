@@ -40,7 +40,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 1 2 1 1 5 3 1 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A320031'>A320031</a></td>
     <td style = "text-align: left;">[1 1 1 1 2 1 1 5 3 1 ]</td>
   </tr>
   <tr>

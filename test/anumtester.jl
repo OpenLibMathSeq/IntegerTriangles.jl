@@ -46,6 +46,9 @@ TLEN = 19
 #IBin(A::Function, len) = [sum((-1)^(n-k)*Binomial(n, k) * A(n, k) for k = 0:n) for n in 0:len-1]
 #Println(IBin(LahNumbers, 8))
 
-Inspect("Lah", "Std", "Middle", 28)
+#Inspect("Lah", "Std", "Middle", 28)
+#Inspect("StirlingCycle", "Std", "DiagSum", 16)
+
+Inspect("Eulerian", "Std", "IBinConv", 12)
 
 end # module

@@ -115,7 +115,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinConv</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 -1 -1 8 19 -276 -1002 21216 103395 -2881180 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344052'>A344052</a></td>
     <td style = "text-align: left;">[1 -1 -1 8 19 -276 -1002 21216 103395 -2881180 ]</td>
   </tr>
   <tr>
