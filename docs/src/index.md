@@ -280,6 +280,9 @@ PolyVal2
 PolyVal3
 ```
 ```@docs
+PolyValn
+```
+```@docs
 PolyValue
 ```
 ```@docs
@@ -389,6 +392,9 @@ Telescope
 ```
 ```@docs
 TraitCard
+```
+```@docs
+Traits
 ```
 ```@docs
 Trans

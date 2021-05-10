@@ -45,7 +45,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 2 2 1 6 7 3 1 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343847'>A343847</a></td>
     <td style = "text-align: left;">[1 1 1 2 2 1 6 7 3 1 ]</td>
   </tr>
   <tr>
@@ -112,6 +112,11 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
     <td style = "text-align: left;">PolyVal3</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A277382'>A277382</a></td>
     <td style = "text-align: left;">[1 4 23 168 1473 14988 173007 2228544 31636449 490102164 ]</td>
+  </tr>
+  <tr>
+    <td style = "text-align: left;">PolyCent</td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A277373'>A277373</a></td>
+    <td style = "text-align: left;">[1 2 14 168 2840 61870 1649232 51988748 1891712384 78031713690 ] </td>
   </tr>
   <tr>
     <td style = "text-align: left;">BinConv</td>

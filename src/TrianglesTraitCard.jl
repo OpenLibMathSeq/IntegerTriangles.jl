@@ -7,7 +7,7 @@ module TrianglesTraitCard
 
 using Nemo, TrianglesBase, TrianglesExamples, TrianglesUtils
 
-export TraitCard, TransTraits, AssociatedTriangles, AllTraitCards
+export TraitCard, TransTraits, Traits, AssociatedTriangles, AllTraitCards
 
 """
 Build the trait card of one or many triangles with Anums.
@@ -48,16 +48,15 @@ end
 """
 (SIGNATURES)
 """
-function Traits(T::ℤTri, name, N, an=false)
+function Traits(T::ℤTri, name, N=10, an=false)
     an = an && ! oeis_notinstalled()
     sep = " "
 
     println("\n=================")
     println(name)
     println()
-    P = Polynomial(T)
     len = max(N, min(N - 1, length(T)))
-    len = len < 10 ? len : 10
+    len = len < 10 ? len : 12
    
     S = Flat(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
@@ -131,6 +130,10 @@ function Traits(T::ℤTri, name, N, an=false)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "RightSide", sep, SeqToString(S, len))
 
+    # --------
+    P = Polynomial(T)
+    # --------
+
     S = PosHalf(P)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PosHalf", sep, SeqToString(S, len))
@@ -166,6 +169,10 @@ function Traits(T::ℤTri, name, N, an=false)
     S = PolyVal3(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
     println(anum, sep, name, sep, "PolyVal3", sep, SeqToString(S, len))
+
+    S = PolyValn(T)
+    anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
+    println(anum, sep, name, sep, "PolyValn", sep, SeqToString(S, len))
 end
 
 """

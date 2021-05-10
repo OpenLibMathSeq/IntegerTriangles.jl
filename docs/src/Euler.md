@@ -70,7 +70,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagSum</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 2 4 9 27 93 392 1898 10493 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343845'>A343845</a></td>
     <td style = "text-align: left;">[1 1 2 4 9 27 93 392 1898 10493 ]</td>
   </tr>
   <tr>
@@ -80,7 +80,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Central</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 2 6 40 350 4032 56364 933504 17824950 385848320 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343846'>A343846</a></td>
     <td style = "text-align: left;">[1 2 6 40 350 4032 56364 933504 17824950 385848320 ]</td>
   </tr>
   <tr>
@@ -100,7 +100,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">NegHalf</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 -1 1 -9 33 -241 1761 -15929 161473 -1853281 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A343843'>A343843</a></td>
     <td style = "text-align: left;">[1 -1 1 -9 33 -241 1761 -15929 161473 -1853281 ]</td>
   </tr>
   <tr>

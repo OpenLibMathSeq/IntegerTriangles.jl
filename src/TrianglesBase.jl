@@ -19,7 +19,7 @@ export OrthoPoly, DelehamΔ, RecTriangle
 export EgfExpansionCoeff, EgfExpansionPoly
 export InverseTriangle, Inverse, Reverse, InvRev, RevInv
 export PolynomialFunction, ReversePolynomial, PolyValue
-export PolyVal2, PolyVal3, Coefficients
+export PolyVal2, PolyVal3, PolyValn, Coefficients
 export RiordanSquare, Println, Print, Telescope, LinMap, Trans
 export EvenSum, OddSum, AltSum, DiagSum, Central, Middle
 export LeftSide, RightSide, PosHalf, NegHalf, Flat, Factorial
@@ -865,6 +865,20 @@ function Flat(T::ℤTri)
 end
 
 """
+(SIGNATURES)
+"""
+function DeFlat(S::ℤSeq)
+    S == [] && return []
+    len = length(S)
+    n = 1
+    while div(n*(n + 1), 2) < len
+        n += 1
+    end
+    T = ZTri(n-1)
+    #[z for z ∈ T[k, tria(n)]]
+end
+
+"""
 Print the array without typeinfo.
 """
 function Println(io, v::AbstractVector, newline=true)
@@ -984,6 +998,14 @@ PolyVal3(T::ℤTri) = PolyValue(T, 3)
 """
 (SIGNATURES)
 """
+function PolyValn(T::ℤTri)
+    P = PolyArray(T)
+    [P[n][n] for n = 1:length(P)]
+end
+
+"""
+(SIGNATURES)
+"""
 const TRAITS = Function[
     Flat,
     Reverse,
@@ -1005,6 +1027,7 @@ const TRAITS = Function[
     NegHalf,
     PolyVal2,
     PolyVal3,
+    PolyValn,
     BinConv,
     IBinConv,
     TransSqrs,

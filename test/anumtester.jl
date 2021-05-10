@@ -15,6 +15,37 @@ TLEN = 19
 #Inspect("Aitken", "Std", "AltSum", TLEN)
 
 #Inspect("Laguerre", "Std", "IBinConv", TLEN)
-Inspect("Laguerre", "Std", "Middle", TLEN)
+#Inspect("Laguerre", "Std", "Middle", TLEN)
+#Inspect("Laguerre", "Std", "PolyTri", TLEN)
+#TraitCard(LaguerreTriangle, 9)
+
+# -------------------------
+#T = LaguerreTriangle(8)
+#P = PolyTriangle(T)
+#Println.(P)      # as a triangle
+#Println(Flat(P)) # as a sequence
+#A = PolyArray(T)
+#Println.(A)      # as an array
+#Traits(P, "LaguerrePoly", 16, true)
+# -------------------------
+#Explore("Laguerre", "Std", "PolyValn", TLEN)
+
+#Inspect("Lah", "Std", "BinConv", 8)
+
+#Bin(A::ℤTri) = [sum(Binomial(n, k) * A[n+1][k+1] for k = 0:n) for n in 0:length(A)-1]
+#Println(Bin(LahTriangle(8)))
+
+#Bin(A::Function, len) = [sum(Binomial(n, k) * A(n, k) for k = 0:n) for n in 0:len-1]
+#Println(Bin(LahNumbers, 8))
+
+#Inspect("Lah", "Std", "IBinConv", 8)
+
+#IBin(A::ℤTri) = [sum((-1)^(n-k)*Binomial(n, k) * A[n+1][k+1] for k = 0:n) for n in 0:length(A)-1]
+#Println(IBin(LahTriangle(8)))
+
+#IBin(A::Function, len) = [sum((-1)^(n-k)*Binomial(n, k) * A(n, k) for k = 0:n) for n in 0:len-1]
+#Println(IBin(LahNumbers, 8))
+
+Inspect("Lah", "Std", "Middle", 28)
 
 end # module

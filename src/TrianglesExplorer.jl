@@ -75,6 +75,7 @@ const TraitFunc = LittleDict{String, Function}(
     "NegHalf"    => NegHalf,
     "PolyVal2"   => PolyVal2,
     "PolyVal3"   => PolyVal3,
+    "PolyValn"   => PolyValn,
     "BinConv"    => BinomialTransform,
     "IBinConv"   => IBinomialTransform,
     "TransSqrs"  => TransSqrs,

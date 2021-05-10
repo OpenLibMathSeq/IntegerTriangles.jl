@@ -25,27 +25,27 @@ export A046802Triangle, A046802Transform
 export A000166, A038048, V000111, Fine
 export TRIANGLES
 
-#function __init__()
-    const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
-    const CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
-    const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
-    const CacheAndré = Dict{Tuple{Int,Int},fmpz}()
+function __init__()
+    global CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
+    global CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
+    global CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
+    global CacheAndré = Dict{Tuple{Int,Int},fmpz}()
 
-    const CacheBeta = Dict{Tuple{Int,Int},fmpz}()
-    const CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
-    const CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
-    const CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
-    const CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
-    const CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
-    const CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
-    const CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
-    const CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
-    const CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
-    const CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
-    const CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
-    const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
-    const CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
-#end
+    global CacheBeta = Dict{Tuple{Int,Int},fmpz}()
+    global CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    global CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    global CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
+    global CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+    global CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
+    global CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
+    global CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
+    global CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+    global CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+    global CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
+    global CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
+    global CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
+    global CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
+end
 
 """
 Recurrences and iterations for some triangles.
@@ -191,7 +191,7 @@ function LahTriangle(size)
     [CacheLah[n] for n = 0:size - 1]
 end
 
-LahNumbers(A::ℤSeq) = LinMap(LahNumbers, A, length(A))
+LahNumbers(A::ℤSeq)   = LinMap(LahNumbers, A, length(A))
 LahTransform(A::ℤSeq) = LahNumbers.(Telescope(A))
 
 # ------------------------------------------------
