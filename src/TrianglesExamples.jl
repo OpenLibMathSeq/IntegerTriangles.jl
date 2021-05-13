@@ -25,6 +25,7 @@ export A046802Triangle, A046802Transform
 export A000166, A038048, V000111, Fine
 export TRIANGLES
 
+#=
 function __init__()
     global CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
     global CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
@@ -46,6 +47,28 @@ function __init__()
     global CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
     global CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
 end
+=#
+
+const CacheA000166 = Dict{Int,ℤInt}(0 => ZZ(1))
+const CacheA038048 = Dict{Int,ℤInt}(0 => ZZ(0))
+const CacheFine = Dict{Int,ℤInt}(0 => ZZ(1), 1 => ZZ(1), 2 => ZZ(0))
+const CacheAndré = Dict{Tuple{Int,Int},fmpz}()
+
+const CacheBeta = Dict{Tuple{Int,Int},fmpz}()
+const CacheLah = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+const CacheFubini = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+const CacheDelannoy = Dict{Tuple{Int,Int},ℤInt}([(0,0) => ZZ(1), (1,0) => ZZ(1), (1,1) => ZZ(1)])
+const CacheAitken = Dict{Int,ℤSeq}([0 => [ZZ(1)]])
+const CacheBallot = Dict{Tuple{Int,Int},ℤInt}()
+const CacheDArcais = Dict{Tuple{Int,Int},ℤInt}()
+const CacheWorpitzky = Dict{Tuple{Int,Int},ℤInt}()
+const CacheEulerianSO2 = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+const CacheSwing = Dict{Tuple{Int,Int},ℤInt}((0,0) => ZZ(1))
+const CacheEulerian = Dict{Tuple{Int,Int},ℤInt}()
+const CacheEulerianClassic = Dict{Tuple{Int,Int},fmpz}()
+const CacheNarayana = Dict{Tuple{Int,Int},fmpz}()
+const CacheLaguerre = Dict{Int,ℤSeq}(0 => [ZZ(1)])
+
 
 """
 Recurrences and iterations for some triangles.
@@ -346,6 +369,15 @@ CatalanBallot(n) = [CatalanBallot(n, k) for k ∈ 0:n]
 ExtCatalanTriangle(dim) = [[CatalanBallot(n, k) for k = 0:n] for n = 0:dim - 1]
 
 # ------------------------------------------------
+
+# CatalanConvolution A106566
+# T(n, k) = binomial(2n-k-1, n-k)*k/n for 0 <= k <= n 
+# with n > 0; T(0, 0) = 1; T(0, k) = 0 if k > 0.
+# The following are all versions of (essentially) the same 
+# Catalan triangle: A009766, A030237, A033184, A059365, 
+# A099039, A106566, A130020, A047072.    
+
+# ------------------------------------------------    
 
 Rencontres(n, k) = A000166(n - k)*Binomial(n, k) 
 RencontresTriangle(dim) = [[Rencontres(n, k) for k = 0:n] for n = 0:dim - 1]

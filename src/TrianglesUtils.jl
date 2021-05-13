@@ -7,9 +7,10 @@ module TrianglesUtils
 
 using Nemo, TrianglesBase, HTTP
 
-export Show, GetSeqnum, GetSeqnumUri, MakeSeqUri, SeqToString 
+export Show, GetSeqnum, GetSeqnumUri, MakeSeqUri, SeqToString, SeqToFixlenString 
 export profilespath, datapath, docsrcpath, csv_files
 export oeis_notinstalled, oeis_search, search_failed
+export devdoctrait
 
 """
 * Search the OEIS for a sequence. 
@@ -140,7 +141,7 @@ function AbsSeqToString(seq::ℤSeq, max=100)
     str
 end
 
-function SeqToString(seq::ℤSeq, max=100)
+function SeqToString(seq::ℤSeq, max::Int=100)
     separator = " "
     str = "["
     c = 1
@@ -151,6 +152,21 @@ function SeqToString(seq::ℤSeq, max=100)
     end
     str * "]"
 end
+
+function SeqToFixlenString(seq::ℤSeq, maxlen::Int=72)
+    #maxlen = 72
+    separator = " "
+    str = "["
+    len = 3
+    for trm in seq
+        s = string(trm) * separator
+        len += length(s)
+        len > maxlen && break
+        str *= s
+    end
+    str * "]"
+end
+
 
 # increases accuracy and prevents premature matches
 const minlen = 30  # fragil! do not reduce!
@@ -216,7 +232,8 @@ end
 function GetSeqnumUri(seq::ℤSeq, len=10)
     anum = GetSeqnum(seq)
     if anum === nothing 
-        return "<a href='" * "https://oeis.org/?q=" * SeqToString(seq, len) * "'>" * "nomatch</a>"
+        s = SeqToFixlenString(seq, 72)
+        return "<a href='" * "https://oeis.org/?q=" * s * "'>" * "nomatch</a>"
     end
     uri = joinpath("https://oeis.org/", anum)
     return "<a href='" * uri * "'>" * anum * "</a>"
@@ -288,6 +305,11 @@ function Show(T::ℤTri, format="std")
     end
 end
 
+# https://openlibmathseq.github.io/IntegerTriangles.jl/dev/#IntegerTriangles.AltSum
+const devdoc = "https://openlibmathseq.github.io/IntegerTriangles.jl/dev/#IntegerTriangles."
+devdoctrait(trait) =  "<a href='" * devdoc * trait * "'>" * trait * "</a>" 
+
+
 # START-TEST-########################################################
 
 using TrianglesExamples
@@ -352,6 +374,12 @@ function demo()
     println()
     Println.(PolyArray(T))
     println()
+
+    A = ℤInt[0, 1, 2, 7, 44, 361, 3654, 44207, 622552, 10005041, 
+    180713290, 3624270839, 79914671748, 1921576392793, 50040900884366, 
+    1403066801155039, 42142044935535536]
+    SeqToString(A, 12) |> println
+    SeqToFixlenString(A, 12) |> println
 end
 
 

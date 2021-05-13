@@ -358,6 +358,9 @@ SchröderBTriangle
 SchröderLTriangle
 ```
 ```@docs
+SeqToFixlenString
+```
+```@docs
 SeqToString
 ```
 ```@docs
@@ -455,6 +458,9 @@ csv_files
 ```
 ```@docs
 datapath
+```
+```@docs
+devdoctrait
 ```
 ```@docs
 docsrcpath

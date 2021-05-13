@@ -56,26 +56,26 @@ function Traits(T::ℤTri, name, N=10, an=false)
     println(name)
     println()
     len = max(N, min(N - 1, length(T)))
-    len = len < 10 ? len : 12
+    len = len < 10 ? len : 72
    
     S = Flat(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "Triangle", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "Triangle", sep, SeqToFixlenString(S, len))
 
     R = Reverse(T); S = Flat(R)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "Reverse", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "Reverse", sep, SeqToFixlenString(S, len))
 
     I = Inverse(T)
     if I != []
 
         S = Flat(I);
         anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-        println(anum, sep, name, sep, "Inverse", sep, SeqToString(S, len))
+        println(anum, sep, name, sep, "Inverse", sep, SeqToFixlenString(S, len))
 
         RI = Reverse(I); S = Flat(RI);
         anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-        println(anum, sep, name, sep, "RevInv", sep, SeqToString(S, len))
+        println(anum, sep, name, sep, "RevInv", sep, SeqToFixlenString(S, len))
     end
 
     IR = Inverse(R)
@@ -83,52 +83,56 @@ function Traits(T::ℤTri, name, N=10, an=false)
 
         S = Flat(IR);
         anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-        println(anum, sep, name, sep, "InvRev", sep, SeqToString(S, len))
+        println(anum, sep, name, sep, "InvRev", sep, SeqToFixlenString(S, len))
     end
 
     S = DiagonalTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "DiagTri", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "DiagTri", sep, SeqToFixlenString(S, len))
 
     S = ConvolutionTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "ConvTri", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "ConvTri", sep, SeqToFixlenString(S, len))
 
     S = PolyTriangle(T); S = Flat(S)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "PolyTri", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "PolyTri", sep, SeqToFixlenString(S, len))
 
     S = sum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "Sum", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "Sum", sep, SeqToFixlenString(S, len))
 
     S = EvenSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "EvenSum", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "EvenSum", sep, SeqToFixlenString(S, len))
 
     S = OddSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "OddSum", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "OddSum", sep, SeqToFixlenString(S, len))
 
     S = AltSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "AltSum", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "AltSum", sep, SeqToFixlenString(S, len))
 
     S = DiagSum(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "DiagSum", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "DiagSum", sep, SeqToFixlenString(S, len))
+
+    S = Middle(T)
+    anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
+    println(anum, sep, name, sep, "Middle", sep, SeqToFixlenString(S, len))
 
     S = Central(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "Central", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "Central", sep, SeqToFixlenString(S, len))
 
     S = LeftSide(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "LeftSide", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "LeftSide", sep, SeqToFixlenString(S, len))
 
     S = RightSide(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "RightSide", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "RightSide", sep, SeqToFixlenString(S, len))
 
     # --------
     P = Polynomial(T)
@@ -136,43 +140,43 @@ function Traits(T::ℤTri, name, N=10, an=false)
 
     S = PosHalf(P)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "PosHalf", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "PosHalf", sep, SeqToFixlenString(S, len))
 
     S = NegHalf(P)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "NegHalf", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "NegHalf", sep, SeqToFixlenString(S, len))
 
     S = BinConv(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "BinConv", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "BinConv", sep, SeqToFixlenString(S, len))
 
     S = IBinConv(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "IBinConv", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "IBinConv", sep, SeqToFixlenString(S, len))
     
     S = Trans(T, [ZZ(n^2) for n = 0:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "TransSqrs", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "TransSqrs", sep, SeqToFixlenString(S, len))
 
     S = Trans(T, [ZZ(n) for n = 0:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "TransNat0", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "TransNat0", sep, SeqToFixlenString(S, len))
 
     S = Trans(T, [ZZ(n) for n = 1:19])
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "TransNat1", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "TransNat1", sep, SeqToFixlenString(S, len))
 
     S = PolyVal2(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "PolyVal2", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "PolyVal2", sep, SeqToFixlenString(S, len))
 
     S = PolyVal3(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "PolyVal3", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "PolyVal3", sep, SeqToFixlenString(S, len))
 
     S = PolyValn(T)
     anum = an ? GetSeqnum(S, SEARCHONLINE) : ""
-    println(anum, sep, name, sep, "PolyValn", sep, SeqToString(S, len))
+    println(anum, sep, name, sep, "PolyValn", sep, SeqToFixlenString(S, len))
 end
 
 """
@@ -275,7 +279,7 @@ end
 using TrianglesExamples
 
 function test()
-    dim = 8
+    dim = 12
     TraitCard(BinomialTriangle, dim)
     TraitCard(LaguerreTriangle, dim)
     TraitCard(LahTriangle, dim)
@@ -291,7 +295,7 @@ end
 
 function demo()
     TransTraits(BinomialTriangle)
-    TraitCard(LaguerreTriangle)
+    TraitCard(FubiniTriangle)
 end
 
 function perf()

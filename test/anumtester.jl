@@ -49,6 +49,6 @@ TLEN = 19
 #Inspect("Lah", "Std", "Middle", 28)
 #Inspect("StirlingCycle", "Std", "DiagSum", 16)
 
-Inspect("Eulerian", "Std", "IBinConv", 12)
+Inspect("Eulerian", "Std", "TransSqrs", 42)
 
 end # module
