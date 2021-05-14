@@ -294,8 +294,8 @@ function test()
 end
 
 function demo()
-    TransTraits(BinomialTriangle)
-    TraitCard(FubiniTriangle)
+    # TransTraits(BinomialTriangle)
+    TraitCard(StirlingCycleTriangle)
 end
 
 function perf()
@@ -303,7 +303,7 @@ function perf()
 end
 
 function main()
-    test()
+    #test()
     demo()
     perf()
 end
