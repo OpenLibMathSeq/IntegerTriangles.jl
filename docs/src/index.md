@@ -7,6 +7,9 @@ A046802Transform
 A046802Triangle
 ```
 ```@docs
+A343237Triangle
+```
+```@docs
 AbstractSequence
 ```
 ```@docs

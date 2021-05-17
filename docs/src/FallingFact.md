@@ -35,7 +35,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 1 1 2 1 3 2 1 4 6 1 5 12 6 1 6 20 24 1 7 30 60 24 1 8 42 120 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344391'>A344391</a></td>
     <td style = "text-align: left;">[1 1 1 1 1 2 1 3 2 1 4 6 1 5 12 6 1 6 20 24 1 7 30 60 24 1 8 42 120 ]</td>
   </tr>
   <tr>

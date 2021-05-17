@@ -21,7 +21,7 @@ export DArcaisTriangle, WorpitzkyTriangle, EulerianSO2Triangle, SwingTriangle, D
 export Bessel1Triangle, Bessel1Transform, HermiteTriangle, HermiteTransform
 export I132393, I048993, I271703, I094587, I008279, I225478, T132393, T048993
 export T094587, T008279, T225478, T271703, FineTriangle, TTreeTriangle
-export A046802Triangle, A046802Transform
+export A046802Triangle, A046802Transform, A343237Triangle
 export A000166, A038048, V000111, Fine
 export TRIANGLES
 
@@ -706,6 +706,16 @@ Narayana(n) = NarayanaTriangle(n + 1)[n + 1]
 Narayana(n, k) = Narayana(n)[k + 1]
 Narayana(A::ℤSeq) = LinMap(Narayana, A, length(A))
 NarayanaTransform(A::ℤSeq) = Narayana.(Telescope(A))
+
+# ------------------------------------------------
+
+A343237(n, k) = ZZ(k + 1)^(n - k + 1) - ZZ(k)^(n - k + 1)
+
+A343237Triangle(dim) = [[A343237(n, k) for k = 0:n] for n = 0:dim - 1]
+A343237(A::ℤSeq) = LinMap(A343237, A, length(A))
+A343237Transform(A::ℤSeq) = A343237.(Telescope(A))
+
+# ------------------------------------------------
 
 """
 (SIGNATURES)

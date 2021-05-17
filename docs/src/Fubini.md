@@ -30,7 +30,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 0 1 0 1 0 1 2 0 1 6 0 1 14 6 0 1 30 36 0 1 62 150 24 0 1 126 540 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344392'>A344392</a></td>
     <td style = "text-align: left;">[1 0 0 1 0 1 0 1 2 0 1 6 0 1 14 6 0 1 30 36 0 1 62 150 24 0 1 126 540 ]</td>
   </tr>
   <tr>

@@ -122,7 +122,10 @@ function Inspect(triangle, kind, trait, dim)
     T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = TraitFunc[trait](T)
     seq == [] && return []
-    typeof(seq) === ℤTri && (seq = Flat(seq))
+    if typeof(seq) === ℤTri 
+        Println.(seq)
+        seq = Flat(seq)
+    end
     anum = GetSeqnum(seq, false)
     println(anum, " ", triangle, " ", kind, " ", trait)
     println(SeqToString(seq)) 

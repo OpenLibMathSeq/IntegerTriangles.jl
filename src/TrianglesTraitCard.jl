@@ -295,7 +295,9 @@ end
 
 function demo()
     # TransTraits(BinomialTriangle)
-    TraitCard(StirlingCycleTriangle)
+    # Function composition
+    #EulerianClassic = Reverse ∘ EulerianTriangle
+    #TraitCard(EulerianClassic)
 end
 
 function perf()

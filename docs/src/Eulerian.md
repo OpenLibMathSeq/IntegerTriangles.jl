@@ -30,12 +30,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">InvRev</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 0 -1 1 0 3 -4 1 0 -23 33 -11 1 0 425 -620 220 -26 1 0 -18129 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A055325'>A055325</a></td>
     <td style = "text-align: left;">[1 0 1 0 -1 1 0 3 -4 1 0 -23 33 -11 1 0 425 -620 220 -26 1 0 -18129 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 1 0 1 1 1 4 0 1 11 1 1 26 11 0 1 57 66 1 1 120 302 26 0 1 247 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344393'>A344393</a></td>
     <td style = "text-align: left;">[1 1 1 0 1 1 1 4 0 1 11 1 1 26 11 0 1 57 66 1 1 120 302 26 0 1 247 ]</td>
   </tr>
   <tr>
