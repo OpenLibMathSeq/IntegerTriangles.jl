@@ -51,6 +51,6 @@ TLEN = 19
 
 #Inspect("Eulerian", "Std", "TransSqrs", 42)
 
-Inspect("Lah", "Std", "InvRev", 19)
+Inspect("Motzkin", "Std", "Middle", 19, true)
 
 end # module

@@ -118,7 +118,7 @@ end
 const LEN = 19
 
 # Prints full sequence
-function Inspect(triangle, kind, trait, dim)
+function Inspect(triangle, kind, trait, dim, oeissearch=false)
     T = TriangleVariant(Triangles[triangle], dim, kind)
     seq = TraitFunc[trait](T)
     seq == [] && return []
@@ -126,7 +126,7 @@ function Inspect(triangle, kind, trait, dim)
         Println.(seq)
         seq = Flat(seq)
     end
-    anum = GetSeqnum(seq, false)
+    anum = GetSeqnum(seq, oeissearch)
     println(anum, " ", triangle, " ", kind, " ", trait)
     println(SeqToString(seq)) 
 end
