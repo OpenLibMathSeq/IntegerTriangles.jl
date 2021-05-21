@@ -25,7 +25,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Reverse</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 2 1 0 6 6 1 0 24 36 14 1 0 120 240 150 30 1 0 720 1800 1560 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A090582'>A090582</a></td>
     <td style = "text-align: left;">[1 1 0 2 1 0 6 6 1 0 24 36 14 1 0 120 240 150 30 1 0 720 1800 1560 ]</td>
   </tr>
   <tr>
@@ -35,7 +35,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyTri</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 0 1 1 0 3 2 1 0 13 10 3 1 0 75 74 21 4 1 0 541 730 219 36 5 1 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344499'>A344499</a></td>
     <td style = "text-align: left;">[1 0 1 0 1 1 0 3 2 1 0 13 10 3 1 0 75 74 21 4 1 0 541 730 219 36 5 1 ]</td>
   </tr>
   <tr>
@@ -65,7 +65,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Middle</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 0 1 1 14 30 540 1806 40824 186480 5103000 29607600 953029440 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344397'>A344397</a></td>
     <td style = "text-align: left;">[1 0 1 1 14 30 540 1806 40824 186480 5103000 29607600 953029440 ]</td>
   </tr>
   <tr>
