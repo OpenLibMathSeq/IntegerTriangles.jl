@@ -71,7 +71,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">AltSum</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000007'>A000007</a></td>
-    <td style = "text-align: left;">[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]</td>
+    <td style = "text-align: left;">[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">DiagSum</td>
@@ -91,12 +91,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">LeftSide</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
-    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
+    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">RightSide</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
-    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
+    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PosHalf</td>
@@ -106,7 +106,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">NegHalf</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
-    <td style = "text-align: left;">[1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 ]</td>
+    <td style = "text-align: left;">[1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 -1 1 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PolyVal2</td>

@@ -56,6 +56,8 @@ TLEN = 19
 # Inspect("Lah", "Std", "RevInv", 19, true)
 # Inspect("Uni", "Std", "TransNat0", 19, true)
 
-TraitCard(UniTriangle, 32)
+#TraitCard(UniTriangle, 32)
+Inspect("Catalan", "Std", "BinConv", 19, true)
+Inspect("Catalan", "Std", "IBinConv", 19, true)
 
 end # module

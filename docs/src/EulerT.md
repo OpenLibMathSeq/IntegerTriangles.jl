@@ -81,7 +81,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">RightSide</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000004'>A000004</a></td>
-    <td style = "text-align: left;">[0 0 0 0 0 0 0 0 0 0 ]</td>
+    <td style = "text-align: left;">[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PosHalf</td>

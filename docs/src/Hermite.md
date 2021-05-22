@@ -20,7 +20,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Triangle</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/A066325'>A066325</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A099174'>A099174</a></td>
     <td style = "text-align: left;">[1 0 1 1 0 1 0 3 0 1 ]</td>
   </tr>
   <tr>
@@ -91,7 +91,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">RightSide</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
-    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 ]</td>
+    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PosHalf</td>
@@ -115,12 +115,12 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">BinConv</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 2 10 40 176 916 4852 27350 163270 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344501'>A344501</a></td>
     <td style = "text-align: left;">[1 1 2 10 40 176 916 4852 27350 163270 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">IBinConv</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 2 10 40 176 916 4852 27350 163270 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A344501'>A344501</a></td>
     <td style = "text-align: left;">[1 1 2 10 40 176 916 4852 27350 163270 ]</td>
   </tr>
   <tr>

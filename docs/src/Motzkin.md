@@ -30,7 +30,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Inverse</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/A101950'>A101950</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A104562'>A104562</a></td>
     <td style = "text-align: left;">[1 -1 1 0 -2 1 1 1 -3 1 ]</td>
   </tr>
   <tr>
@@ -91,7 +91,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">RightSide</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A000012'>A000012</a></td>
-    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 ]</td>
+    <td style = "text-align: left;">[1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">PosHalf</td>
