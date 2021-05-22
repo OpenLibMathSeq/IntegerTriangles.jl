@@ -1,7 +1,6 @@
 Manifest.toml
 local/*
 docs/build/*
-profiles/*
 .vscode/*
 .github/*
 demos/.ipynb_checkpoints

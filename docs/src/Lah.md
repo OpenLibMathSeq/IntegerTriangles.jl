@@ -25,7 +25,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">Reverse</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 2 0 1 6 6 0 1 12 36 24 0 1 20 120 240 120 0 1 30 300 1200 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A089231'>A089231</a></td>
     <td style = "text-align: left;">[1 1 0 1 2 0 1 6 6 0 1 12 36 24 0 1 20 120 240 120 0 1 30 300 1200 ]</td>
   </tr>
   <tr>
@@ -35,7 +35,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   </tr>
   <tr>
     <td style = "text-align: left;">RevInv</td>
-    <td style = "text-align: left;"><a href='https://oeis.org/?q=[1 1 0 1 -2 0 1 -6 6 0 1 -12 36 -24 0 1 -20 120 -240 120 0 1 -30 300 ]'>nomatch</a></td>
+    <td style = "text-align: left;"><a href='https://oeis.org/A089231'>A089231</a></td>
     <td style = "text-align: left;">[1 1 0 1 -2 0 1 -6 6 0 1 -12 36 -24 0 1 -20 120 -240 120 0 1 -30 300 ]</td>
   </tr>
   <tr>

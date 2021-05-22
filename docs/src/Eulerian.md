@@ -76,7 +76,7 @@ th.rowNumber, td.rowNumber {text-align: right;} </style><body>
   <tr>
     <td style = "text-align: left;">Central</td>
     <td style = "text-align: left;"><a href='https://oeis.org/A180056'>A180056</a></td>
-    <td style = "text-align: left;">[1 1 11 302 15619 1310354 162512286 27971176092 6382798925475 1865385657780650 ]</td>
+    <td style = "text-align: left;">[1 1 11 302 15619 1310354 162512286 27971176092 6382798925475 ]</td>
   </tr>
   <tr>
     <td style = "text-align: left;">LeftSide</td>

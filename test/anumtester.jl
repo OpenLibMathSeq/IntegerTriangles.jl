@@ -51,6 +51,11 @@ TLEN = 19
 
 #Inspect("Eulerian", "Std", "TransSqrs", 42)
 
-Inspect("Motzkin", "Std", "Middle", 19, true)
+#Inspect("Fubini", "Std", "PolyTri", 19, true)
+
+# Inspect("Lah", "Std", "RevInv", 19, true)
+# Inspect("Uni", "Std", "TransNat0", 19, true)
+
+TraitCard(UniTriangle, 32)
 
 end # module
